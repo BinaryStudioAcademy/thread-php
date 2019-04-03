@@ -28,7 +28,7 @@ final class ApiResponse extends JsonResponse
 
     public static function success(array $data = []): self
     {
-        return new static($data);
+        return new static(['data' => $data]);
     }
 
     public static function empty(): self
