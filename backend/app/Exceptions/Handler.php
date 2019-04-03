@@ -2,8 +2,11 @@
 
 namespace App\Exceptions;
 
+use App\Http\Response\ApiResponse;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Validation\ValidationException;
 
 class Handler extends ExceptionHandler
 {
@@ -42,10 +45,17 @@ class Handler extends ExceptionHandler
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|JsonResponse
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof ValidationException) {
+            return ApiResponse::error(
+                'invalid_attribute',
+                $exception->validator->errors()->first()
+            );
+        }
+
         return parent::render($request, $exception);
     }
 }
