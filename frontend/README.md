@@ -1,4 +1,4 @@
-# frontend
+# BSA 2019 Thread frontend
 
 ## Project setup
 ```
