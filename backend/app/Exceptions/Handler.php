@@ -51,7 +51,7 @@ class Handler extends ExceptionHandler
     {
         if ($exception instanceof ValidationException) {
             return ApiResponse::error(
-                'invalid_attribute',
+                ErrorCode::VALIDATION_FAILED,
                 $exception->validator->errors()->first()
             );
         }
