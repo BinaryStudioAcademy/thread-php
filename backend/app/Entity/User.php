@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Entity;
 
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
@@ -48,10 +48,10 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-	public function setPasswordAttribute($password)
-	{
-		if ( !empty($password) ) {
-			$this->attributes['password'] = bcrypt($password);
-		}
-	}
+    public function setPasswordAttribute($password)
+    {
+        if (!empty($password)) {
+            $this->attributes['password'] = bcrypt($password);
+        }
+    }
 }

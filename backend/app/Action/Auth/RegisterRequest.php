@@ -1,18 +1,23 @@
 <?php
 
-namespace App\Requests\Auth;
+declare(strict_types = 1);
 
-class LoginRequest
+namespace App\Action\Auth;
+
+final class RegisterRequest
 {
     private $email;
     private $password;
+    private $name;
 
     public function __construct(
         string $email,
-        string $password
+        string $password,
+        string $name
     ) {
         $this->email = $email;
         $this->password = $password;
+        $this->name = $name;
     }
 
     public function getEmail(): string
@@ -23,5 +28,10 @@ class LoginRequest
     public function getPassword(): string
     {
         return $this->password;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 }

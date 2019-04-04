@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Responses\Auth;
+declare(strict_types = 1);
 
-class AuthenticateResponse
+namespace App\Action\Auth;
+
+final class AuthenticationResponse
 {
     private $accessToken;
     private $tokenType;
