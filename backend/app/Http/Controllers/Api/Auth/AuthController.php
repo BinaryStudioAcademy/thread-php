@@ -20,7 +20,7 @@ class AuthController extends ApiController
 {
     public function __construct()
     {
-		$this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
     public function register(
@@ -53,11 +53,11 @@ class AuthController extends ApiController
     }
 
     public function me(GetAuthenticatedUserAction $action, UserArrayPresenter $userArrayPresenter)
-	{
-	    $response = $action->execute();
+    {
+        $response = $action->execute();
 
-		return $this->createSuccessResponse($userArrayPresenter->present($response->getUser()));
-	}
+        return $this->createSuccessResponse($userArrayPresenter->present($response->getUser()));
+    }
 
     public function logout(LogoutAction $action)
     {

@@ -8,14 +8,14 @@ use App\Repository\UserRepository;
 
 final class RegisterAction
 {
-	private $userRepository;
+    private $userRepository;
 
-	public function __construct(UserRepository $userRepository)
-	{
-		$this->userRepository = $userRepository;
-	}
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
 
-	public function execute(RegisterRequest $request): AuthenticationResponse
+    public function execute(RegisterRequest $request): AuthenticationResponse
     {
         $user = $this->userRepository->create([
             'email' => $request->getEmail(),
