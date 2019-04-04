@@ -6,7 +6,7 @@ namespace App\Http\Request\Api\Auth;
 
 use App\Http\Request\ApiFormRequest;
 
-class RegisterHttpRequest extends ApiFormRequest
+final class RegisterHttpRequest extends ApiFormRequest
 {
     /**
      * Get the validation rules that apply to the request.

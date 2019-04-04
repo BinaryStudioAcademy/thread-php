@@ -16,7 +16,7 @@ use App\Http\Presenter\User\UserArrayPresenter;
 use App\Http\Request\Api\Auth\RegisterHttpRequest;
 use App\Http\Request\Api\Auth\LoginHttpRequest;
 
-class AuthController extends ApiController
+final class AuthController extends ApiController
 {
     public function __construct()
     {
