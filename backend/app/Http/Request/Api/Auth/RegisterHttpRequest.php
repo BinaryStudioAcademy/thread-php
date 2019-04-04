@@ -4,9 +4,9 @@ declare(strict_types = 1);
 
 namespace App\Http\Request\Api\Auth;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Request\ApiFormRequest;
 
-class RegisterHttpRequest extends FormRequest
+class RegisterHttpRequest extends ApiFormRequest
 {
     /**
      * Get the validation rules that apply to the request.
