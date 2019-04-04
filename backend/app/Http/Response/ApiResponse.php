@@ -9,6 +9,7 @@ use Illuminate\Http\JsonResponse;
 final class ApiResponse extends JsonResponse
 {
     private const CLIENT_ERROR_STATUS = 400;
+    private const NO_CONTENT_STATUS = 204;
     private const RESOURCE_DELETED_STATUS = 204;
     private const RESOURCE_NOT_FOUND_STATUS = 404;
 
@@ -33,7 +34,7 @@ final class ApiResponse extends JsonResponse
 
     public static function empty(): self
     {
-        return new static();
+        return new static(null, self::NO_CONTENT_STATUS);
     }
 
     public static function deleted(): self
