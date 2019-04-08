@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -125,5 +126,10 @@ final class User extends Authenticatable implements JWTSubject
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function tweets(): HasMany
+    {
+        return $this->hasMany(Tweet::class, 'author_id');
     }
 }
