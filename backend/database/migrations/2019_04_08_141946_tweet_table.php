@@ -17,7 +17,7 @@ class TweetTable extends Migration
             $blueprint->bigIncrements('id');
             $blueprint->longText('text');
             $blueprint->unsignedBigInteger('author_id');
-            $blueprint->string('image_url');
+            $blueprint->string('image_url')->nullable();
             $blueprint->timestamps();
 
             $blueprint
