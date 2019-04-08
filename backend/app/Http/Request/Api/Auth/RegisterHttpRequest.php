@@ -16,9 +16,10 @@ final class RegisterHttpRequest extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'password' => 'required|min:6|string',
             'name' => 'required|string',
+            'nickname' => 'required|string|unique:users'
         ];
     }
 }

@@ -4,9 +4,11 @@ namespace App\Exceptions;
 
 use App\Http\Response\ApiResponse;
 use Exception;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -53,6 +55,20 @@ class Handler extends ExceptionHandler
             return ApiResponse::error(
                 ErrorCode::VALIDATION_FAILED,
                 $exception->validator->errors()->first()
+            );
+        }
+
+        if ($exception instanceof MethodNotAllowedHttpException) {
+            return ApiResponse::error(
+                ErrorCode::HTTP_METHOD_NOT_ALLOWED,
+                'Http method not allowed.'
+            );
+        }
+
+        if ($exception instanceof AuthenticationException) {
+            return ApiResponse::error(
+                ErrorCode::UNAUTHENTICATED,
+                'Unauthenticated.'
             );
         }
 

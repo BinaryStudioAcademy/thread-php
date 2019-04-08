@@ -2,11 +2,22 @@
 
 namespace App\Entity;
 
+use Carbon\Carbon;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * Class User
+ * @package App\Entity
+ * @property string $name
+ * @property string $nick_name
+ * @property string $email
+ * @property string $password
+ * @property string $profile_image
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ */
 final class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
@@ -17,7 +28,11 @@ final class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'nickname',
+        'email',
+        'password',
+        'profile_image'
     ];
 
     /**
@@ -26,7 +41,11 @@ final class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
+        'email_verified_at',
+        'created_at',
+        'updated_at'
     ];
 
     /**
@@ -37,7 +56,7 @@ final class User extends Authenticatable implements JWTSubject
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -53,5 +72,52 @@ final class User extends Authenticatable implements JWTSubject
         if (!empty($password)) {
             $this->attributes['password'] = bcrypt($password);
         }
+    }
+
+    public function changeName(string $name): void
+    {
+        if (empty($name)) {
+            throw new \InvalidArgumentException('User name cannot be empty.');
+        }
+
+        $this->attributes['name'] = $name;
+    }
+
+    public function changeNickName(string $nickname): void
+    {
+        if (empty($nickname)) {
+            throw new \InvalidArgumentException('User nickname cannot be empty.');
+        }
+
+        $this->attributes['nick_name'] = $nickname;
+    }
+
+    public function changeAvatar(string $avatarUrl): void
+    {
+        if (empty($avatarUrl)) {
+            throw new \InvalidArgumentException('User avatar cannot be empty.');
+        }
+
+        $this->attributes['profile_image'] = $avatarUrl;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getNickName(): string
+    {
+        return $this->nick_name;
+    }
+
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function getAvatar(): string
+    {
+        return $this->profile_image;
     }
 }

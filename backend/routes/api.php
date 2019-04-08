@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +21,14 @@ Route::prefix('v1')->group(function () {
         Route::post('/logout', 'AuthController@logout');
     });
 
-    Route::group(['middleware' => 'auth:api'], function () {
-        //
+    Route::group([
+        'middleware' => 'auth:api',
+        'namespace' => 'Api\\'
+    ], function () {
+        Route::group([
+            'prefix' => '/users',
+        ], function () {
+            Route::get('/', 'UserController@getUserCollection');
+        });
     });
 });
