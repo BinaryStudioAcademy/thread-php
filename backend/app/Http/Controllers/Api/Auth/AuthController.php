@@ -31,7 +31,8 @@ final class AuthController extends ApiController
         $request = new RegisterRequest(
             $httpRequest->email,
             $httpRequest->password,
-            $httpRequest->name
+            $httpRequest->name,
+            $httpRequest->nickname
         );
         $response = $action->execute($request);
 
