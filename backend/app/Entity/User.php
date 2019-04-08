@@ -14,6 +14,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $nick_name
  * @property string $email
  * @property string $password
+ * @property string $profile_image
  */
 final class User extends Authenticatable implements JWTSubject
 {
@@ -29,6 +30,7 @@ final class User extends Authenticatable implements JWTSubject
         'nick_name',
         'email',
         'password',
+        'profile_image'
     ];
 
     /**
@@ -84,6 +86,15 @@ final class User extends Authenticatable implements JWTSubject
         $this->attributes['nick_name'] = $nickname;
     }
 
+    public function changeAvatar(string $avatarUrl): void
+    {
+        if (empty($avatarUrl)) {
+            throw new \InvalidArgumentException('User avatar cannot be empty.');
+        }
+
+        $this->attributes['profile_image'] = $avatarUrl;
+    }
+
     public function getName(): string
     {
         return $this->name;
@@ -97,5 +108,10 @@ final class User extends Authenticatable implements JWTSubject
     public function getPassword(): string
     {
         return $this->password;
+    }
+
+    public function getAvatar(): string
+    {
+        return $this->profile_image;
     }
 }
