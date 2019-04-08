@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 /**
  * Class User
  * @package App\Entity
+ * @property int $id
  * @property string $name
  * @property string $nick_name
  * @property string $email
@@ -119,5 +120,10 @@ final class User extends Authenticatable implements JWTSubject
     public function getAvatar(): string
     {
         return $this->profile_image;
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
     }
 }
