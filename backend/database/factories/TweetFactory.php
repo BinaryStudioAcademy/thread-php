@@ -13,6 +13,5 @@ $factory->define(Tweet::class, function (Faker $faker) {
         'author_id' => User::query()->inRandomOrder()->first()->id,
         'image_url' => random_int(0, 1) ? $faker->unique()->imageUrl() : null,
         'created_at' => $now->toDateTimeString(),
-        'updated_at' => $now->toDateTimeString()
     ];
 });

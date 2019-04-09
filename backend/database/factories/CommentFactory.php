@@ -14,6 +14,5 @@ $factory->define(Comment::class, function (Faker $faker) {
         'author_id' => User::query()->inRandomOrder()->first()->id,
         'tweet_id' => Tweet::query()->inRandomOrder()->first()->id,
         'created_at' => $now->toDateTimeString(),
-        'updated_at' => $now->toDateTimeString()
     ];
 });
