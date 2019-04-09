@@ -11,4 +11,6 @@ final class ErrorCode
     public const UNAUTHENTICATED = 'unauthenticated';
 
     public const HTTP_METHOD_NOT_ALLOWED = 'method_not_allowed';
+
+    public const NOT_FOUND = 'not_found';
 }
