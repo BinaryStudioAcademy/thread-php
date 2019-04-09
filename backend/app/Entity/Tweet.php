@@ -29,10 +29,6 @@ final class Tweet extends Model
         'author_id',
     ];
 
-    protected $hidden = [
-        'updated_at'
-    ];
-
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
