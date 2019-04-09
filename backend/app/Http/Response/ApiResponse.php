@@ -4,13 +4,13 @@ declare(strict_types = 1);
 
 namespace App\Http\Response;
 
+use App\Exceptions\ErrorCode;
 use Illuminate\Http\JsonResponse;
 
 final class ApiResponse extends JsonResponse
 {
     private const CLIENT_ERROR_STATUS = 400;
     private const NO_CONTENT_STATUS = 204;
-    private const RESOURCE_DELETED_STATUS = 204;
     private const RESOURCE_NOT_FOUND_STATUS = 404;
 
     public static function error(string $code, string $message): self
@@ -39,27 +39,18 @@ final class ApiResponse extends JsonResponse
 
     public static function deleted(): self
     {
-        return new static(null, self::RESOURCE_DELETED_STATUS);
+        return new static(null, self::NO_CONTENT_STATUS);
     }
 
-    public static function notFound(string $code, string $message): self
+    public static function notFound(string $message): self
     {
-        static::assertErrorDataIsValid($code, $message);
-
-        return new static([
-            'errors' => [
-                [
-                    'code' => $code,
-                    'message' => $message
-                ]
-            ]
-        ], self::RESOURCE_NOT_FOUND_STATUS);
+        return static::error(ErrorCode::NOT_FOUND, $message)->setStatusCode(self::RESOURCE_NOT_FOUND_STATUS);
     }
 
     private static function assertErrorDataIsValid(string $code, string $message): void
     {
         if (empty($code) || empty($message)) {
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException('Error values cannot be empty.');
         }
     }
 }
