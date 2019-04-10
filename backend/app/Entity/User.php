@@ -15,7 +15,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @package App\Entity
  * @property int $id
  * @property string $name
- * @property string $nick_name
+ * @property string $nickname
  * @property string $email
  * @property string $password
  * @property string $profile_image
@@ -112,7 +112,7 @@ final class User extends Authenticatable implements JWTSubject
 
     public function getNickName(): string
     {
-        return $this->nick_name;
+        return $this->nickname;
     }
 
     public function getPassword(): string
@@ -128,6 +128,11 @@ final class User extends Authenticatable implements JWTSubject
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
     }
 
     public function tweets(): HasMany
