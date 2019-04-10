@@ -6,7 +6,7 @@ namespace App\Action\Auth;
 
 use App\Entity\User;
 
-final class GetUserResponse
+final class GetAuthenticatedUserResponse
 {
     private $user;
 
