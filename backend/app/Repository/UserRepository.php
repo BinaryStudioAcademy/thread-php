@@ -7,7 +7,7 @@ namespace App\Repository;
 use App\Entity\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
-final class UserRepository
+final class UserRepository implements Paginable
 {
     public function create(array $fields): User
     {
