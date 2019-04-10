@@ -6,6 +6,7 @@ namespace App\Entity;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use InvalidArgumentException;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -18,7 +19,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $nickname
  * @property string $email
  * @property string $password
- * @property string $profile_image
+ * @property string|null $profile_image
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
@@ -81,7 +82,7 @@ final class User extends Authenticatable implements JWTSubject
     public function changeName(string $name): void
     {
         if (empty($name)) {
-            throw new \InvalidArgumentException('User name cannot be empty.');
+            throw new InvalidArgumentException('User name cannot be empty.');
         }
 
         $this->attributes['name'] = $name;
@@ -90,7 +91,7 @@ final class User extends Authenticatable implements JWTSubject
     public function changeNickName(string $nickname): void
     {
         if (empty($nickname)) {
-            throw new \InvalidArgumentException('User nickname cannot be empty.');
+            throw new InvalidArgumentException('User nickname cannot be empty.');
         }
 
         $this->attributes['nick_name'] = $nickname;
@@ -99,7 +100,7 @@ final class User extends Authenticatable implements JWTSubject
     public function changeAvatar(string $avatarUrl): void
     {
         if (empty($avatarUrl)) {
-            throw new \InvalidArgumentException('User avatar cannot be empty.');
+            throw new InvalidArgumentException('User avatar cannot be empty.');
         }
 
         $this->attributes['profile_image'] = $avatarUrl;
@@ -120,7 +121,7 @@ final class User extends Authenticatable implements JWTSubject
         return $this->password;
     }
 
-    public function getAvatar(): string
+    public function getAvatar(): ?string
     {
         return $this->profile_image;
     }
