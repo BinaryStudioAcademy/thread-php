@@ -5,10 +5,14 @@ namespace App\Exceptions;
 use App\Http\Response\ApiResponse;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -34,7 +38,7 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param  \Exception  $exception
+     * @param Exception $exception
      * @return void
      */
     public function report(Exception $exception)
@@ -45,9 +49,9 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response|JsonResponse
+     * @param  Request  $request
+     * @param Exception $exception
+     * @return Response|JsonResponse
      */
     public function render($request, Exception $exception)
     {
@@ -70,6 +74,11 @@ class Handler extends ExceptionHandler
                 ErrorCode::UNAUTHENTICATED,
                 'Unauthenticated.'
             );
+        }
+
+        // NotFoundHttpException - route doesn't exist
+        if ($exception instanceof ModelNotFoundException || $exception instanceof NotFoundHttpException) {
+            return ApiResponse::notFound('Resource not found.');
         }
 
         return parent::render($request, $exception);
