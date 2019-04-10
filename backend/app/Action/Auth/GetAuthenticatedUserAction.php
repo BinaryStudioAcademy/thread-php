@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 final class GetAuthenticatedUserAction
 {
-    public function execute(): GetUserResponse
+    public function execute(): GetAuthenticatedUserResponse
     {
-        return new GetUserResponse(Auth::user());
+        return new GetAuthenticatedUserResponse(Auth::user());
     }
 }

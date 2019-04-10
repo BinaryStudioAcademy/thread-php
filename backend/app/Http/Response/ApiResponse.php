@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Http\Response;
 
 use App\Exceptions\ErrorCode;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\JsonResponse;
 
 final class ApiResponse extends JsonResponse
@@ -52,5 +53,18 @@ final class ApiResponse extends JsonResponse
         if (empty($code) || empty($message)) {
             throw new \InvalidArgumentException('Error values cannot be empty.');
         }
+    }
+
+    public static function paginate(LengthAwarePaginator $paginator): self
+    {
+        return new static([
+            'data' => $paginator->items(),
+            'meta' => [
+                'total' => $paginator->total(),
+                'per_page' => $paginator->perPage(),
+                'current_page' => $paginator->currentPage(),
+                'last_page' => $paginator->lastPage(),
+            ]
+        ]);
     }
 }

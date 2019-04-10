@@ -29,6 +29,7 @@ Route::prefix('v1')->group(function () {
             'prefix' => '/users',
         ], function () {
             Route::get('/', 'UserController@getUserCollection');
+            Route::get('/{id}', 'UserController@getUserById');
         });
     });
 });

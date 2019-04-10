@@ -1,12 +1,12 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
-namespace App\Action\Auth;
+namespace App\Action\User;
 
 use App\Entity\User;
 
-final class GetUserResponse
+final class GetUserByIdResponse
 {
     private $user;
 
