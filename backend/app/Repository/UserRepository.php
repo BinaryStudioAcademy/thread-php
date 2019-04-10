@@ -6,6 +6,7 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 final class UserRepository implements Paginable
 {
@@ -20,6 +21,16 @@ final class UserRepository implements Paginable
         string $sort = self::DEFAULT_SORT,
         string $direction = self::DEFAULT_DIRECTION
     ): LengthAwarePaginator {
-        return User::query()->orderBy($sort, $direction)->paginate($perPage, ['*'], null, $page);
+        return User::orderBy($sort, $direction)->paginate($perPage, ['*'], null, $page);
+    }
+
+    /**
+     * @param int $id
+     * @return User
+     * @throws ModelNotFoundException
+     */
+    public function getById(int $id): User
+    {
+        return User::findOrFail($id);
     }
 }
