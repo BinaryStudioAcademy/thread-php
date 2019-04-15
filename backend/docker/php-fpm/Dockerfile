@@ -15,7 +15,7 @@ RUN apt-get update \
     libpng-dev \
     && docker-php-ext-install pdo_mysql bcmath sockets \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install gd
+    && docker-php-ext-install gd \
     && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 RUN pecl channel-update pecl.php.net \
