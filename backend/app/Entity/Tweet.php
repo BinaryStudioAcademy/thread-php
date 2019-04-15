@@ -49,7 +49,7 @@ final class Tweet extends Model
         return $this->text;
     }
 
-    public function getImageUrl(): string
+    public function getImageUrl(): ?string
     {
         return $this->image_url;
     }
@@ -57,6 +57,11 @@ final class Tweet extends Model
     public function getCreatedAt(): Carbon
     {
         return $this->created_at;
+    }
+
+    public function getAuthorId(): int
+    {
+        return $this->author_id;
     }
 
     public function changeContent(string $text): void
