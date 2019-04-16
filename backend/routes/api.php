@@ -37,6 +37,7 @@ Route::prefix('v1')->group(function () {
         ], function () {
             Route::get('/', 'CommentController@getCommentCollection');
             Route::get('/{id}', 'CommentController@getCommentById');
+            Route::post('/', 'CommentController@newComment');
         });
     });
 });
