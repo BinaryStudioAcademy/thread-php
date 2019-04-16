@@ -19,7 +19,7 @@ install:
 before_script:
     - cp .env.travis .env
     - php artisan key:generate
-    - php artisan jwt:generate
+    - php artisan jwt:secret
     - php artisan migrate --force
 
 script:
