@@ -13,6 +13,7 @@ final class ApiResponse extends JsonResponse
     private const CLIENT_ERROR_STATUS = 400;
     private const NO_CONTENT_STATUS = 204;
     private const RESOURCE_NOT_FOUND_STATUS = 404;
+    private const RESOURCE_CREATED_STATUS = 201;
 
     public static function error(string $code, string $message): self
     {
@@ -66,5 +67,10 @@ final class ApiResponse extends JsonResponse
                 'last_page' => $paginator->lastPage(),
             ]
         ]);
+    }
+
+    public static function created(int $id): self
+    {
+        return new static(['data' => ['id' => $id]], self::RESOURCE_CREATED_STATUS);
     }
 }

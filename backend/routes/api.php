@@ -31,11 +31,20 @@ Route::prefix('v1')->group(function () {
             Route::get('/', 'UserController@getUserCollection');
             Route::get('/{id}', 'UserController@getUserById');
         });
+
         Route::group([
             'prefix' => '/tweets',
         ], function () {
             Route::get('/', 'TweetController@getTweetCollection');
             Route::get('/{id}', 'TweetController@getTweetById');
+        });
+
+        Route::group([
+            'prefix' => '/comments',
+        ], function () {
+            Route::get('/', 'CommentController@getCommentCollection');
+            Route::get('/{id}', 'CommentController@getCommentById');
+            Route::post('/', 'CommentController@newComment');
         });
     });
 });

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Action\User;
 
 use App\Action\GetCollectionRequest;
+use App\Action\PaginatedResponse;
 use App\Repository\UserRepository;
 
 final class GetUserCollectionAction
@@ -16,9 +17,9 @@ final class GetUserCollectionAction
         $this->repository = $repository;
     }
 
-    public function execute(GetCollectionRequest $request): GetUserCollectionResponse
+    public function execute(GetCollectionRequest $request): PaginatedResponse
     {
-        return new GetUserCollectionResponse(
+        return new PaginatedResponse(
             $this->repository->paginate(
                 $request->getPage() ?: UserRepository::DEFAULT_PAGE,
                 UserRepository::DEFAULT_PER_PAGE,
