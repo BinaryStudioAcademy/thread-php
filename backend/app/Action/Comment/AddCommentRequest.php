@@ -6,20 +6,13 @@ namespace App\Action\Comment;
 
 final class AddCommentRequest
 {
-    private $authorId;
     private $body;
     private $tweetId;
 
-    public function __construct(int $authorId, string $body, int $tweetId)
+    public function __construct(string $body, int $tweetId)
     {
-        $this->authorId = $authorId;
         $this->body = $body;
         $this->tweetId = $tweetId;
-    }
-
-    public function getAuthorId(): int
-    {
-        return $this->authorId;
     }
 
     public function getBody(): string

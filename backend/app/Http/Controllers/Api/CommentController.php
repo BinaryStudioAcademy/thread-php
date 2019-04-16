@@ -59,7 +59,6 @@ final class CommentController extends ApiController
     {
         $response = $this->addCommentAction->execute(
             new AddCommentRequest(
-                (int)$request->get('author_id'),
                 $request->get('body'),
                 (int)$request->get('tweet_id')
             )
