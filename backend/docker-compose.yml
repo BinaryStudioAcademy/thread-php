@@ -19,12 +19,6 @@ services:
         - .:/var/www/app
         - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
 
-    composer:
-      image: composer:latest
-      container_name: thread-composer
-      volumes:
-        - .:/app
-
     mysql:
       image: mysql:5.7.22
       container_name: thread-mysql
