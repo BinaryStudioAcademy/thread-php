@@ -45,4 +45,9 @@ abstract class ApiController extends Controller
             )
         );
     }
+
+    final protected function created(int $id): ApiResponse
+    {
+        return ApiResponse::created($id);
+    }
 }

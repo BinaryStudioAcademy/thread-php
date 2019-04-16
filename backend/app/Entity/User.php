@@ -21,7 +21,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $password
  * @property string|null $profile_image
  * @property Carbon $created_at
- * @property Carbon $updated_at
+ * @property Carbon|null $updated_at
  */
 final class User extends Authenticatable implements JWTSubject
 {

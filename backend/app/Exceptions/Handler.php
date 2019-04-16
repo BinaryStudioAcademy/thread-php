@@ -81,6 +81,11 @@ class Handler extends ExceptionHandler
             return ApiResponse::notFound('Resource not found.');
         }
 
+        // if our custom application logic error occurred
+        if ($exception instanceof \DomainException) {
+            return ApiResponse::error(ErrorCode::VALIDATION_FAILED, $exception->getMessage());
+        }
+
         return parent::render($request, $exception);
     }
 }
