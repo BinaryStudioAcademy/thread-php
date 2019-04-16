@@ -11,7 +11,7 @@ cache:
 before_install:
     - cd $TRAVIS_BUILD_DIR/backend
     - composer validate
-    - mysql -e 'CREATE DATABASE thread-test;'      
+    - mysql -e 'CREATE DATABASE thread'      
 
 install:
     - composer install --no-interaction --prefer-source
