@@ -6,3 +6,5 @@ disabled:
   - elseif
   - single_blank_line_at_eof
   - single_import_per_statement
+  - function_declaration
+
