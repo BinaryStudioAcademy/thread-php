@@ -28,4 +28,11 @@ final class CommentRepository implements Paginable
     ): LengthAwarePaginator {
         return Comment::orderBy($sort, $direction)->paginate($perPage, ['*'], null, $page);
     }
+
+    public function save(Comment $comment): Comment
+    {
+        $comment->save();
+
+        return $comment;
+    }
 }
