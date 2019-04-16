@@ -22,6 +22,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 final class Tweet extends Model
 {
     protected $table = 'tweets';
+    
+    // The relations to eager load on every query.
+    protected $with = ['author', 'comments'];
 
     protected $fillable = [
         'text',

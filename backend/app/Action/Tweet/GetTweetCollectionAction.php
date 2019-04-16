@@ -6,6 +6,7 @@ namespace App\Action\Tweet;
 
 use App\Action\GetCollectionRequest;
 use App\Repository\TweetRepository;
+use App\Action\PaginatedResponse;
 
 final class GetTweetCollectionAction
 {
@@ -16,9 +17,9 @@ final class GetTweetCollectionAction
         $this->repository = $repository;
     }
 
-    public function execute(GetCollectionRequest $request): GetTweetCollectionResponse
+    public function execute(GetCollectionRequest $request): PaginatedResponse
     {
-        return new GetTweetCollectionResponse(
+        return new PaginatedResponse(
             $this->repository->paginate(
                 $request->getPage() ?: TweetRepository::DEFAULT_PAGE,
                 TweetRepository::DEFAULT_PER_PAGE,
