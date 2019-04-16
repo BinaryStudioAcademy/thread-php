@@ -9,12 +9,14 @@ services:
 
 cache:
   directories:
-    - node_modules  
-    - vendor
-      
-before_script:
-    - composer self-update
-    - composer install --no-interaction --prefer-source --dev
+    - $HOME/.composer/cache
+
+before_install:
+    - cd $TRAVIS_BUILD_DIR/backend
+    - composer validate
+
+install:
+    - composer install --no-interaction --prefer-source
 
 script:
     - vendor/bin/phpunit --coverage-clover=coverage.xml
