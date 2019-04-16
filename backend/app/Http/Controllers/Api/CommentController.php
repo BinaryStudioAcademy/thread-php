@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
+use App\Action\Comment\GetCommentByIdAction;
 use App\Action\Comment\GetCommentCollectionAction;
+use App\Action\GetByIdRequest;
 use App\Action\GetCollectionRequest;
 use App\Http\Controllers\ApiController;
 use App\Http\Presenter\Comment\CommentAsArrayPresenter;
@@ -15,13 +17,16 @@ final class CommentController extends ApiController
 {
     private $getCommentCollectionAction;
     private $presenter;
+    private $getCommentByIdAction;
 
     public function __construct(
         GetCommentCollectionAction $getCommentCollectionAction,
-        CommentAsArrayPresenter $presenter
+        CommentAsArrayPresenter $presenter,
+        GetCommentByIdAction $commentByIdAction
     ) {
         $this->getCommentCollectionAction = $getCommentCollectionAction;
         $this->presenter = $presenter;
+        $this->getCommentByIdAction = $commentByIdAction;
     }
 
     public function getCommentCollection(CollectionHttpRequest $request): ApiResponse
@@ -35,5 +40,12 @@ final class CommentController extends ApiController
         );
 
         return $this->createPaginatedResponse($response->getPaginator(), $this->presenter);
+    }
+
+    public function getCommentById(string $id): ApiResponse
+    {
+        $comment = $this->getCommentByIdAction->execute(new GetByIdRequest((int)$id))->getComment();
+
+        return $this->createSuccessResponse($this->presenter->present($comment));
     }
 }

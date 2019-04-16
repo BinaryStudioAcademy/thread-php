@@ -6,9 +6,20 @@ namespace App\Repository;
 
 use App\Entity\Comment;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 final class CommentRepository implements Paginable
 {
+    /**
+     * @param int $id
+     * @return Comment
+     * @throws ModelNotFoundException
+     */
+    public function getById(int $id): Comment
+    {
+        return Comment::findOrFail($id);
+    }
+
     public function paginate(
         int $page = self::DEFAULT_PAGE,
         int $perPage = self::DEFAULT_PER_PAGE,
