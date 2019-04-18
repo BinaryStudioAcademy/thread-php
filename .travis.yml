@@ -1,0 +1,36 @@
+dist: xenial
+
+services:
+  - mysql
+
+language: php
+
+php:
+    - 7.1
+    - 7.2
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+before_install:
+    - cd $TRAVIS_BUILD_DIR/backend
+    - composer validate
+    - mysql -e 'CREATE DATABASE thread'      
+
+install:
+    - composer install --no-interaction --prefer-source
+
+before_script:
+    - cp .env.travis .env
+    - php artisan key:generate
+    - php artisan jwt:secret -f
+    - php artisan migrate --force
+
+script:
+    - vendor/bin/phpunit --coverage-clover=coverage.xml
+
+after_success:
+    - bash <(curl -s https://codecov.io/bash)
+
+      
