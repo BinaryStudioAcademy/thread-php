@@ -1,0 +1,48 @@
+version: "3.1"
+
+services:
+    webserver:
+      image: nginx:stable-alpine
+      container_name: thread-webserver
+      working_dir: /var/www/app
+      ports:
+        - "${APP_PORT}:80"
+      volumes:
+        - .:/var/www/app
+        - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+
+    app:
+      build: ./docker/php-fpm
+      container_name: thread-app
+      working_dir: /var/www/app
+      volumes:
+        - .:/var/www/app
+        - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
+
+    mysql:
+      image: mysql:5.7.22
+      container_name: thread-mysql
+      working_dir: /var/www/app
+      volumes:
+        - .mysqldata:/var/lib/mysql
+        - ./docker/mysql:/etc/mysql/conf.d
+      ports:
+        - "${MYSQL_PORT}:3306"
+      environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=thread
+        - MYSQL_USER=user
+        - MYSQL_PASSWORD=secret
+
+    mysql-testing:
+      image: mysql:5.7.22
+      container_name: thread-mysql-testing
+      volumes:
+        - ./docker/mysql:/etc/mysql/conf.d
+      ports:
+        - "${MYSQL_PORT_TEST_DB}:3306"
+      environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=thread-testing
+        - MYSQL_USER=user
+        - MYSQL_PASSWORD=secret
