@@ -21,6 +21,7 @@ install:
     - composer install --no-interaction --prefer-source
 
 before_script:
+    - cp .env.travis .env        
     - php artisan migrate --force
 
 script:
