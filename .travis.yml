@@ -1,3 +1,8 @@
+dist: xenial
+
+services:
+  - mysql
+
 language: php
 
 php:
