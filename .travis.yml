@@ -6,7 +6,6 @@ services:
 language: php
 
 php:
-    - 7.1
     - 7.2
 
 cache:
@@ -22,13 +21,10 @@ install:
     - composer install --no-interaction --prefer-source
 
 before_script:
-    - cp .env.travis .env
-    - php artisan key:generate
-    - php artisan jwt:secret -f
     - php artisan migrate --force
 
 script:
-    - vendor/bin/phpunit --coverage-clover=coverage.xml
+    - vendor/bin/phpunit --coverage-clover=coverage.xml -c phpunit.travis.xml
 
 after_success:
     - bash <(curl -s https://codecov.io/bash)
