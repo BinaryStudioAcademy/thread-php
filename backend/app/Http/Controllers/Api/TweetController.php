@@ -12,10 +12,13 @@ use App\Action\Tweet\GetTweetByIdAction;
 use App\Action\Tweet\GetTweetCollectionAction;
 use App\Action\Tweet\GetTweetCollectionByUserIdAction;
 use App\Action\Tweet\GetTweetCollectionByUserIdRequest;
+use App\Action\Tweet\UpdateTweetAction;
+use App\Action\Tweet\UpdateTweetRequest;
 use App\Http\Controllers\ApiController;
 use App\Http\Presenter\Tweet\TweetArrayPresenter;
 use App\Http\Request\Api\CollectionHttpRequest;
 use App\Http\Request\Api\Tweet\AddTweetHttpRequest;
+use App\Http\Request\Api\Tweet\UpdateTweetHttpRequest;
 use App\Http\Response\ApiResponse;
 
 final class TweetController extends ApiController
@@ -25,19 +28,22 @@ final class TweetController extends ApiController
     private $getTweetByIdAction;
     private $getTweetCollectionByUserIdAction;
     private $addTweetAction;
+    private $updateTweetAction;
 
     public function __construct(
         GetTweetCollectionAction $getTweetCollectionAction,
         TweetArrayPresenter $presenter,
         GetTweetByIdAction $getTweetByIdAction,
         GetTweetCollectionByUserIdAction $getTweetCollectionByUserIdAction,
-        AddTweetAction $addTweetAction
+        AddTweetAction $addTweetAction,
+        UpdateTweetAction $updateTweetAction
     ) {
         $this->getTweetCollectionAction = $getTweetCollectionAction;
         $this->presenter = $presenter;
         $this->getTweetByIdAction = $getTweetByIdAction;
         $this->getTweetCollectionByUserIdAction = $getTweetCollectionByUserIdAction;
         $this->addTweetAction = $addTweetAction;
+        $this->updateTweetAction = $updateTweetAction;
     }
 
     public function getTweetCollection(CollectionHttpRequest $request): ApiResponse
@@ -78,6 +84,23 @@ final class TweetController extends ApiController
     {
         $response = $this->addTweetAction->execute(
             new AddTweetRequest(
+                $request->get('text'),
+                $request->get('image_url')
+            )
+        );
+
+        return $this->createSuccessResponse(
+            $this->presenter->present(
+                $response->getTweet()
+            )
+        );
+    }
+
+    public function updateTweetById(string $id, UpdateTweetHttpRequest $request): ApiResponse
+    {
+        $response = $this->updateTweetAction->execute(
+            new UpdateTweetRequest(
+                (int)$id,
                 $request->get('text'),
                 $request->get('image_url')
             )

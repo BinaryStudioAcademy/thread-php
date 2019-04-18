@@ -12,6 +12,7 @@ final class ApiResponse extends JsonResponse
 {
     private const CLIENT_ERROR_STATUS = 400;
     private const NO_CONTENT_STATUS = 204;
+    private const FORBIDDEN_STATUS = 403;
     private const RESOURCE_NOT_FOUND_STATUS = 404;
     private const RESOURCE_CREATED_STATUS = 201;
 
@@ -42,6 +43,11 @@ final class ApiResponse extends JsonResponse
     public static function deleted(): self
     {
         return new static(null, self::NO_CONTENT_STATUS);
+    }
+
+    public static function forbidden(string $message): self
+    {
+        return static::error(ErrorCode::FORBIDDEN, $message)->setStatusCode(self::FORBIDDEN_STATUS);
     }
 
     public static function notFound(string $message): self

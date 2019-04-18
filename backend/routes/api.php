@@ -39,6 +39,7 @@ Route::prefix('v1')->group(function () {
             Route::get('/', 'TweetController@getTweetCollection');
             Route::post('/', 'TweetController@addTweet');
             Route::get('/{id}', 'TweetController@getTweetById');
+            Route::put('/{id}', 'TweetController@updateTweetById');
         });
 
         Route::group([
