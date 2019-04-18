@@ -33,4 +33,16 @@ final class TweetRepository implements Paginable
     {
         return Tweet::findOrFail($id);
     }
+
+    public function getPaginatedByUserId(
+        int $userId,
+        int $page = self::DEFAULT_PAGE,
+        int $perPage = self::DEFAULT_PER_PAGE,
+        string $sort = self::DEFAULT_SORT,
+        string $direction = self::DEFAULT_DIRECTION
+    ): LengthAwarePaginator {
+        return Tweet::where('author_id', $userId)
+            ->orderBy($sort, $direction)
+            ->paginate($perPage, ['*'], null, $page);
+    }
 }
