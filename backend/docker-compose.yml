@@ -33,3 +33,16 @@ services:
         - MYSQL_DATABASE=thread
         - MYSQL_USER=user
         - MYSQL_PASSWORD=secret
+
+    mysql-testing:
+      image: mysql:5.7.22
+      container_name: thread-mysql-testing
+      volumes:
+        - ./docker/mysql:/etc/mysql/conf.d
+      ports:
+        - "${MYSQL_PORT_TEST_DB}:3306"
+      environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=thread-testing
+        - MYSQL_USER=user
+        - MYSQL_PASSWORD=secret
