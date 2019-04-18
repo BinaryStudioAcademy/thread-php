@@ -45,4 +45,11 @@ final class TweetRepository implements Paginable
             ->orderBy($sort, $direction)
             ->paginate($perPage, ['*'], null, $page);
     }
+
+    public function save(Tweet $tweet): Tweet
+    {
+        $tweet->save();
+
+        return $tweet;
+    }
 }
