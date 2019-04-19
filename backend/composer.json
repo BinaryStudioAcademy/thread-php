@@ -12,7 +12,6 @@
         "ext-bcmath": "*",
         "ext-mbstring": "*",
         "ext-redis": "*",
-        "ext-amqp": "*",
         "barryvdh/laravel-cors": "^0.11.3",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.8.*",
