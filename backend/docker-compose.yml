@@ -19,12 +19,6 @@ services:
         - .:/var/www/app
         - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
 
-    composer:
-      image: composer:latest
-      container_name: thread-composer
-      volumes:
-        - .:/app
-
     mysql:
       image: mysql:5.7.22
       container_name: thread-mysql
@@ -37,5 +31,18 @@ services:
       environment:
         - MYSQL_ROOT_PASSWORD=root
         - MYSQL_DATABASE=thread
+        - MYSQL_USER=user
+        - MYSQL_PASSWORD=secret
+
+    mysql-testing:
+      image: mysql:5.7.22
+      container_name: thread-mysql-testing
+      volumes:
+        - ./docker/mysql:/etc/mysql/conf.d
+      ports:
+        - "${MYSQL_PORT_TEST_DB}:3306"
+      environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=thread-testing
         - MYSQL_USER=user
         - MYSQL_PASSWORD=secret
