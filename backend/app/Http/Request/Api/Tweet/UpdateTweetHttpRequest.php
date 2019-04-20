@@ -11,8 +11,7 @@ final class UpdateTweetHttpRequest extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'text' => 'string',
-            'imageUrl' => 'string',
+            'text' => 'string'
         ];
     }
 }

@@ -84,8 +84,7 @@ final class TweetController extends ApiController
     {
         $response = $this->addTweetAction->execute(
             new AddTweetRequest(
-                $request->get('text'),
-                $request->get('image_url')
+                $request->get('text')
             )
         );
 
@@ -101,8 +100,7 @@ final class TweetController extends ApiController
         $response = $this->updateTweetAction->execute(
             new UpdateTweetRequest(
                 (int)$id,
-                $request->get('text'),
-                $request->get('image_url')
+                $request->get('text')
             )
         );
 

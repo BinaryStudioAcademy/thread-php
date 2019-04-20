@@ -8,13 +8,11 @@ final class UpdateTweetRequest
 {
     private $id;
     private $text;
-    private $imageUrl;
 
-    public function __construct(int $id, ?string $text, ?string $imageUrl)
+    public function __construct(int $id, ?string $text)
     {
         $this->id = $id;
         $this->text = $text;
-        $this->imageUrl = $imageUrl;
     }
 
     public function getId(): int
@@ -25,10 +23,5 @@ final class UpdateTweetRequest
     public function getText(): ?string
     {
         return $this->text;
-    }
-
-    public function getImageUrl(): ?string
-    {
-        return $this->imageUrl;
     }
 }

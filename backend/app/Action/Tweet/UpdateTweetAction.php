@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Action\Tweet;
 
 use App\Exceptions\TweetNotFoundException;
-use App\Exceptions\TweetUpdateForbiddenException;
 use App\Repository\TweetRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Access\AuthorizationException;
 
 final class UpdateTweetAction
 {
@@ -19,7 +19,7 @@ final class UpdateTweetAction
         $this->tweetRepository = $tweetRepository;
     }
 
-    public function execute(UpdateTweetRequest $request): GetTweetByIdResponse
+    public function execute(UpdateTweetRequest $request): UpdateTweetResponse
     {
         try {
             $tweet = $this->tweetRepository->getById($request->getId());
@@ -28,14 +28,13 @@ final class UpdateTweetAction
         }
 
         if ($tweet->author_id !== Auth::id()) {
-            throw new TweetUpdateForbiddenException();
+            throw new AuthorizationException();
         }
 
         $tweet->text = $request->getText() ?: $tweet->text;
-        $tweet->image_url = $request->getImageUrl() ?: $tweet->image_url;
 
         $tweet = $this->tweetRepository->save($tweet);
 
-        return new GetTweetByIdResponse($tweet);
+        return new UpdateTweetResponse($tweet);
     }
 }

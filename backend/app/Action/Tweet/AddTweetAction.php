@@ -17,15 +17,14 @@ final class AddTweetAction
         $this->tweetRepository = $tweetRepository;
     }
 
-    public function execute(AddTweetRequest $request): GetTweetByIdResponse
+    public function execute(AddTweetRequest $request): AddTweetResponse
     {
         $tweet = new Tweet();
         $tweet->author_id = Auth::id();
         $tweet->text = $request->getText();
-        $tweet->image_url = $request->getImageUrl();
 
         $tweet = $this->tweetRepository->save($tweet);
 
-        return new GetTweetByIdResponse($tweet);
+        return new AddTweetResponse($tweet);
     }
 }

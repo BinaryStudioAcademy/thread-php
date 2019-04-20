@@ -11,9 +11,9 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class Handler extends ExceptionHandler
 {
@@ -70,10 +70,9 @@ class Handler extends ExceptionHandler
             );
         }
 
-        if ($exception instanceof AccessDeniedHttpException) {
-            return ApiResponse::error(
-                ErrorCode::FORBIDDEN,
-                $exception->getMessage()
+        if ($exception instanceof AuthorizationException) {
+            return ApiResponse::forbidden(
+                'Forbidden.'
             );
         }
 
