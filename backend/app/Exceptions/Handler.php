@@ -13,6 +13,7 @@ use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class Handler extends ExceptionHandler
 {
@@ -66,6 +67,12 @@ class Handler extends ExceptionHandler
             return ApiResponse::error(
                 ErrorCode::HTTP_METHOD_NOT_ALLOWED,
                 'Http method not allowed.'
+            );
+        }
+
+        if ($exception instanceof AuthorizationException) {
+            return ApiResponse::forbidden(
+                'Forbidden.'
             );
         }
 

@@ -30,6 +30,17 @@ Route::prefix('v1')->group(function () {
         ], function () {
             Route::get('/', 'UserController@getUserCollection');
             Route::get('/{id}', 'UserController@getUserById');
+            Route::get('/{id}/tweets', 'TweetController@getTweetCollectionByUserId');
+        });
+
+        Route::group([
+            'prefix' => '/tweets',
+        ], function () {
+            Route::get('/', 'TweetController@getTweetCollection');
+            Route::post('/', 'TweetController@addTweet');
+            Route::get('/{id}', 'TweetController@getTweetById');
+            Route::post('/{id}/image', 'TweetController@uploadTweetImage');
+            Route::put('/{id}', 'TweetController@updateTweetById');
         });
 
         Route::group([
