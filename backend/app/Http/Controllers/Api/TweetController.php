@@ -14,11 +14,14 @@ use App\Action\Tweet\GetTweetCollectionByUserIdAction;
 use App\Action\Tweet\GetTweetCollectionByUserIdRequest;
 use App\Action\Tweet\UpdateTweetAction;
 use App\Action\Tweet\UpdateTweetRequest;
+use App\Action\Tweet\UploadTweetImageAction;
+use App\Action\Tweet\UploadTweetImageRequest;
 use App\Http\Controllers\ApiController;
 use App\Http\Presenter\Tweet\TweetArrayPresenter;
 use App\Http\Request\Api\CollectionHttpRequest;
 use App\Http\Request\Api\Tweet\AddTweetHttpRequest;
 use App\Http\Request\Api\Tweet\UpdateTweetHttpRequest;
+use App\Http\Request\Api\Tweet\UploadTweetImageHttpRequest;
 use App\Http\Response\ApiResponse;
 
 final class TweetController extends ApiController
@@ -29,6 +32,7 @@ final class TweetController extends ApiController
     private $getTweetCollectionByUserIdAction;
     private $addTweetAction;
     private $updateTweetAction;
+    private $uploadTweetImageAction;
 
     public function __construct(
         GetTweetCollectionAction $getTweetCollectionAction,
@@ -36,7 +40,8 @@ final class TweetController extends ApiController
         GetTweetByIdAction $getTweetByIdAction,
         GetTweetCollectionByUserIdAction $getTweetCollectionByUserIdAction,
         AddTweetAction $addTweetAction,
-        UpdateTweetAction $updateTweetAction
+        UpdateTweetAction $updateTweetAction,
+        UploadTweetImageAction $uploadTweetImageAction
     ) {
         $this->getTweetCollectionAction = $getTweetCollectionAction;
         $this->presenter = $presenter;
@@ -44,6 +49,7 @@ final class TweetController extends ApiController
         $this->getTweetCollectionByUserIdAction = $getTweetCollectionByUserIdAction;
         $this->addTweetAction = $addTweetAction;
         $this->updateTweetAction = $updateTweetAction;
+        $this->uploadTweetImageAction = $uploadTweetImageAction;
     }
 
     public function getTweetCollection(CollectionHttpRequest $request): ApiResponse
@@ -101,6 +107,22 @@ final class TweetController extends ApiController
             new UpdateTweetRequest(
                 (int)$id,
                 $request->get('text')
+            )
+        );
+
+        return $this->createSuccessResponse(
+            $this->presenter->present(
+                $response->getTweet()
+            )
+        );
+    }
+
+    public function uploadTweetImage(string $id, UploadTweetImageHttpRequest $request): ApiResponse
+    {
+        $response = $this->uploadTweetImageAction->execute(
+            new UploadTweetImageRequest(
+                (int)$id,
+                $request->file('image')
             )
         );
 
