@@ -5,10 +5,16 @@
                 <strong>Thread-PHP</strong>
             </router-link>
 
-            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="header-navbar">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
+            <a
+                role="button"
+                class="navbar-burger burger"
+                aria-label="menu"
+                aria-expanded="false"
+                data-target="header-navbar"
+            >
+                <span aria-hidden="true" />
+                <span aria-hidden="true" />
+                <span aria-hidden="true" />
             </a>
         </div>
 
@@ -28,7 +34,11 @@
             <div class="navbar-end">
                 <div class="navbar-item">
                     <figure class="image is-32x32">
-                        <img v-if="currentUser.profile_image" class="profile-image is-rounded" :src="currentUser.profile_image">
+                        <img
+                            v-if="currentUser.profile_image"
+                            class="profile-image is-rounded"
+                            :src="currentUser.profile_image"
+                        >
                         <strong v-else class="text-avatar">{{ nameLatters }}</strong>
                     </figure>
                     <span class="profile-name">{{ currentUser.name }}</span>
@@ -47,16 +57,14 @@ export default {
             currentUser: {
                 name: 'Alex',
                 nickname: 'aLLeXUs',
-                profile_image: 'https://bulma.io/images/placeholders/128x128.png'
-            }
-        }
+                profile_image: 'https://bulma.io/images/placeholders/128x128.png',
+            },
+        };
     },
     computed: {
-        nameLatters: function () {
-            return this.user.name.substr(0, 2).toUpperCase();
-        }
-    }
-}
+        nameLatters: () => this.user.name.substr(0, 2).toUpperCase(),
+    },
+};
 </script>
 
 <style lang="scss" scoped>

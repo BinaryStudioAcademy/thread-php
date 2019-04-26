@@ -10,11 +10,11 @@
 </template>
 
 <script>
-import Tweet from '@/components/Tweet';
+import Tweet from '@/components/Tweet.vue';
 
 export default {
     components: {
-        Tweet
+        Tweet,
     },
     data() {
         return {
@@ -27,10 +27,10 @@ export default {
                         id: 1,
                         name: 'Alex',
                         nickname: 'alex',
-                        avatar_image: 'https://bulma.io/images/placeholders/128x128.png'
+                        avatar_image: 'https://bulma.io/images/placeholders/128x128.png',
                     },
                     likes_count: 5,
-                    comments_count: 2
+                    comments_count: 2,
                 },
                 {
                     id: 2,
@@ -39,12 +39,12 @@ export default {
                         id: 2,
                         name: 'John',
                         nickname: 'john',
-                        avatar_image: 'https://bulma.io/images/placeholders/128x128.png'
+                        avatar_image: 'https://bulma.io/images/placeholders/128x128.png',
                     },
                     likes_count: 15,
-                    comments_count: 7
+                    comments_count: 7,
                 },
-            ]
+            ],
         };
     },
 };

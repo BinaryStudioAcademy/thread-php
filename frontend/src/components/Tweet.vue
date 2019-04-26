@@ -10,10 +10,10 @@
                 <strong class="name">{{ tweet.author.name }}</strong>
                 <small class="nickname">@{{ tweet.author.nickname }}</small>
                 <small class="created">31m</small>
-                <br />
+                <br>
                 {{ tweet.text }}
                 <figure v-if="tweet.image_url" class="image is-square">
-                    <img :src="tweet.image_url" />
+                    <img :src="tweet.image_url">
                 </figure>
             </div>
             <nav class="level is-mobile">
@@ -41,10 +41,10 @@ export default {
     props: {
         tweet: {
             type: Object,
-            required: true
-        }
-    }
-}
+            required: true,
+        },
+    },
+};
 </script>
 
 <style lang="scss" scoped>
