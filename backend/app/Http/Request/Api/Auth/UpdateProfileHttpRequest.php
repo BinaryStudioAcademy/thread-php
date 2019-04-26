@@ -6,7 +6,7 @@ namespace App\Http\Request\Api\Auth;
 
 use App\Http\Request\ApiFormRequest;
 
-final class RegisterHttpRequest extends ApiFormRequest
+final class UpdateProfileHttpRequest extends ApiFormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -16,10 +16,11 @@ final class RegisterHttpRequest extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6|string',
-            'name' => 'required|string|min:2',
-            'nickname' => 'required|string|min:2|unique:users'
+            'email' => 'email|unique:users',
+//            'password' => 'min:6|string',
+//            'new_password' => 'min:6|string',
+            'name' => 'string|min:2',
+            'nickname' => 'string|min:2|unique:users'
         ];
     }
 }

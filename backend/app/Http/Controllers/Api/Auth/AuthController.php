@@ -10,11 +10,15 @@ use App\Action\Auth\LoginRequest;
 use App\Action\Auth\LogoutAction;
 use App\Action\Auth\RegisterAction;
 use App\Action\Auth\RegisterRequest;
+use App\Action\Auth\UpdateProfileAction;
+use App\Action\Auth\UpdateProfileRequest;
 use App\Http\Controllers\ApiController;
 use App\Http\Presenter\Auth\AuthenticationResponseArrayPresenter;
 use App\Http\Presenter\User\UserArrayPresenter;
 use App\Http\Request\Api\Auth\RegisterHttpRequest;
 use App\Http\Request\Api\Auth\LoginHttpRequest;
+use App\Http\Request\Api\Auth\UpdateProfileHttpRequest;
+use App\Http\Response\ApiResponse;
 
 final class AuthController extends ApiController
 {
@@ -43,7 +47,7 @@ final class AuthController extends ApiController
         LoginHttpRequest $httpRequest,
         LoginAction $action,
         AuthenticationResponseArrayPresenter $authenticationResponseArrayPresenter
-    ) {
+    ): ApiResponse {
         $request = new LoginRequest(
             $httpRequest->email,
             $httpRequest->password
@@ -53,17 +57,33 @@ final class AuthController extends ApiController
         return $this->createSuccessResponse($authenticationResponseArrayPresenter->present($response));
     }
 
-    public function me(GetAuthenticatedUserAction $action, UserArrayPresenter $userArrayPresenter)
+    public function me(GetAuthenticatedUserAction $action, UserArrayPresenter $userArrayPresenter): ApiResponse
     {
         $response = $action->execute();
 
         return $this->createSuccessResponse($userArrayPresenter->present($response->getUser()));
     }
 
-    public function logout(LogoutAction $action)
+    public function logout(LogoutAction $action): ApiResponse
     {
         $action->execute();
 
         return $this->createEmptyResponse();
+    }
+
+    public function update(
+        UpdateProfileHttpRequest $httpRequest,
+        UpdateProfileAction $action,
+        UserArrayPresenter $userArrayPresenter
+    ): ApiResponse {
+        $response = $action->execute(
+            new UpdateProfileRequest(
+                $httpRequest->email,
+                $httpRequest->name,
+                $httpRequest->nickname
+            )
+        );
+
+        return $this->createSuccessResponse($userArrayPresenter->present($response->getUser()));
     }
 }

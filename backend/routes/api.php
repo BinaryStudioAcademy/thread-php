@@ -18,6 +18,7 @@ Route::prefix('v1')->group(function () {
         Route::post('/register', 'AuthController@register');
         Route::post('/login', 'AuthController@login');
         Route::get('/me', 'AuthController@me');
+        Route::put('/me', 'AuthController@update');
         Route::post('/logout', 'AuthController@logout');
     });
 
