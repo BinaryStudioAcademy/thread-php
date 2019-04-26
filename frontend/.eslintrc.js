@@ -12,27 +12,27 @@ module.exports = {
         'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
         'vue/html-indent': ['error', 4],
         'vue/max-attributes-per-line': ['error', {
-            'singleline': 3,
-            'multiline': {
-                'max': 1,
-                'allowFirstLine': false
-            }
+            singleline: 3,
+            multiline: {
+                max: 1,
+                allowFirstLine: false,
+            },
         }],
-        'indent': [
+        indent: [
             'error',
-            4
+            4,
         ],
         'linebreak-style': [
             'error',
-            'unix'
+            'unix',
         ],
-        'quotes': [
+        quotes: [
             'error',
-            'single'
+            'single',
         ],
-        'semi': [
+        semi: [
             'error',
-            'always'
+            'always',
         ],
     },
     parserOptions: {
