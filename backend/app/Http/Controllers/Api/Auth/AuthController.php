@@ -12,12 +12,15 @@ use App\Action\Auth\RegisterAction;
 use App\Action\Auth\RegisterRequest;
 use App\Action\Auth\UpdateProfileAction;
 use App\Action\Auth\UpdateProfileRequest;
+use App\Action\Auth\UploadProfileImageAction;
+use App\Action\Auth\UploadProfileImageRequest;
 use App\Http\Controllers\ApiController;
 use App\Http\Presenter\Auth\AuthenticationResponseArrayPresenter;
 use App\Http\Presenter\User\UserArrayPresenter;
 use App\Http\Request\Api\Auth\RegisterHttpRequest;
 use App\Http\Request\Api\Auth\LoginHttpRequest;
 use App\Http\Request\Api\Auth\UpdateProfileHttpRequest;
+use App\Http\Request\Api\Auth\UploadProfileImageHttpRequest;
 use App\Http\Response\ApiResponse;
 
 final class AuthController extends ApiController
@@ -78,9 +81,23 @@ final class AuthController extends ApiController
     ): ApiResponse {
         $response = $action->execute(
             new UpdateProfileRequest(
-                $httpRequest->email,
-                $httpRequest->name,
-                $httpRequest->nickname
+                $httpRequest->get('email'),
+                $httpRequest->get('name'),
+                $httpRequest->get('nickname')
+            )
+        );
+
+        return $this->createSuccessResponse($userArrayPresenter->present($response->getUser()));
+    }
+
+    public function uploadProfileImage(
+        UploadProfileImageHttpRequest $httpRequest,
+        UploadProfileImageAction $action,
+        UserArrayPresenter $userArrayPresenter
+    ): ApiResponse {
+        $response = $action->execute(
+            new UploadProfileImageRequest(
+                $httpRequest->file('image')
             )
         );
 

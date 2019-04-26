@@ -6,7 +6,6 @@ namespace App\Action\Auth;
 
 use App\Repository\UserRepository;
 use Illuminate\Support\Facades\Auth;
-//use Illuminate\Support\Facades\Hash;
 
 final class UpdateProfileAction
 {
@@ -20,10 +19,6 @@ final class UpdateProfileAction
     public function execute(UpdateProfileRequest $request): UpdateProfileResponse
     {
         $user = Auth::user();
-
-//        if (!empty($request->getPassword()) && Hash::check($request->getPassword(), $user->getPassword())) {
-//            // The passwords match...
-//        }
 
         $user->email = $request->getEmail() ?: $user->email;
         $user->name = $request->getName() ?: $user->name;
