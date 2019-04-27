@@ -34,6 +34,8 @@ module.exports = {
             'error',
             'always',
         ],
+        'arrow-parens': 'off',
+        'no-param-reassign': 'off'
     },
     parserOptions: {
         parser: 'babel-eslint',
