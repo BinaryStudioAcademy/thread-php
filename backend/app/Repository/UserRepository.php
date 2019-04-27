@@ -33,4 +33,11 @@ final class UserRepository implements Paginable
     {
         return User::findOrFail($id);
     }
+
+    public function save(User $user): User
+    {
+        $user->save();
+
+        return $user;
+    }
 }
