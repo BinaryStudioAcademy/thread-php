@@ -1,7 +1,9 @@
 <template>
     <div id="app">
         <Header />
-        <router-view />
+        <transition name="fade">
+            <router-view />
+        </transition>
     </div>
 </template>
 
@@ -17,16 +19,20 @@ export default {
 </script>
 
 <style lang="scss">
+@import '~buefy/dist/buefy.min.css';
+
 html, body {
+    padding: 0;
+    margin: 0;
     width: 100%;
     height: 100%;
-    background: #f6f4ff;
 }
 
 #app {
-    background: #f6f4ff;
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    color: $font-color;
+    background-color: $background-color;
 }
 </style>
