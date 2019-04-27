@@ -1,41 +1,71 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './views/Home.vue';
-import Feed from './views/Feed.vue';
+import Storage from '@/services/Storage';
+
+// async components
+const Feed = () => import(/* webpackChunkName: "feed" */ './views/Feed.vue');
+const Profile = () => import(/* webpackChunkName: "profile" */ './views/Profile.vue');
+const User = () => import(/* webpackChunkName: "user" */ './views/User.vue');
+
+// auth pages using same chunk name
+const SignIn = () => import(/* webpackChunkName: "auth" */ './views/SignIn.vue');
+const SignUp = () => import(/* webpackChunkName: "auth" */ './views/SignUp.vue');
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
     mode: 'history',
     base: process.env.BASE_URL,
     routes: [
         {
             path: '/',
-            name: 'home',
-            component: Home,
+            redirect: '/feed',
+            meta: { requiresAuth: true },
         },
         {
             path: '/feed',
             name: 'feed',
             component: Feed,
-        },
-        {
-            path: '/',
-            name: 'home',
-            // route level code-splitting
-            // this generates a separate chunk (about.[hash].js) for this route
-            // which is lazy-loaded when the route is visited.
-            component: () => import(/* webpackChunkName: "about" */ './views/Home.vue'),
-        },
-        {
-            path: '/feed',
-            name: 'feed',
-            component: () => import(/* webpackChunkName: "about" */ './views/Feed.vue'),
+            meta: { requiresAuth: true },
         },
         {
             path: '/profile',
             name: 'profile',
-            component: () => import(/* webpackChunkName: "about" */ './views/Profile.vue'),
+            component: Profile,
+            meta: { requiresAuth: true },
+        },
+        {
+            path: '/users/:id',
+            name: 'user-page',
+            component: User,
+            meta: { requiresAuth: true },
+        },
+        {
+            path: '/auth/sign-in',
+            name: 'auth.signIn',
+            component: SignIn,
+        },
+        {
+            path: '/auth/sign-up',
+            name: 'auth.signUp',
+            component: SignUp,
         },
     ],
+    scrollBehavior: () => ({ x: 0, y: 0 }),
 });
+
+// check auth routes
+router.beforeEach(
+    (to, from, next) => {
+        const isAuthenticatedRoute = to.matched.some(record => record.meta.requiresAuth);
+
+        if (!isAuthenticatedRoute || Storage.hasToken()) {
+            next();
+            return;
+        }
+
+        next({ name: 'auth.signIn' });
+    },
+);
+
+export default router;
