@@ -1,3 +1,5 @@
+import Storage from '@/services/Storage';
+
 export default {
     user: {
         id: null,
@@ -5,6 +7,6 @@ export default {
         lastName: '',
         avatar: '',
     },
-    isLoggedIn: false,
-    token: '',
+    isLoggedIn: Storage.hasToken(),
+    token: Storage.getToken(),
 };

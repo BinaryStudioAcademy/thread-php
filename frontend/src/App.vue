@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <Header />
+        <Header v-if="isLoggedIn" />
         <transition name="fade">
             <router-view />
         </transition>
@@ -9,17 +9,26 @@
 
 <script>
 import Header from '@/components/Header.vue';
+import { mapGetters } from 'vuex';
 
 export default {
     name: 'App',
+
     components: {
         Header,
+    },
+
+    computed: {
+        ...mapGetters('auth', [
+            'isLoggedIn',
+        ]),
     },
 };
 </script>
 
 <style lang="scss">
 @import '~buefy/dist/buefy.min.css';
+@import 'styles/common';
 
 html, body {
     padding: 0;
