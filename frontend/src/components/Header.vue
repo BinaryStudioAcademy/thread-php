@@ -2,7 +2,7 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <router-link class="navbar-item" to="/">
-                <strong>Thread-PHP</strong>
+                <strong>Thread</strong>
             </router-link>
 
             <a
