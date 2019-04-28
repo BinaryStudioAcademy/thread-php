@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Api;
 
 use App\Entity\Tweet;
+use App\Entity\User;
 
 final class TweetApiTest extends ApiTestCase
 {
@@ -48,7 +49,21 @@ final class TweetApiTest extends ApiTestCase
     {
         $this->actingWithToken()
             ->assertErrorResponse(self::API_URL, [
-                'body' => ''
+                'text' => ''
+            ]);
+    }
+
+    public function test_update_tweet_by_id()
+    {
+        $tweet = Tweet::first();
+        $user = User::find(
+            $tweet->getAuthorId()
+        );
+
+        $this->actingWithToken($user)
+            ->assertUpdatedResponse(
+                $this->createResourceItemUri(self::API_URL, $tweet->id), [
+                'text' => 'Text'
             ]);
     }
 }

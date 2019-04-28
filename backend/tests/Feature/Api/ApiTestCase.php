@@ -109,7 +109,7 @@ abstract class ApiTestCase extends BaseTestCase
         $this->jwtToken = Auth::login($user);
     }
 
-    protected function actingWithToken(Authenticatable $user = null) : self
+    protected function actingWithToken(Authenticatable $user = null): self
     {
         $user = $user ?? factory(User::class)->create();
 
