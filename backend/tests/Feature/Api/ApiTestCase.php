@@ -37,6 +37,18 @@ abstract class ApiTestCase extends BaseTestCase
     /**
      * @var array
      *
+     * Tweet response item structure
+     */
+    protected const TWEET_RESOURCE_STRUCTURE = [
+        'id',
+        'text',
+        'image_url',
+        'author' => self::USER_RESOURCE_STRUCTURE
+    ];
+
+    /**
+     * @var array
+     *
      * Comment response item structure
      */
     protected const COMMENT_RESOURCE_STRUCTURE = [

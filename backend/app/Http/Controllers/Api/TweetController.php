@@ -94,10 +94,8 @@ final class TweetController extends ApiController
             )
         );
 
-        return $this->createSuccessResponse(
-            $this->presenter->present(
-                $response->getTweet()
-            )
+        return $this->created(
+            $response->getTweetId()
         );
     }
 
