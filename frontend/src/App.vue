@@ -4,6 +4,11 @@
         <transition name="fade">
             <router-view />
         </transition>
+        <b-loading
+            :is-full-page="true"
+            :active.sync="isLoading"
+            :can-cancel="false"
+        />
     </div>
 </template>
 
@@ -19,6 +24,9 @@ export default {
     },
 
     computed: {
+        ...mapGetters([
+            'isLoading'
+        ]),
         ...mapGetters('auth', [
             'isLoggedIn',
         ]),
@@ -43,5 +51,7 @@ html, body {
     -moz-osx-font-smoothing: grayscale;
     color: $font-color;
     background-color: $background-color;
+    width: 100%;
+    height: 100%;
 }
 </style>
