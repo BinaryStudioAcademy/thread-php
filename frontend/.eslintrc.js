@@ -35,7 +35,14 @@ module.exports = {
             'always',
         ],
         'arrow-parens': 'off',
-        'no-param-reassign': 'off'
+        'no-param-reassign': 'off',
+        'vue/singleline-html-element-content-newline': 'off',
+        'comma-dangle': 'off',
+        'import/prefer-default-export': 'off',
+        'max-len': ['error', {
+            'code': 120,
+            'tabWidth': 4
+        }]
     },
     parserOptions: {
         parser: 'babel-eslint',
