@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <Header v-if="isLoggedIn" />
+        <Navbar v-if="isLoggedIn" />
         <transition name="fade">
             <router-view />
         </transition>
@@ -13,14 +13,14 @@
 </template>
 
 <script>
-import Header from '@/components/Header.vue';
+import Navbar from '@/components/Navbar.vue';
 import { mapGetters } from 'vuex';
 
 export default {
     name: 'App',
 
     components: {
-        Header,
+        Navbar,
     },
 
     computed: {
@@ -43,6 +43,7 @@ html, body {
     margin: 0;
     width: 100%;
     height: 100%;
+    overflow: hidden;
 }
 
 #app {

@@ -1,2 +1,16 @@
 $background-color: #f6f4ff;
 $font-color: #4e595d;
+$link-color: #0e58cf;
+
+.shadow-box {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+  color: #8a94a6;
+  font-size: 14px;
+}
+
+.link {
+  color: $link-color;
+}
