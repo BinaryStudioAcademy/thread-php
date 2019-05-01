@@ -1,10 +1,6 @@
 <template>
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <router-link class="navbar-item" to="/">
-                <strong>Thread</strong>
-            </router-link>
-
             <a
                 role="button"
                 class="navbar-burger burger"
@@ -51,7 +47,8 @@
 
 <script>
 export default {
-    name: 'Header',
+    name: 'Navbar',
+
     data() {
         return {
             currentUser: {
@@ -61,6 +58,7 @@ export default {
             },
         };
     },
+
     computed: {
         nameLatters: () => this.user.name.substr(0, 2).toUpperCase(),
     },
