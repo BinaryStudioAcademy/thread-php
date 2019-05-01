@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Storage from '@/services/Storage';
+import store from './store';
 
 // async components
 const Feed = () => import(/* webpackChunkName: "feed" */ './views/Feed.vue');
@@ -64,6 +65,20 @@ router.beforeEach(
 
         if (isAuthenticatedRoute && !Storage.hasToken()) {
             next({ name: 'auth.signIn' });
+            return;
+        }
+
+        if (isAuthenticatedRoute
+            && Storage.hasToken()
+            && !store.getters['auth/hasAuthenticatedUser']
+        ) {
+            store.dispatch('auth/fetchAuthenticatedUser')
+                .then(() => {
+                    next({ path: to });
+                })
+                .catch(() => {
+                    next({ name: 'auth.signIn' });
+                });
             return;
         }
 

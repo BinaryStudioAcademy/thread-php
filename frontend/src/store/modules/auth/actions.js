@@ -1,4 +1,4 @@
-import { USER_LOGIN } from './mutationTypes';
+import { USER_LOGIN, SET_AUTHENTICATED_USER } from './mutationTypes';
 import { SET_LOADING } from '../../mutationTypes';
 import Http from '@/api/Http';
 
@@ -40,6 +40,23 @@ export default {
             });
 
             commit(USER_LOGIN, data.access_token);
+            commit(SET_LOADING, false, { root: true });
+
+            return Promise.resolve();
+        } catch (errorMsg) {
+            commit(SET_LOADING, false, { root: true });
+
+            return Promise.reject(errorMsg);
+        }
+    },
+
+    async fetchAuthenticatedUser({ commit }) {
+        commit(SET_LOADING, true, { root: true });
+
+        try {
+            const data = await Http.get('/auth/me');
+
+            commit(SET_AUTHENTICATED_USER, data);
             commit(SET_LOADING, false, { root: true });
 
             return Promise.resolve();
