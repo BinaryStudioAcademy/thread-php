@@ -20,6 +20,10 @@
                     Feed
                 </router-link>
 
+                <router-link class="navbar-item" :to="{ name: 'user-page', params: { id: user.id }}">
+                    My Feed
+                </router-link>
+
                 <div class="navbar-item">
                     <a class="button is-primary">
                         <strong>Add tweet</strong>
@@ -31,13 +35,13 @@
                 <div class="navbar-item">
                     <figure class="image is-32x32">
                         <img
-                            v-if="currentUser.profile_image"
+                            v-if="user.avatar"
                             class="profile-image is-rounded"
-                            :src="currentUser.profile_image"
+                            :src="user.avatar"
                         >
                         <strong v-else class="text-avatar">{{ nameLatters }}</strong>
                     </figure>
-                    <span class="profile-name">{{ currentUser.name }}</span>
+                    <span class="profile-name">{{ user.name }}</span>
                     <span class="icon is-medium"><font-awesome-icon icon="angle-down" /></span>
                 </div>
             </div>
@@ -46,21 +50,16 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
     name: 'Navbar',
 
-    data() {
-        return {
-            currentUser: {
-                name: 'Alex',
-                nickname: 'aLLeXUs',
-                profile_image: 'https://bulma.io/images/placeholders/128x128.png',
-            },
-        };
-    },
-
     computed: {
-        nameLatters: () => this.user.name.substr(0, 2).toUpperCase(),
+        ...mapState('auth', ['user']),
+        nameLatters() {
+            return this.user.name && this.user.name.substr(0, 2).toUpperCase();
+        },
     },
 };
 </script>
