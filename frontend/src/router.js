@@ -44,11 +44,13 @@ const router = new Router({
             path: '/auth/sign-in',
             name: 'auth.signIn',
             component: SignIn,
+            meta: { handleAuth: true },
         },
         {
             path: '/auth/sign-up',
             name: 'auth.signUp',
             component: SignUp,
+            meta: { handleAuth: true },
         },
     ],
     scrollBehavior: () => ({ x: 0, y: 0 }),
@@ -58,13 +60,19 @@ const router = new Router({
 router.beforeEach(
     (to, from, next) => {
         const isAuthenticatedRoute = to.matched.some(record => record.meta.requiresAuth);
+        const isAuthSectionRoute = to.matched.some(record => record.meta.handleAuth);
 
-        if (!isAuthenticatedRoute || Storage.hasToken()) {
-            next();
+        if (isAuthenticatedRoute && !Storage.hasToken()) {
+            next({ name: 'auth.signIn' });
             return;
         }
 
-        next({ name: 'auth.signIn' });
+        if (isAuthSectionRoute && Storage.hasToken()) {
+            next({ path: '/' });
+            return;
+        }
+
+        next({ path: to });
     },
 );
 

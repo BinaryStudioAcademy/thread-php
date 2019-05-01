@@ -1,11 +1,11 @@
-import { USER_LOGIN, USER_LOGOUT, SET_AUTHENTICATED_USER } from './actionTypes';
+import { USER_LOGIN, USER_LOGOUT, SET_AUTHENTICATED_USER } from './mutationTypes';
 import Storage from '@/services/Storage';
 
 export default {
-    [USER_LOGIN]: (state, response) => {
-        Storage.setToken(response.access_token);
+    [USER_LOGIN]: (state, accessToken) => {
+        Storage.setToken(accessToken);
 
-        state.token = response.access_token;
+        state.token = accessToken;
         state.isLoggedIn = true;
     },
 
@@ -24,6 +24,6 @@ export default {
 
     [SET_AUTHENTICATED_USER]: (state, user) => {
         state.isLoggedIn = true;
-        state.currentUser = user;
+        state.user = user;
     },
 };
