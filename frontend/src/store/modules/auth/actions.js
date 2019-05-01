@@ -22,4 +22,31 @@ export default {
             return Promise.reject(errorMsg);
         }
     },
+
+    async signUp({ commit }, {
+        name,
+        email,
+        password,
+        nickname
+    }) {
+        commit(SET_LOADING, true, { root: true });
+
+        try {
+            const data = await Http.post('/auth/register', {
+                name,
+                email,
+                password,
+                nickname,
+            });
+
+            commit(USER_LOGIN, data.access_token);
+            commit(SET_LOADING, false, { root: true });
+
+            return Promise.resolve();
+        } catch (errorMsg) {
+            commit(SET_LOADING, false, { root: true });
+
+            return Promise.reject(errorMsg);
+        }
+    },
 };
