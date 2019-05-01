@@ -37,6 +37,18 @@ abstract class ApiTestCase extends BaseTestCase
     /**
      * @var array
      *
+     * Tweet response item structure
+     */
+    protected const TWEET_RESOURCE_STRUCTURE = [
+        'id',
+        'text',
+        'image_url',
+        'author' => self::USER_RESOURCE_STRUCTURE
+    ];
+
+    /**
+     * @var array
+     *
      * Comment response item structure
      */
     protected const COMMENT_RESOURCE_STRUCTURE = [
@@ -97,7 +109,7 @@ abstract class ApiTestCase extends BaseTestCase
         $this->jwtToken = Auth::login($user);
     }
 
-    protected function actingWithToken(Authenticatable $user = null) : self
+    protected function actingWithToken(Authenticatable $user = null): self
     {
         $user = $user ?? factory(User::class)->create();
 
