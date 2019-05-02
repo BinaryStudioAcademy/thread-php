@@ -1,20 +1,37 @@
 import axios from 'axios/index';
 import Storage from '../services/Storage';
+import { UNAUTHENTICATED } from './ErrorCodes';
 
 class Http {
     constructor(apiUrl, authHeaderName = 'Authorization', authHeaderPrefix = 'Bearer') {
         this.axios = axios.create({ baseURL: apiUrl });
 
-        if (Storage.hasToken()) {
-            this.axios.defaults.headers.common[authHeaderName] = `${authHeaderPrefix} ${Storage.getToken()}`;
-        }
+        this.axios
+            .interceptors
+            .request
+            .use(
+                config => {
+                    if (Storage.hasToken()) {
+                        config.headers[authHeaderName] = `${authHeaderPrefix} ${Storage.getToken()}`;
+                    }
+
+                    return config;
+                },
+                error => Promise.reject(error)
+            );
 
         this.axios
             .interceptors
             .response
             .use(
                 response => response.data.data,
-                error => Promise.reject(error.response.data.errors[0].message),
+                error => {
+                    if (error.response.data.errors[0].code === UNAUTHENTICATED) {
+                        Storage.removeToken();
+                    }
+
+                    return Promise.reject(error.response.data.errors[0].message);
+                },
             );
     }
 
