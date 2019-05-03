@@ -14,7 +14,9 @@
 
 <script>
 import Navbar from '@/components/Navbar.vue';
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
+import { USER_LOGOUT } from './store/modules/auth/mutationTypes';
+import { UNAUTHENTICATED } from '@/api/ErrorCodes';
 
 export default {
     name: 'App',
@@ -30,6 +32,26 @@ export default {
         ...mapGetters('auth', [
             'isLoggedIn',
         ]),
+    },
+
+    created() {
+        this.fetchAuthenticatedUser()
+            .catch(error => {
+                if (error.code === UNAUTHENTICATED) {
+                    this.logout();
+                    this.$router.push({ name: 'auth.signIn' });
+                }
+            });
+    },
+
+    methods: {
+        ...mapActions('auth', [
+            'fetchAuthenticatedUser'
+        ]),
+
+        ...mapMutations('auth', {
+            logout: USER_LOGOUT
+        }),
     },
 };
 </script>
