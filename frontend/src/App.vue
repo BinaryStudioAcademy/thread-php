@@ -14,9 +14,9 @@
 
 <script>
 import Navbar from '@/components/Navbar.vue';
-import { mapActions, mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 import { USER_LOGOUT } from './store/modules/auth/mutationTypes';
-import { UNAUTHENTICATED } from '@/api/ErrorCodes';
+import { EventEmitter, TOKEN_EXPIRED_EVENT } from './services/EventEmitter';
 
 export default {
     name: 'App',
@@ -35,20 +35,13 @@ export default {
     },
 
     created() {
-        this.fetchAuthenticatedUser()
-            .catch(error => {
-                if (error.code === UNAUTHENTICATED) {
-                    this.logout();
-                    this.$router.push({ name: 'auth.signIn' });
-                }
-            });
+        EventEmitter.$on(TOKEN_EXPIRED_EVENT, () => {
+            this.logout();
+            this.$router.push({ name: 'auth.signIn' });
+        });
     },
 
     methods: {
-        ...mapActions('auth', [
-            'fetchAuthenticatedUser'
-        ]),
-
         ...mapMutations('auth', {
             logout: USER_LOGOUT
         }),
