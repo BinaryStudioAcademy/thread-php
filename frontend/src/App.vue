@@ -14,7 +14,9 @@
 
 <script>
 import Navbar from '@/components/Navbar.vue';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
+import { USER_LOGOUT } from './store/modules/auth/mutationTypes';
+import { EventEmitter, TOKEN_EXPIRED_EVENT } from './services/EventEmitter';
 
 export default {
     name: 'App',
@@ -30,6 +32,19 @@ export default {
         ...mapGetters('auth', [
             'isLoggedIn',
         ]),
+    },
+
+    created() {
+        EventEmitter.$on(TOKEN_EXPIRED_EVENT, () => {
+            this.logout();
+            this.$router.push({ name: 'auth.signIn' });
+        });
+    },
+
+    methods: {
+        ...mapMutations('auth', {
+            logout: USER_LOGOUT
+        }),
     },
 };
 </script>

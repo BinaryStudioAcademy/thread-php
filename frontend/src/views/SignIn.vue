@@ -54,6 +54,7 @@
 <script>
 import { mapActions } from 'vuex';
 import showStatusToast from '../components/mixin/showStatusToast';
+import { USER_LOGGED_IN } from '../translation/messages';
 
 export default {
     name: 'SignInPage',
@@ -75,11 +76,11 @@ export default {
         onLogin() {
             this.signIn(this.user)
                 .then(() => {
-                    this.showSuccessMessage('Welcome!');
+                    this.showSuccessMessage(USER_LOGGED_IN);
 
                     this.$router.push({ path: '/' });
                 })
-                .catch(errorMessage => this.showErrorMessage(errorMessage));
+                .catch(error => this.showErrorMessage(error.message));
         },
     },
 };

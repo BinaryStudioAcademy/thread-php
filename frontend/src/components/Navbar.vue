@@ -50,16 +50,24 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
     name: 'Navbar',
 
     computed: {
-        ...mapState('auth', ['user']),
+        ...mapGetters('auth', {
+            user: 'getAuthenticatedUser'
+        }),
+
         nameLatters() {
             return this.user.name && this.user.name.substr(0, 2).toUpperCase();
-        },
+        }
+    },
+
+    created() {
+        this.fetchAuthenticatedUser()
+            .catch(error => console.log(`Error occurred: ${error.message}`));
     },
 };
 </script>
@@ -67,7 +75,7 @@ export default {
 <style lang="scss" scoped>
 .navbar {
     margin-bottom: 20px;
-    box-shadow: 5px 5px 5px 0px #00000020;
+    box-shadow: 5px 5px 5px 0 #00000020;
 }
 
 .navbar-item img {

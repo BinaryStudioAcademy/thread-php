@@ -42,7 +42,8 @@ module.exports = {
         'max-len': ['error', {
             'code': 120,
             'tabWidth': 4
-        }]
+        }],
+        'no-trailing-spaces': 'off',
     },
     parserOptions: {
         parser: 'babel-eslint',
