@@ -43,10 +43,10 @@ export default {
             commit(SET_LOADING, false, { root: true });
 
             return Promise.resolve();
-        } catch (errorMsg) {
+        } catch (error) {
             commit(SET_LOADING, false, { root: true });
 
-            return Promise.reject(errorMsg);
+            return Promise.reject(error);
         }
     },
 
@@ -60,10 +60,10 @@ export default {
             commit(SET_LOADING, false, { root: true });
 
             return Promise.resolve();
-        } catch (errorMsg) {
+        } catch (error) {
             commit(SET_LOADING, false, { root: true });
 
-            return Promise.reject(errorMsg);
+            return Promise.reject(error);
         }
     },
 };
