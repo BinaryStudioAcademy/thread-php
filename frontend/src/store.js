@@ -5,6 +5,7 @@ import mutations from './store/mutations';
 import getters from './store/getters';
 import actions from './store/actions';
 import auth from './store/modules/auth';
+import tweet from './store/modules/tweet';
 
 Vue.use(Vuex);
 
@@ -16,5 +17,6 @@ export default new Vuex.Store({
     getters,
     modules: {
         auth,
+        tweet,
     },
 });
