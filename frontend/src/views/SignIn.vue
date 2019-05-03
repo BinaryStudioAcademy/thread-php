@@ -79,7 +79,7 @@ export default {
 
                     this.$router.push({ path: '/' });
                 })
-                .catch(errorMessage => this.showErrorMessage(errorMessage));
+                .catch(error => this.showErrorMessage(error.message));
         },
     },
 };
