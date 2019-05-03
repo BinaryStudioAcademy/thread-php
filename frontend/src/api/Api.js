@@ -1,7 +1,9 @@
 import axios from 'axios/index';
-import Storage from '../services/Storage';
+import Storage from '@/services/Storage';
+import { EventEmitter, TOKEN_EXPIRED_EVENT } from '@/services/EventEmitter';
+import { UNAUTHENTICATED } from '@/api/ErrorCodes';
 
-class Http {
+class Api {
     constructor(apiUrl, authHeaderName = 'Authorization', authHeaderPrefix = 'Bearer') {
         this.axios = axios.create({ baseURL: apiUrl });
 
@@ -24,7 +26,15 @@ class Http {
             .response
             .use(
                 response => response.data.data,
-                errorResponse => Promise.reject(errorResponse.response.data.errors[0]),
+                errorResponse => {
+                    const error = errorResponse.response.data.errors[0];
+
+                    if (error.code === UNAUTHENTICATED) {
+                        EventEmitter.$emit(TOKEN_EXPIRED_EVENT, error);
+                    }
+
+                    return Promise.reject(error);
+                },
             );
     }
 
@@ -45,4 +55,4 @@ class Http {
     }
 }
 
-export default new Http(process.env.VUE_APP_API_URL);
+export default new Api(process.env.VUE_APP_API_URL);

@@ -1,13 +1,13 @@
 import { USER_LOGIN, SET_AUTHENTICATED_USER } from './mutationTypes';
 import { SET_LOADING } from '../../mutationTypes';
-import Http from '@/api/Http';
+import api from '@/api/Api';
 
 export default {
     async signIn({ commit }, { email, password }) {
         commit(SET_LOADING, true, { root: true });
 
         try {
-            const data = await Http.post('/auth/login', {
+            const data = await api.post('/auth/login', {
                 email,
                 password,
             });
@@ -32,7 +32,7 @@ export default {
         commit(SET_LOADING, true, { root: true });
 
         try {
-            const data = await Http.post('/auth/register', {
+            const data = await api.post('/auth/register', {
                 name,
                 email,
                 password,
@@ -54,7 +54,7 @@ export default {
         commit(SET_LOADING, true, { root: true });
 
         try {
-            const data = await Http.get('/auth/me');
+            const data = await api.get('/auth/me');
 
             commit(SET_AUTHENTICATED_USER, data);
             commit(SET_LOADING, false, { root: true });
