@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Storage from '@/services/Storage';
-import store from './store';
 
 // async components
 const Feed = () => import(/* webpackChunkName: "feed" */ './views/Feed.vue');
