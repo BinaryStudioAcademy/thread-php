@@ -23,12 +23,6 @@
                 <router-link class="navbar-item" :to="{ name: 'user-page', params: { id: user.id }}">
                     My Feed
                 </router-link>
-
-                <div class="navbar-item">
-                    <a class="button is-primary">
-                        <strong>Add tweet</strong>
-                    </a>
-                </div>
             </div>
 
             <div class="navbar-end">
@@ -50,7 +44,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
     name: 'Navbar',
@@ -69,6 +63,12 @@ export default {
         this.fetchAuthenticatedUser()
             .catch(error => console.log(`Error occurred: ${error.message}`));
     },
+
+    methods: {
+        ...mapActions('auth', [
+            'fetchAuthenticatedUser'
+        ])
+    }
 };
 </script>
 
