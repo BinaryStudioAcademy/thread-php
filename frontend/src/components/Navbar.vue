@@ -50,16 +50,19 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
     name: 'Navbar',
 
     computed: {
-        ...mapState('auth', ['user']),
+        ...mapGetters('auth', {
+            user: 'getAuthenticatedUser'
+        }),
+
         nameLatters() {
             return this.user.name && this.user.name.substr(0, 2).toUpperCase();
-        },
+        }
     },
 };
 </script>
