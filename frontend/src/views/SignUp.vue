@@ -68,6 +68,7 @@
 <script>
 import { mapActions } from 'vuex';
 import showStatusToast from '../components/mixin/showStatusToast';
+import { USER_LOGGED_IN } from '../translation/messages';
 
 export default {
     name: 'SignUpPage',
@@ -91,7 +92,7 @@ export default {
         onSubmit() {
             this.signUp(this.user)
                 .then(() => {
-                    this.showSuccessMessage('Welcome!');
+                    this.showSuccessMessage(USER_LOGGED_IN);
 
                     this.$router.push({ path: '/' });
                 })
