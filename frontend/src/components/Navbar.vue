@@ -64,6 +64,11 @@ export default {
             return this.user.name && this.user.name.substr(0, 2).toUpperCase();
         }
     },
+
+    created() {
+        this.fetchAuthenticatedUser()
+            .catch(error => console.log(`Error occurred: ${error.message}`));
+    },
 };
 </script>
 
