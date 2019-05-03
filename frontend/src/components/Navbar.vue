@@ -70,7 +70,7 @@ export default {
 <style lang="scss" scoped>
 .navbar {
     margin-bottom: 20px;
-    box-shadow: 5px 5px 5px 0px #00000020;
+    box-shadow: 5px 5px 5px 0 #00000020;
 }
 
 .navbar-item img {
