@@ -1,6 +1,5 @@
 import axios from 'axios/index';
 import Storage from '../services/Storage';
-import { UNAUTHENTICATED } from './ErrorCodes';
 
 class Http {
     constructor(apiUrl, authHeaderName = 'Authorization', authHeaderPrefix = 'Bearer') {
@@ -25,13 +24,7 @@ class Http {
             .response
             .use(
                 response => response.data.data,
-                error => {
-                    if (error.response.data.errors[0].code === UNAUTHENTICATED) {
-                        Storage.removeToken();
-                    }
-
-                    return Promise.reject(error.response.data.errors[0].message);
-                },
+                errorResponse => Promise.reject(errorResponse.response.data.errors[0]),
             );
     }
 
