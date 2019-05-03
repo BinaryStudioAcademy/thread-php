@@ -15,6 +15,7 @@ final class ApiResponse extends JsonResponse
     private const FORBIDDEN_STATUS = 403;
     private const RESOURCE_NOT_FOUND_STATUS = 404;
     private const RESOURCE_CREATED_STATUS = 201;
+    private const UNAUTHENTICATED_STATUS = 401;
 
     public static function error(string $code, string $message): self
     {
@@ -48,6 +49,11 @@ final class ApiResponse extends JsonResponse
     public static function forbidden(string $message): self
     {
         return static::error(ErrorCode::FORBIDDEN, $message)->setStatusCode(self::FORBIDDEN_STATUS);
+    }
+
+    public static function unauthenticated(string $message = 'Unauthenticated.'): self
+    {
+        return static::error(ErrorCode::UNAUTHENTICATED, $message)->setStatusCode(self::UNAUTHENTICATED_STATUS);
     }
 
     public static function notFound(string $message): self

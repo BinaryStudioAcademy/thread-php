@@ -77,10 +77,7 @@ class Handler extends ExceptionHandler
         }
 
         if ($exception instanceof AuthenticationException) {
-            return ApiResponse::error(
-                ErrorCode::UNAUTHENTICATED,
-                'Unauthenticated.'
-            );
+            return ApiResponse::unauthenticated();
         }
 
         // NotFoundHttpException - route doesn't exist
