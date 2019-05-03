@@ -68,20 +68,6 @@ router.beforeEach(
             return;
         }
 
-        if (isAuthenticatedRoute
-            && Storage.hasToken()
-            && !store.getters['auth/hasAuthenticatedUser']
-        ) {
-            store.dispatch('auth/fetchAuthenticatedUser')
-                .then(() => {
-                    next({ path: to });
-                })
-                .catch(() => {
-                    next({ name: 'auth.signIn' });
-                });
-            return;
-        }
-
         if (isAuthSectionRoute && Storage.hasToken()) {
             next({ path: '/' });
             return;
