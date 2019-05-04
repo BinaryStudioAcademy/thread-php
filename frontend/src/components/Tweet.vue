@@ -11,10 +11,10 @@
                 <div class="content">
                     <strong class="name">{{ tweet.author.name }}</strong>
                     <small class="nickname">@{{ tweet.author.nickname }}</small>
-                    <small class="created">{{ tweet.created }}</small>
+                    <small class="created">{{ tweet.created | createdDate }}</small>
                     <br>
                     {{ tweet.text }}
-                    <figure v-if="tweet.imageUrl" class="image is-3by2 tweet-image">
+                    <figure v-if="tweet.imageUrl" class="image is-3by1 tweet-image">
                         <img :src="tweet.imageUrl" alt="Tweet image">
                     </figure>
                 </div>
@@ -63,7 +63,11 @@ export default {
     box-shadow: 5px 5px 5px 0 #00000020;
 
     .tweet-image {
-        margin: 10px 20px 0 0;
+        margin: 12px 0 0 0;
+
+        img {
+            width: auto;
+        }
     }
 
     .nickname {
