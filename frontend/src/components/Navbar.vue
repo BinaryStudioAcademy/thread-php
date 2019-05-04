@@ -26,8 +26,8 @@
             </div>
 
             <div class="navbar-end">
-                <div class="navbar-item">
-                    <figure class="image is-32x32">
+                <div class="navbar-item profile">
+                    <figure class="image is-32x32 is-square">
                         <img
                             v-if="user.avatar"
                             class="profile-image is-rounded"
@@ -84,6 +84,12 @@ export default {
 
 .profile-name {
     margin-left: 10px;
+}
+
+.profile {
+    .image.is-square {
+        padding-top: 0;
+    }
 }
 
 .text-avatar {
