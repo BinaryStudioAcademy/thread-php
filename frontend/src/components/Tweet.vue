@@ -2,8 +2,8 @@
     <div class="tweet box">
         <article class="media">
             <figure class="media-left">
-                <p class="image is-64x64">
-                    <img :src="tweet.author.avatar" alt="Author avatar">
+                <p class="image is-64x64 is-square">
+                    <img class="is-rounded" :src="tweet.author.avatar" alt="Author avatar">
                 </p>
             </figure>
 
