@@ -7,7 +7,7 @@
                 type="is-primary"
                 icon-left="twitter"
                 icon-pack="fab"
-                @click="onAddTweet"
+                @click="onAddTweetClick"
             >
                 New Tweet :)
             </b-button>
@@ -21,7 +21,7 @@
         </template>
 
         <b-modal :active.sync="isModalActive" has-modal-card>
-            <NewTweetForm :on-save="newTweet" />
+            <NewTweetForm />
         </b-modal>
     </div>
 </template>
@@ -55,20 +55,16 @@ export default {
 
     methods: {
         ...mapActions('tweet', [
-            'fetchTweets'
+            'fetchTweets',
         ]),
 
-        onAddTweet() {
+        onAddTweetClick() {
             this.showAddTweetModal();
         },
 
         showAddTweetModal() {
             this.isModalActive = true;
         },
-
-        newTweet({ text, image }) {
-            console.log(text, image);
-        }
     }
 };
 </script>
