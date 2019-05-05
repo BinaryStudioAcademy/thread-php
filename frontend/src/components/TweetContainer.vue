@@ -1,81 +1,36 @@
 <template>
     <div class="tweets-container">
-        <div class="navigation">
-            <b-button
-                rounded
-                size="is-medium"
-                type="is-primary"
-                icon-left="twitter"
-                icon-pack="fab"
-                @click="onAddTweetClick"
-            >
-                New Tweet :)
-            </b-button>
-        </div>
-
-        <template v-for="tweet in tweets">
-            <Tweet
-                :key="tweet.id"
-                :tweet="tweet"
-            />
-        </template>
-
-        <b-modal :active.sync="isModalActive" has-modal-card>
-            <NewTweetForm />
-        </b-modal>
+        <Tweet :tweet="tweet" />
     </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
 import Tweet from '@/components/Tweet.vue';
-import NewTweetForm from '@/components/NewTweetForm.vue';
 
 export default {
     name: 'TweetContainer',
 
     components: {
         Tweet,
-        NewTweetForm
     },
+
+    // get tweet
 
     data: () => ({
-        isModalActive: false,
+        tweet: {
+            id: 1,
+            text: 'Test tweet',
+            created: '3h',
+            author: {
+                id: 1,
+                name: 'Author 1',
+                avatar: 'https://bulma.io/images/placeholders/96x96.png',
+            },
+        },
     }),
-
-    created() {
-        this.fetchTweets();
-    },
-
-    computed: {
-        ...mapGetters('tweet', [
-            'tweets'
-        ])
-    },
-
-    methods: {
-        ...mapActions('tweet', [
-            'fetchTweets',
-        ]),
-
-        onAddTweetClick() {
-            this.showAddTweetModal();
-        },
-
-        showAddTweetModal() {
-            this.isModalActive = true;
-        },
-    }
 };
 </script>
 
 <style scoped lang="scss">
-.tweets-container {
-    padding-bottom: 20px;
-}
 
-.navigation {
-    padding: 10px 0;
-    margin-bottom: 20px;
-}
 </style>

@@ -1,17 +1,17 @@
 <template>
     <div class="container">
-        <TweetContainer />
+        <FeedContainer />
     </div>
 </template>
 
 <script>
-import TweetContainer from '@/components/TweetContainer.vue';
+import FeedContainer from '@/components/FeedContainer.vue';
 
 export default {
     name: 'FeedPage',
 
     components: {
-        TweetContainer,
+        FeedContainer,
     },
 };
 </script>

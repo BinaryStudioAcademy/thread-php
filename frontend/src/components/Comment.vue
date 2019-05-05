@@ -1,0 +1,39 @@
+<template>
+    <article class="media">
+        <figure class="media-left">
+            <p class="image is-48x48">
+                <img :src="comment.author.avatar">
+            </p>
+        </figure>
+        <div class="media-content">
+            <div class="content">
+                <p>
+                    <strong>{{ comment.author.name }} </strong>
+                    <br>
+                    {{ comment.body }}
+                    <br>
+                    <small><a>Like</a> · <a>Reply</a> · 2 hrs</small>
+                </p>
+            </div>
+        </div>
+    </article>
+</template>
+
+<script>
+import router from '@/router';
+
+export default {
+    name: 'Comment',
+
+    props: {
+        comment: {
+            type: Object,
+            required: true,
+        },
+    },
+};
+</script>
+
+<style lang="scss" scoped>
+
+</style>
