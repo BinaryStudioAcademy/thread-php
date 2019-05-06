@@ -19,44 +19,27 @@
                     <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
                 </p>
             </div>
-
             <template v-for="comment in comments">
                 <Comment
                     :key="comment.id"
                     :comment="comment"
                 />
             </template>
+            <NewCommentForm />
         </div>
     </article>
-    <!-- <article class="media">
-        <figure class="media-left">
-            <p class="image is-64x64">
-            <img src="https://bulma.io/images/placeholders/128x128.png">
-            </p>
-        </figure>
-        <div class="media-content">
-            <div class="field">
-            <p class="control">
-                <textarea class="textarea" placeholder="Add a comment..."></textarea>
-            </p>
-            </div>
-            <div class="field">
-            <p class="control">
-                <button class="button">Post comment</button>
-            </p>
-            </div>
-        </div>
-    </article> -->
 </template>
 
 <script>
 import Comment from './Comment.vue';
+import NewCommentForm from './NewCommentForm.vue';
 
 export default {
     name: 'Tweet',
 
     components: {
         Comment,
+        NewCommentForm,
     },
 
     props: {
