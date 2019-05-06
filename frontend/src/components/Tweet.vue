@@ -1,8 +1,8 @@
 <template>
-    <article class="media">
+    <article class="tweet media">
         <figure class="media-left">
-            <p class="image is-64x64">
-                <img :src="tweet.author.avatar">
+            <p class="image is-64x64 is-square">
+                <img class="is-rounded" :src="tweet.author.avatar">
             </p>
         </figure>
         <div class="media-content">
@@ -11,6 +11,10 @@
                     <strong>{{ tweet.author.name }}</strong>
                     <br>
                     {{ tweet.text }}
+                    <br>
+                    <figure v-if="tweet.imageUrl" class="image is-3by1 tweet-image">
+                        <img :src="tweet.imageUrl" alt="Tweet image">
+                    </figure>
                     <br>
                     <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
                 </p>
@@ -22,7 +26,6 @@
                     :comment="comment"
                 />
             </template>
-
         </div>
     </article>
     <!-- <article class="media">
@@ -83,5 +86,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.tweet-image {
+    margin: 12px 0 0 0;
 
+    img {
+        width: auto;
+    }
+}
 </style>

@@ -1,8 +1,8 @@
 <template>
     <article class="media">
         <figure class="media-left">
-            <p class="image is-48x48">
-                <img :src="comment.author.avatar">
+            <p class="image is-48x48 is-square">
+                <img class="is-rounded" :src="comment.author.avatar">
             </p>
         </figure>
         <div class="media-content">

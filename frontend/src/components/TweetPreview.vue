@@ -42,14 +42,9 @@
 
 <script>
 import router from '@/router';
-import Tweet from './Tweet.vue';
 
 export default {
     name: 'TweetPreview',
-
-    components: {
-        Tweet,
-    },
 
     props: {
         tweet: {
@@ -85,7 +80,7 @@ export default {
     border-radius: 5px;
     box-shadow: 5px 5px 5px 0 #00000020;
 
-    .tweet-image {
+    &-image {
         margin: 12px 0 0 0;
 
         img {
