@@ -66,4 +66,6 @@ return [
 
     ],
 
+    'tweet_images_dir' => 'tweet-images'
+
 ];
