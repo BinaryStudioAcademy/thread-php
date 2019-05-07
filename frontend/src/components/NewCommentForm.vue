@@ -8,12 +8,17 @@
         <div class="media-content">
             <div class="field">
                 <p class="control">
-                    <textarea class="textarea" placeholder="Add a comment..."></textarea>
+                    <textarea
+                        class="textarea"
+                        v-model="text"
+                        placeholder="Add a comment..."
+                    >
+                    </textarea>
                 </p>
             </div>
             <div class="field">
                 <p class="control">
-                    <button class="button">Post comment</button>
+                    <button class="button" @click="handlePostComment">Post comment</button>
                 </p>
             </div>
         </div>
@@ -21,8 +26,34 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
     name: 'NewCommentForm',
+
+    props: {
+        tweetId: {
+            type: Number,
+            required: true,
+        },
+    },
+
+    data: () => ({
+        text: '',
+    }),
+
+    methods: {
+        ...mapActions('comment', [
+            'addComment',
+        ]),
+
+        async handlePostComment() {
+            await this.addComment({
+                tweetId: this.tweetId,
+                text: this.text,
+            });
+        },
+    },
 }
 </script>
 

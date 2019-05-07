@@ -6,6 +6,7 @@ import getters from './store/getters';
 import actions from './store/actions';
 import auth from './store/modules/auth';
 import tweet from './store/modules/tweet';
+import comment from './store/modules/comment';
 
 Vue.use(Vuex);
 
@@ -18,5 +19,6 @@ export default new Vuex.Store({
     modules: {
         auth,
         tweet,
+        comment,
     },
 });

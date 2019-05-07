@@ -25,12 +25,13 @@
                     :comment="comment"
                 />
             </template>
-            <NewCommentForm />
+            <NewCommentForm :tweetId="tweet.id" />
         </div>
     </article>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import Comment from './Comment.vue';
 import NewCommentForm from './NewCommentForm.vue';
 
@@ -49,22 +50,21 @@ export default {
         },
     },
 
-    // get tweet comments
+    created() {
+        this.fetchComments(this.tweet.id);
+    },
 
-    data: () => ({
-        comments: [
-            {
-                id: 1,
-                body: 'Test comment 1',
-                created: '3h',
-                author: {
-                    id: 1,
-                    name: 'Author 1',
-                    avatar: 'https://bulma.io/images/placeholders/96x96.png',
-                },
-            },
-        ],
-    }),
+    computed: {
+        ...mapGetters('comment', [
+            'comments'
+        ])
+    },
+
+    methods: {
+        ...mapActions('comment', [
+            'fetchComments',
+        ]),
+    },
 };
 </script>
 
