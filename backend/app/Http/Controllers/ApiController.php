@@ -46,8 +46,8 @@ abstract class ApiController extends Controller
         );
     }
 
-    final protected function created(int $id): ApiResponse
+    final protected function created(array $data): ApiResponse
     {
-        return ApiResponse::created($id);
+        return ApiResponse::created($data);
     }
 }

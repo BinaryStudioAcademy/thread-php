@@ -25,6 +25,6 @@ final class AddTweetAction
 
         $tweet = $this->tweetRepository->save($tweet);
 
-        return new AddTweetResponse($tweet->id);
+        return new AddTweetResponse($tweet);
     }
 }
