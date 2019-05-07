@@ -57,20 +57,23 @@ export default {
             try {
                 const tweet = await this.addTweet(this.text);
 
-                // @todo implement image upload
-                // if (this.image === null) {
-                //     return;
-                // }
-                //
-                // await this.uploadTweetImage({
-                //     id: tweet.id,
-                //     imageFile: this.image
-                // });
+                if (this.image === null) {
+                    return;
+                }
+
+                await this.uploadTweetImage({
+                    id: tweet.id,
+                    imageFile: this.image
+                });
 
                 this.$parent.close();
             } catch (error) {
                 this.showErrorMessage(error.message);
             }
+        },
+
+        showErrorMessage(msg) {
+            this.errorMessage = msg;
         }
     }
 };

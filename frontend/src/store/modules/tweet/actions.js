@@ -26,8 +26,7 @@ export default {
         try {
             const tweet = await api.post('/tweets', { text });
 
-            // @todo fix backend first
-            // commit(NEW_TWEET, tweet);
+            commit(NEW_TWEET, tweet);
             commit(SET_LOADING, false, { root: true });
 
             return Promise.resolve(tweet);
@@ -45,13 +44,13 @@ export default {
             const formData = new FormData();
             formData.append('image', imageFile);
 
-            const tweet = await api.post(`/tweets/${id}/image`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
+            const tweet = await api.post(`/tweets/${id}/image`, formData);
+
+            commit(SET_TWEET_IMAGE, {
+                id,
+                imageUrl: tweet.image_url
             });
 
-            commit(SET_TWEET_IMAGE, tweet);
             commit(SET_LOADING, false, { root: true });
 
             return Promise.resolve(tweet);
