@@ -94,9 +94,7 @@ final class TweetController extends ApiController
             )
         );
 
-        return $this->created(
-            $response->getTweetId()
-        );
+        return $this->created($this->presenter->present($response->getTweet()));
     }
 
     public function updateTweetById(string $id, UpdateTweetHttpRequest $request): ApiResponse

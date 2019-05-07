@@ -5,7 +5,7 @@
         </header>
 
         <section class="modal-card-body">
-            <div class="error" v-if="errorMessage">{{ errorMessage }}</div>
+            <div class="error has-text-danger" v-if="errorMessage">{{ errorMessage }}</div>
 
             <b-field label="Text">
                 <b-input
@@ -57,25 +57,30 @@ export default {
             try {
                 const tweet = await this.addTweet(this.text);
 
-                // @todo implement image upload
-                // if (this.image === null) {
-                //     return;
-                // }
-                //
-                // await this.uploadTweetImage({
-                //     id: tweet.id,
-                //     imageFile: this.image
-                // });
+                if (this.image === null) {
+                    return;
+                }
+
+                await this.uploadTweetImage({
+                    id: tweet.id,
+                    imageFile: this.image
+                });
 
                 this.$parent.close();
             } catch (error) {
                 this.showErrorMessage(error.message);
             }
+        },
+
+        showErrorMessage(msg) {
+            this.errorMessage = msg;
         }
     }
 };
 </script>
 
 <style scoped>
-
+.error {
+    padding: 10px 0;
+}
 </style>

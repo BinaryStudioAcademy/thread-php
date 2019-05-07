@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace App\Action\Tweet;
 
+use App\Entity\Tweet;
+
 final class AddTweetResponse
 {
-    private $tweetId;
+    private $tweet;
 
-    public function __construct(int $tweetId)
+    public function __construct(Tweet $tweet)
     {
-        $this->tweetId = $tweetId;
+        $this->tweet = $tweet;
     }
 
-    public function getTweetId(): int
+    public function getTweet(): Tweet
     {
-        return $this->tweetId;
+        return $this->tweet;
     }
 }

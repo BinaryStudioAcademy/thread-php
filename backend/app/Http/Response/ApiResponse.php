@@ -7,6 +7,7 @@ namespace App\Http\Response;
 use App\Exceptions\ErrorCode;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\JsonResponse;
+use InvalidArgumentException;
 
 final class ApiResponse extends JsonResponse
 {
@@ -64,7 +65,7 @@ final class ApiResponse extends JsonResponse
     private static function assertErrorDataIsValid(string $code, string $message): void
     {
         if (empty($code) || empty($message)) {
-            throw new \InvalidArgumentException('Error values cannot be empty.');
+            throw new InvalidArgumentException('Error values cannot be empty.');
         }
     }
 
@@ -81,8 +82,8 @@ final class ApiResponse extends JsonResponse
         ]);
     }
 
-    public static function created(int $id): self
+    public static function created(array $data): self
     {
-        return new static(['data' => ['id' => $id]], self::RESOURCE_CREATED_STATUS);
+        return new static(['data' => $data], self::RESOURCE_CREATED_STATUS);
     }
 }

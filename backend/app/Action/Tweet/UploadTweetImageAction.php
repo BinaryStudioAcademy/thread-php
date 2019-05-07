@@ -8,20 +8,17 @@ use App\Exceptions\TweetNotFoundException;
 use App\Repository\TweetRepository;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Filesystem\FilesystemManager;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Storage;
 
 final class UploadTweetImageAction
 {
-    private const UPLOAD_DIR = 'tweet-images';
-
     private $tweetRepository;
-    private $filesystemManager;
 
-    public function __construct(TweetRepository $tweetRepository, FilesystemManager $filesystemManager)
+    public function __construct(TweetRepository $tweetRepository)
     {
         $this->tweetRepository = $tweetRepository;
-        $this->filesystemManager = $filesystemManager;
     }
 
     public function execute(UploadTweetImageRequest $request): UploadTweetImageResponse
@@ -36,15 +33,14 @@ final class UploadTweetImageAction
             throw new AuthorizationException();
         }
 
-        $disk = $this->filesystemManager->disk('public');
-
-        $filePath = $disk->putFileAs(
-            self::UPLOAD_DIR,
+        $filePath = Storage::putFileAs(
+            Config::get('filesystems.tweet_images_dir'),
             $request->getImage(),
-            $tweet->id,
+            $request->getImage()->hashName(),
             'public'
         );
-        $tweet->image_url = $disk->url($filePath);
+
+        $tweet->image_url = Storage::url($filePath);
 
         $tweet = $this->tweetRepository->save($tweet);
 
