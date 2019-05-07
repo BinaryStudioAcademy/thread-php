@@ -1,4 +1,4 @@
-import { SET_TWEETS, NEW_TWEET } from './mutationTypes';
+import { SET_TWEETS, NEW_TWEET, SET_TWEET_IMAGE } from './mutationTypes';
 import { tweetMapper } from '@/services/Normalizer';
 
 export default {
@@ -7,6 +7,14 @@ export default {
     },
 
     [NEW_TWEET]: (state, tweet) => {
-        state.tweets.unshift(tweet);
+        state.tweets.unshift(tweetMapper(tweet));
+    },
+
+    [SET_TWEET_IMAGE]: (state, { id, imageUrl }) => {
+        const tweet = state.tweets.find(tw => tw.id === id);
+
+        if (tweet) {
+            tweet.imageUrl = imageUrl;
+        }
     },
 };
