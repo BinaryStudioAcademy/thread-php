@@ -5,7 +5,7 @@
         </header>
 
         <section class="modal-card-body">
-            <div class="error" v-if="errorMessage">{{ errorMessage }}</div>
+            <div class="error has-text-danger" v-if="errorMessage">{{ errorMessage }}</div>
 
             <b-field label="Text">
                 <b-input
@@ -80,5 +80,7 @@ export default {
 </script>
 
 <style scoped>
-
+.error {
+    padding: 10px 0;
+}
 </style>
