@@ -35,4 +35,4 @@ export default {
             return Promise.reject(error);
         }
     },
-}
+};

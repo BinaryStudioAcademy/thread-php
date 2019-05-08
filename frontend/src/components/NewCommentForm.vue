@@ -12,13 +12,12 @@
                         class="textarea"
                         v-model="text"
                         placeholder="Add a comment..."
-                    >
-                    </textarea>
+                    />
                 </p>
             </div>
             <div class="field">
                 <p class="control">
-                    <button class="button" @click="handlePostComment">Post comment</button>
+                    <button class="button is-primary" @click="handlePostComment">Post comment</button>
                 </p>
             </div>
         </div>
@@ -54,7 +53,7 @@ export default {
             });
         },
     },
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -62,4 +61,3 @@ export default {
     min-height: 60px;
 }
 </style>
-
