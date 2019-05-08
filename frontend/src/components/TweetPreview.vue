@@ -1,6 +1,5 @@
 <template>
-    <!-- <div class="tweet box" @click="redirectToTweetPage"> -->
-    <div class="tweet box">
+    <div class="tweet box" @click="$emit('click', tweet, $event)">
         <article class="media">
             <figure class="media-left">
                 <p class="image is-64x64 is-square">
@@ -15,15 +14,24 @@
                     <small class="created">{{ tweet.created | createdDate }}</small>
                     <br>
                     {{ tweet.text }}
-                    <figure v-if="tweet.imageUrl" class="image is-3by1 tweet-image">
-                        <img :src="tweet.imageUrl" alt="Tweet image">
+                    <figure
+                        v-if="tweet.imageUrl"
+                        class="image is-3by1 tweet-image"
+                    >
+                        <img
+                            :src="tweet.imageUrl"
+                            alt="Tweet image"
+                            @click="$emit('image-click', tweet, $event)"
+                        >
                     </figure>
                 </div>
 
                 <nav class="level is-mobile">
                     <div class="level-left">
                         <a class="level-item">
-                            <span class="icon is-medium"><font-awesome-icon icon="share" /></span>
+                            <span class="icon is-medium" @click="redirectToTweetPage">
+                                <font-awesome-icon icon="share" />
+                            </span>
                         </a>
                         <a class="level-item">
                             <span class="icon is-medium"><font-awesome-icon icon="comments" /></span>
@@ -41,8 +49,6 @@
 </template>
 
 <script>
-import router from '@/router';
-
 export default {
     name: 'TweetPreview',
 
@@ -59,7 +65,7 @@ export default {
 
     methods: {
         redirectToTweetPage() {
-            router.push({ name: 'tweet-page', params: { id: this.tweet.id } });
+            this.$router.push({ name: 'tweet-page', params: { id: this.tweet.id } });
         },
     },
 };

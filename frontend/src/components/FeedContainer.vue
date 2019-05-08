@@ -17,7 +17,8 @@
             <TweetPreview
                 :key="tweet.id"
                 :tweet="tweet"
-                @click.native="onTweetClick(tweet)"
+                @click="onTweetClick"
+                @image-click="onTweetImageClick"
             />
         </template>
 
@@ -31,6 +32,12 @@
                     <Tweet :tweet="currentTweet" />
                 </div>
             </div>
+        </b-modal>
+
+        <b-modal :active.sync="isImageModalActive">
+            <p class="image is-4by3">
+                <img :src="currentImageUrl">
+            </p>
         </b-modal>
     </div>
 </template>
@@ -53,7 +60,9 @@ export default {
     data: () => ({
         isModalActive: false,
         isTweetModalActive: false,
+        isImageModalActive: false,
         currentTweet: null,
+        currentImageUrl: null,
     }),
 
     created() {
@@ -79,15 +88,26 @@ export default {
             this.isModalActive = true;
         },
 
-        onTweetClick(tweet) {
+        onTweetClick(tweet, event) {
+            event.stopPropagation();
             this.currentTweet = tweet;
             this.showTweetModal();
         },
 
         showTweetModal() {
             this.isTweetModalActive = true;
-        }
-    }
+        },
+
+        onTweetImageClick(tweet, event) {
+            event.stopPropagation();
+            this.currentImageUrl = tweet.imageUrl;
+            this.showTweetImageModal();
+        },
+
+        showTweetImageModal() {
+            this.isImageModalActive = true;
+        },
+    },
 };
 </script>
 
