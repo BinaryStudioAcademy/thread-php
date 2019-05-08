@@ -12,7 +12,7 @@
                     <br>
                     {{ comment.body }}
                     <br>
-                    <small><a>Like</a> · <a>Reply</a> · 2 hrs</small>
+                    <small><a>Like</a> · <a>Reply</a> · {{ comment.created | createdDate }}</small>
                 </p>
             </div>
         </div>

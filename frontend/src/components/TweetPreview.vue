@@ -51,10 +51,6 @@ export default {
             type: Object,
             required: true,
         },
-        // onClick: {
-        //     type: Function,
-        //     required: true,
-        // },
     },
 
     data: () => ({

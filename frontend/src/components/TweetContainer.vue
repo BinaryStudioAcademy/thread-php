@@ -1,10 +1,12 @@
 <template>
     <div class="tweets-container">
-        <Tweet :tweet="tweet" />
+        <Tweet v-if="tweet" :tweet="tweet" />
     </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+import { tweetMapper } from '@/services/Normalizer';
 import Tweet from '@/components/Tweet.vue';
 
 export default {
@@ -14,20 +16,21 @@ export default {
         Tweet,
     },
 
-    // get tweet
-
     data: () => ({
-        tweet: {
-            id: 1,
-            text: 'Test tweet',
-            created: '3h',
-            author: {
-                id: 1,
-                name: 'Author 1',
-                avatar: 'https://bulma.io/images/placeholders/96x96.png',
-            },
-        },
+        tweet: null,
     }),
+
+    async created() {
+        this.tweet = tweetMapper(
+            await this.fetchTweetById(this.$route.params.id)
+        );
+    },
+
+    methods: {
+        ...mapActions('tweet', [
+            'fetchTweetById',
+        ]),
+    },
 };
 </script>
 

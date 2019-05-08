@@ -16,7 +16,7 @@
                         <img :src="tweet.imageUrl" alt="Tweet image">
                     </figure>
                     <br>
-                    <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
+                    <small><a>Like</a> · <a>Reply</a> · {{ tweet.created | createdDate }}</small>
                 </p>
             </div>
             <template v-for="comment in getComments(tweet.id)">
@@ -57,7 +57,7 @@ export default {
     computed: {
         ...mapGetters('comment', [
             'getComments'
-        ])
+        ]),
     },
 
     methods: {
