@@ -8,6 +8,7 @@ use App\Action\Comment\AddCommentAction;
 use App\Action\Comment\AddCommentRequest;
 use App\Action\Comment\GetCommentByIdAction;
 use App\Action\Comment\GetCommentCollectionAction;
+use App\Action\Comment\GetCommentCollectionByTweetIdAction;
 use App\Action\GetByIdRequest;
 use App\Action\GetCollectionRequest;
 use App\Http\Controllers\ApiController;
@@ -15,6 +16,7 @@ use App\Http\Presenter\Comment\CommentAsArrayPresenter;
 use App\Http\Request\Api\AddCommentHttpRequest;
 use App\Http\Response\ApiResponse;
 use App\Http\Request\Api\CollectionHttpRequest;
+use App\Action\Comment\GetCommentCollectionByTweetIdRequest;
 
 final class CommentController extends ApiController
 {
@@ -22,17 +24,20 @@ final class CommentController extends ApiController
     private $presenter;
     private $getCommentByIdAction;
     private $addCommentAction;
+    private $getCommentCollectionByTweetIdAction;
 
     public function __construct(
         GetCommentCollectionAction $getCommentCollectionAction,
         CommentAsArrayPresenter $presenter,
         GetCommentByIdAction $commentByIdAction,
-        AddCommentAction $addCommentAction
+        AddCommentAction $addCommentAction,
+        GetCommentCollectionByTweetIdAction $getCommentCollectionByTweetIdAction
     ) {
         $this->getCommentCollectionAction = $getCommentCollectionAction;
         $this->presenter = $presenter;
         $this->getCommentByIdAction = $commentByIdAction;
         $this->addCommentAction = $addCommentAction;
+        $this->getCommentCollectionByTweetIdAction = $getCommentCollectionByTweetIdAction;
     }
 
     public function getCommentCollection(CollectionHttpRequest $request): ApiResponse
@@ -64,6 +69,24 @@ final class CommentController extends ApiController
             )
         );
 
-        return $this->created($response->getCommentId());
+        return $this->created(
+            $this->presenter->present(
+                $response->getComment()
+            )
+        );
+    }
+
+    public function getCommentCollectionByTweetId(string $tweetId, CollectionHttpRequest $request): ApiResponse
+    {
+        $response = $this->getCommentCollectionByTweetIdAction->execute(
+            new GetCommentCollectionByTweetIdRequest(
+                (int)$tweetId,
+                (int)$request->query('page'),
+                $request->query('sort'),
+                $request->query('direction')
+            )
+        );
+
+        return $this->createPaginatedResponse($response->getPaginator(), $this->presenter);
     }
 }

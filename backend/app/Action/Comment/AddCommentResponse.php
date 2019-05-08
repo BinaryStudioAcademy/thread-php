@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace App\Action\Comment;
 
+use App\Entity\Comment;
+
 final class AddCommentResponse
 {
-    private $commentId;
+    private $comment;
 
-    public function __construct(int $commentId)
+    public function __construct(Comment $comment)
     {
-        $this->commentId = $commentId;
+        $this->comment = $comment;
     }
 
-    public function getCommentId(): int
+    public function getComment(): Comment
     {
-        return $this->commentId;
+        return $this->comment;
     }
 }

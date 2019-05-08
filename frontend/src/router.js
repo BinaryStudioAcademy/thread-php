@@ -6,6 +6,7 @@ import Storage from '@/services/Storage';
 const Feed = () => import(/* webpackChunkName: "feed" */ './views/Feed.vue');
 const Profile = () => import(/* webpackChunkName: "profile" */ './views/Profile.vue');
 const User = () => import(/* webpackChunkName: "user" */ './views/User.vue');
+const Tweet = () => import(/* webpackChunkName: "tweet" */ './views/Tweet.vue');
 
 // auth pages using same chunk name
 const SignIn = () => import(/* webpackChunkName: "auth" */ './views/SignIn.vue');
@@ -38,6 +39,12 @@ const router = new Router({
             path: '/users/:id',
             name: 'user-page',
             component: User,
+            meta: { requiresAuth: true },
+        },
+        {
+            path: '/tweets/:id',
+            name: 'tweet-page',
+            component: Tweet,
             meta: { requiresAuth: true },
         },
         {

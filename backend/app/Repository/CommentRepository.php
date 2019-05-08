@@ -29,6 +29,18 @@ final class CommentRepository implements Paginable
         return Comment::orderBy($sort, $direction)->paginate($perPage, ['*'], null, $page);
     }
 
+    public function getPaginatedByTweetId(
+        int $tweetId,
+        int $page = self::DEFAULT_PAGE,
+        int $perPage = self::DEFAULT_PER_PAGE,
+        string $sort = self::DEFAULT_SORT,
+        string $direction = self::DEFAULT_DIRECTION
+    ): LengthAwarePaginator {
+        return Comment::where('tweet_id', $tweetId)
+            ->orderBy($sort, $direction)
+            ->paginate($perPage, ['*'], null, $page);
+    }
+
     public function save(Comment $comment): Comment
     {
         $comment->save();
