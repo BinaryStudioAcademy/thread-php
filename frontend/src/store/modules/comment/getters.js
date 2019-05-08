@@ -1,3 +1,3 @@
 export default {
-    comments: state => state.comments,
+    getComments: state => tweetId => state.comments[tweetId] || [],
 };

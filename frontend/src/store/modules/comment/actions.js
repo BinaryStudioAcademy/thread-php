@@ -7,9 +7,9 @@ export default {
         commit(SET_LOADING, true, { root: true });
 
         try {
-            const data = await api.get(`/tweets/${tweetId}/comments`);
+            const comments = await api.get(`/tweets/${tweetId}/comments`);
 
-            commit(SET_COMMENTS, data);
+            commit(SET_COMMENTS, { tweetId, comments });
             commit(SET_LOADING, false, { root: true });
 
             return Promise.resolve();

@@ -19,7 +19,7 @@
                     <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
                 </p>
             </div>
-            <template v-for="comment in comments">
+            <template v-for="comment in getComments(tweet.id)">
                 <Comment
                     :key="comment.id"
                     :comment="comment"
@@ -56,7 +56,7 @@ export default {
 
     computed: {
         ...mapGetters('comment', [
-            'comments'
+            'getComments'
         ])
     },
 
