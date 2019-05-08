@@ -39,7 +39,7 @@ class Api {
     }
 
     get(url, params) {
-        return this.axios.get(url, params);
+        return this.axios.get(url, { params });
     }
 
     post(url, data) {

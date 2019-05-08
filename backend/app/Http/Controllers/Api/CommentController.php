@@ -69,7 +69,11 @@ final class CommentController extends ApiController
             )
         );
 
-        return $this->created($response->getCommentId());
+        return $this->created(
+            $this->presenter->present(
+                $response->getComment()
+            )
+        );
     }
 
     public function getCommentCollectionByTweetId(string $tweetId, CollectionHttpRequest $request): ApiResponse

@@ -39,6 +39,6 @@ final class AddCommentAction
 
         $comment = $this->commentRepository->save($comment);
 
-        return new AddCommentResponse($comment->id);
+        return new AddCommentResponse($comment);
     }
 }

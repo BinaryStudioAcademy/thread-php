@@ -17,7 +17,13 @@
             </div>
             <div class="field">
                 <p class="control">
-                    <button class="button is-primary" @click="handlePostComment">Post comment</button>
+                    <button
+                        class="button is-primary"
+                        :disabled="!text.trim()"
+                        @click="handlePostComment"
+                    >
+                        Post comment
+                    </button>
                 </p>
             </div>
         </div>
@@ -46,11 +52,16 @@ export default {
             'addComment',
         ]),
 
+        clearInput() {
+            this.text = '';
+        },
+
         async handlePostComment() {
             await this.addComment({
                 tweetId: this.tweetId,
                 text: this.text,
             });
+            this.clearInput();
         },
     },
 };
