@@ -1,5 +1,5 @@
 <template>
-    <div class="tweets-container">
+    <div class="tweets-container box">
         <Tweet v-if="tweet" :tweet="tweet" />
     </div>
 </template>
