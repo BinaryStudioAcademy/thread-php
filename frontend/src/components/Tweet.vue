@@ -19,7 +19,7 @@
                     <small><a>Like</a> · <a>Reply</a> · {{ tweet.created | createdDate }}</small>
                 </p>
             </div>
-            <template v-for="comment in getComments(tweet.id)">
+            <template v-for="comment in getCommentsByTweetId(tweet.id)">
                 <Comment
                     :key="comment.id"
                     :comment="comment"
@@ -56,7 +56,7 @@ export default {
 
     computed: {
         ...mapGetters('comment', [
-            'getComments'
+            'getCommentsByTweetId'
         ]),
     },
 

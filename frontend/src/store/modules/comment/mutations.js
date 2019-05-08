@@ -10,12 +10,9 @@ export default {
     },
 
     [ADD_COMMENT]: (state, { tweetId, comment }) => {
-        state.comments = {
-            ...state.comments,
-            [tweetId]: [
-                ...state.comments[tweetId],
-                commentMapper(comment)
-            ],
-        };
+        state.comments[tweetId] = [
+            ...state.comments[tweetId],
+            commentMapper(comment)
+        ];
     },
 };

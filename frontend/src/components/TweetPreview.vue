@@ -66,10 +66,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .media + .media {
-//     padding-top: 10px;
-// }
-
 .tweet {
     cursor: pointer;
     padding: 15px;
