@@ -2,7 +2,7 @@
     <article class="media">
         <figure class="media-left">
             <p class="image is-48x48 is-square">
-                <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
+                <img class="is-rounded" :src="user.avatar">
             </p>
         </figure>
         <div class="media-content">
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
     name: 'NewCommentForm',
@@ -46,6 +46,12 @@ export default {
     data: () => ({
         text: '',
     }),
+
+    computed: {
+        ...mapGetters('auth', {
+            user: 'getAuthenticatedUser'
+        }),
+    },
 
     methods: {
         ...mapActions('comment', [
