@@ -18,18 +18,11 @@
                 :key="tweet.id"
                 :tweet="tweet"
                 @click="onTweetClick"
-                @image-click="onTweetImageClick"
             />
         </template>
 
         <b-modal :active.sync="isNewTweetModalActive" has-modal-card>
             <NewTweetForm />
-        </b-modal>
-
-        <b-modal :active.sync="isImageModalActive">
-            <p class="image is-4by3">
-                <img :src="currentImageUrl">
-            </p>
         </b-modal>
     </div>
 </template>
@@ -49,8 +42,6 @@ export default {
 
     data: () => ({
         isNewTweetModalActive: false,
-        isImageModalActive: false,
-        currentImageUrl: null,
     }),
 
     created() {
@@ -79,16 +70,6 @@ export default {
         onTweetClick(tweet, event) {
             event.stopPropagation();
             this.$router.push({ name: 'tweet-page', params: { id: tweet.id } });
-        },
-
-        onTweetImageClick(tweet, event) {
-            event.stopPropagation();
-            this.currentImageUrl = tweet.imageUrl;
-            this.showTweetImageModal();
-        },
-
-        showTweetImageModal() {
-            this.isImageModalActive = true;
         },
     },
 };

@@ -21,6 +21,22 @@ export default {
         }
     },
 
+    async fetchTweetsByUserId({ commit }, userId) {
+        commit(SET_LOADING, true, { root: true });
+
+        try {
+            const tweets = await api.get(`/users/${userId}/tweets`);
+
+            commit(SET_LOADING, false, { root: true });
+
+            return Promise.resolve(tweets);
+        } catch (error) {
+            commit(SET_LOADING, false, { root: true });
+
+            return Promise.reject(error);
+        }
+    },
+
     async fetchTweetById({ commit }, tweetId) {
         commit(SET_LOADING, true, { root: true });
 
