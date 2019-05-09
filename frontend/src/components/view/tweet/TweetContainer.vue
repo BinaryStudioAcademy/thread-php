@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import Tweet from './Tweet.vue';
 
 export default {
@@ -15,16 +15,18 @@ export default {
         Tweet,
     },
 
-    data: () => ({
-        tweet: null,
-    }),
+    computed: {
+        ...mapGetters('tweet', [
+            'getTweetById'
+        ]),
 
-    async created() {
-        try {
-            this.tweet = await this.fetchTweetById(this.$route.params.id);
-        } catch (error) {
-            console.error(error.message);
+        tweet() {
+            return this.getTweetById(this.$route.params.id);
         }
+    },
+
+    created() {
+        this.fetchTweetById(this.$route.params.id);
     },
 
     methods: {

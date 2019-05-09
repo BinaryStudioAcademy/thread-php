@@ -2,7 +2,7 @@ import {
     SET_TWEETS,
     NEW_TWEET,
     SET_TWEET_IMAGE,
-    EDIT_TWEET
+    SET_TWEET
 } from './mutationTypes';
 import { SET_LOADING } from '../../mutationTypes';
 import api from '@/api/Api';
@@ -33,6 +33,7 @@ export default {
             const tweet = await api.get(`/tweets/${tweetId}`);
 
             commit(SET_LOADING, false, { root: true });
+            commit(SET_TWEET, tweet);
 
             return Promise.resolve(tweetMapper(tweet));
         } catch (error) {
@@ -89,7 +90,7 @@ export default {
         try {
             const tweet = await api.put(`/tweets/${id}`, { text });
 
-            commit(EDIT_TWEET, tweet);
+            commit(SET_TWEET, tweet);
             commit(SET_LOADING, false, { root: true });
 
             return Promise.resolve(tweetMapper(tweet));
