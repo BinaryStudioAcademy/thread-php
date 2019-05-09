@@ -1,6 +1,7 @@
 import api from '@/api/Api';
 import { SET_LOADING } from '../../mutationTypes';
 import { SET_COMMENTS, ADD_COMMENT } from './mutationTypes';
+import { commentMapper } from '@/services/Normalizer';
 
 export default {
     async fetchComments({ commit }, tweetId) {
@@ -31,8 +32,7 @@ export default {
             commit(ADD_COMMENT, { tweetId, comment });
             commit(SET_LOADING, false, { root: true });
 
-            // @todo comment mapper use
-            return Promise.resolve(comment);
+            return Promise.resolve(commentMapper(comment));
         } catch (error) {
             commit(SET_LOADING, false, { root: true });
 
