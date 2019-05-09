@@ -89,8 +89,4 @@ export default {
         margin-left: 5px;
     }
 }
-
-.tweet:hover {
-    background: #faf9ff;
-}
 </style>

@@ -73,6 +73,14 @@ export default {
 <style scoped lang="scss">
 .tweets-container {
     padding-bottom: 20px;
+
+    .tweet {
+        transition: 0.2s ease-out all;
+
+        &:hover {
+            background: #faf9ff;
+        }
+    }
 }
 
 .navigation {
