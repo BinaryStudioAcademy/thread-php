@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import DefaultAvatar from './DefaultAvatar.vue';
+import DefaultAvatar from './common/DefaultAvatar.vue';
 
 export default {
     name: 'TweetPreview',

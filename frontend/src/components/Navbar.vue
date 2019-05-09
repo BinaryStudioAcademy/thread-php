@@ -45,7 +45,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import DefaultAvatar from './DefaultAvatar.vue';
+import DefaultAvatar from './common/DefaultAvatar.vue';
 
 export default {
     name: 'Navbar',
