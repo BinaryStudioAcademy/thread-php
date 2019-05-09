@@ -199,6 +199,13 @@ abstract class ApiTestCase extends BaseTestCase
         $this->json('PUT', $uri, $attributes)->assertStatus(200);
     }
 
+    protected function assertDeletedResponse(string $uri): void
+    {
+        $this->assertUriIsValid($uri);
+
+        $this->json('DELETE', $uri)->assertStatus(204);
+    }
+
     protected function createResourceItemUri(string $uri, int $id): string
     {
         $this->assertUriIsValid($uri);

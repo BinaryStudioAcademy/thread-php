@@ -52,4 +52,9 @@ final class TweetRepository implements Paginable
 
         return $tweet;
     }
+
+    public function delete(Tweet $tweet): ?bool
+    {
+        return $tweet->delete();
+    }
 }

@@ -8,6 +8,8 @@ use App\Action\GetByIdRequest;
 use App\Action\GetCollectionRequest;
 use App\Action\Tweet\AddTweetAction;
 use App\Action\Tweet\AddTweetRequest;
+use App\Action\Tweet\DeleteTweetAction;
+use App\Action\Tweet\DeleteTweetRequest;
 use App\Action\Tweet\GetTweetByIdAction;
 use App\Action\Tweet\GetTweetCollectionAction;
 use App\Action\Tweet\GetTweetCollectionByUserIdAction;
@@ -33,6 +35,7 @@ final class TweetController extends ApiController
     private $addTweetAction;
     private $updateTweetAction;
     private $uploadTweetImageAction;
+    private $deleteTweetAction;
 
     public function __construct(
         GetTweetCollectionAction $getTweetCollectionAction,
@@ -41,7 +44,8 @@ final class TweetController extends ApiController
         GetTweetCollectionByUserIdAction $getTweetCollectionByUserIdAction,
         AddTweetAction $addTweetAction,
         UpdateTweetAction $updateTweetAction,
-        UploadTweetImageAction $uploadTweetImageAction
+        UploadTweetImageAction $uploadTweetImageAction,
+        DeleteTweetAction $deleteTweetAction
     ) {
         $this->getTweetCollectionAction = $getTweetCollectionAction;
         $this->presenter = $presenter;
@@ -50,6 +54,7 @@ final class TweetController extends ApiController
         $this->addTweetAction = $addTweetAction;
         $this->updateTweetAction = $updateTweetAction;
         $this->uploadTweetImageAction = $uploadTweetImageAction;
+        $this->deleteTweetAction = $deleteTweetAction;
     }
 
     public function getTweetCollection(CollectionHttpRequest $request): ApiResponse
@@ -127,5 +132,16 @@ final class TweetController extends ApiController
                 $response->getTweet()
             )
         );
+    }
+
+    public function deleteTweetById(string $id): ApiResponse
+    {
+        $this->deleteTweetAction->execute(
+            new DeleteTweetRequest(
+                (int)$id
+            )
+        );
+
+        return $this->createDeletedResponse();
     }
 }
