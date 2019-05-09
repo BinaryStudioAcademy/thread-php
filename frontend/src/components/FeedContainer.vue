@@ -14,23 +14,11 @@
         </div>
 
         <template v-for="tweet in tweets">
-            <TweetPreview
-                :key="tweet.id"
-                :tweet="tweet"
-                @click.native="onTweetClick(tweet)"
-            />
+            <TweetPreview :key="tweet.id" :tweet="tweet" @click.native="onTweetClick(tweet)" />
         </template>
 
         <b-modal :active.sync="isModalActive" has-modal-card>
             <NewTweetForm />
-        </b-modal>
-
-        <b-modal :active.sync="isTweetModalActive" has-modal-card>
-            <div class="modal-card">
-                <div class="modal-card-body">
-                    <Tweet :tweet="currentTweet" />
-                </div>
-            </div>
         </b-modal>
     </div>
 </template>
@@ -39,7 +27,6 @@
 import { mapGetters, mapActions } from 'vuex';
 import TweetPreview from '@/components/TweetPreview.vue';
 import NewTweetForm from '@/components/NewTweetForm.vue';
-import Tweet from '@/components/Tweet.vue';
 
 export default {
     name: 'FeedContainer',
@@ -47,7 +34,6 @@ export default {
     components: {
         TweetPreview,
         NewTweetForm,
-        Tweet,
     },
 
     data: () => ({
@@ -80,13 +66,8 @@ export default {
         },
 
         onTweetClick(tweet) {
-            this.currentTweet = tweet;
-            this.showTweetModal();
+            this.$router.push({ name: 'tweet-page', params: { id: tweet.id } });
         },
-
-        showTweetModal() {
-            this.isTweetModalActive = true;
-        }
     }
 };
 </script>
