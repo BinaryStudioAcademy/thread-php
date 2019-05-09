@@ -60,7 +60,7 @@ export default {
         },
 
         showAddTweetModal() {
-            this.isModalActive = true;
+            this.isNewTweetModalActive = true;
         },
 
         onTweetClick(tweet) {

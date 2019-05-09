@@ -1,5 +1,5 @@
 <template>
-    <div class="modal-card">
+    <div class="modal-card" @keyup.ctrl.exact.enter="save">
         <header class="modal-card-head">
             <p class="modal-card-title">Add</p>
         </header>
