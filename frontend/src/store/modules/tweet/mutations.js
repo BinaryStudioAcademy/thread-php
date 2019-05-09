@@ -2,7 +2,8 @@ import {
     SET_TWEETS,
     NEW_TWEET,
     SET_TWEET_IMAGE,
-    SET_TWEET
+    SET_TWEET,
+    DELETE_TWEET
 } from './mutationTypes';
 import { tweetMapper } from '@/services/Normalizer';
 
@@ -30,4 +31,8 @@ export default {
             [tweet.id]: tweetMapper(tweet)
         };
     },
+
+    [DELETE_TWEET]: (state, id) => {
+        delete state.tweets[id];
+    }
 };

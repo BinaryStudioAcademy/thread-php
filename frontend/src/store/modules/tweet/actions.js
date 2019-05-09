@@ -2,7 +2,8 @@ import {
     SET_TWEETS,
     NEW_TWEET,
     SET_TWEET_IMAGE,
-    SET_TWEET
+    SET_TWEET,
+    DELETE_TWEET
 } from './mutationTypes';
 import { SET_LOADING } from '../../mutationTypes';
 import api from '@/api/Api';
@@ -94,6 +95,23 @@ export default {
             commit(SET_LOADING, false, { root: true });
 
             return Promise.resolve(tweetMapper(tweet));
+        } catch (error) {
+            commit(SET_LOADING, false, { root: true });
+
+            return Promise.reject(error);
+        }
+    },
+
+    async deleteTweet({ commit }, id) {
+        commit(SET_LOADING, true, { root: true });
+
+        try {
+            await api.delete(`/tweets/${id}`);
+
+            commit(DELETE_TWEET, id);
+            commit(SET_LOADING, false, { root: true });
+
+            return Promise.resolve();
         } catch (error) {
             commit(SET_LOADING, false, { root: true });
 

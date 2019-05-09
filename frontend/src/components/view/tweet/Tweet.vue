@@ -103,12 +103,19 @@ export default {
             'fetchComments',
         ]),
 
+        ...mapActions('tweet', [
+            'deleteTweet',
+        ]),
+
         onEditTweet() {
             this.isEditTweetModalActive = true;
         },
 
-        onDeleteTweet() {
+        async onDeleteTweet() {
+            // @todo add dialog confirm
+            await this.deleteTweet(this.tweet.id);
 
+            this.$router.push({ name: 'feed' });
         }
     },
 };
