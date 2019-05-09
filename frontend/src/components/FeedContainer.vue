@@ -17,7 +17,7 @@
             <TweetPreview :key="tweet.id" :tweet="tweet" @click.native="onTweetClick(tweet)" />
         </template>
 
-        <b-modal :active.sync="isModalActive" has-modal-card>
+        <b-modal :active.sync="isNewTweetModalActive" has-modal-card>
             <NewTweetForm />
         </b-modal>
     </div>
@@ -37,9 +37,7 @@ export default {
     },
 
     data: () => ({
-        isModalActive: false,
-        isTweetModalActive: false,
-        currentTweet: null,
+        isNewTweetModalActive: false,
     }),
 
     created() {
