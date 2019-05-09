@@ -1,5 +1,5 @@
 <template>
-    <article class="tweet media">
+    <article class="media box tweet">
         <figure class="media-left">
             <p class="image is-64x64 is-square">
                 <img class="is-rounded" :src="tweet.author.avatar">
