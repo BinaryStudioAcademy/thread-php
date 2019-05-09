@@ -9,21 +9,18 @@
             <div class="content">
                 <p>
                     <strong>{{ tweet.author.name }}</strong>
-
                     <br>
                     {{ tweet.text }}
                     <br>
-
-                    <figure v-if="tweet.imageUrl" class="image is-3by1 tweet-image">
-                        <img :src="tweet.imageUrl" alt="Tweet image">
-                    </figure>
-
                     <small>
-                        <a>Like</a> ·
-                        <a>Reply</a> ·
                         {{ tweet.created | createdDate }}
                     </small>
+                    <br>
+                    <a>Like</a>
                 </p>
+                <figure v-if="tweet.imageUrl" class="image is-3by1 tweet-image">
+                    <img :src="tweet.imageUrl" alt="Tweet image">
+                </figure>
             </div>
             <template v-for="comment in getCommentsByTweetId(tweet.id)">
                 <Comment
