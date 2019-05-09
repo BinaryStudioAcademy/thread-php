@@ -6,7 +6,7 @@
 
 <script>
 import { mapActions } from 'vuex';
-import Tweet from '@/components/Tweet.vue';
+import Tweet from './Tweet.vue';
 
 export default {
     name: 'TweetContainer',

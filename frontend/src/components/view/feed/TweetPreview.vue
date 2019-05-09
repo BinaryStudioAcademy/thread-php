@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import DefaultAvatar from './common/DefaultAvatar.vue';
+import DefaultAvatar from '../../common/DefaultAvatar.vue';
 
 export default {
     name: 'TweetPreview',
@@ -65,7 +65,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/common';
+@import '../../../styles/common';
 
 .tweet {
     cursor: pointer;

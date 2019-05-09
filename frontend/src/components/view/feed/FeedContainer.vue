@@ -25,8 +25,8 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import TweetPreview from '@/components/TweetPreview.vue';
-import NewTweetForm from '@/components/NewTweetForm.vue';
+import TweetPreview from './TweetPreview.vue';
+import NewTweetForm from './NewTweetForm.vue';
 
 export default {
     name: 'FeedContainer',

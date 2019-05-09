@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import FeedContainer from '@/components/FeedContainer.vue';
+import FeedContainer from '@/components/view/feed/FeedContainer.vue';
 
 export default {
     name: 'FeedPage',
