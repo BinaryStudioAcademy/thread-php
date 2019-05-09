@@ -6,7 +6,6 @@
 
 <script>
 import { mapActions } from 'vuex';
-import { tweetMapper } from '@/services/Normalizer';
 import Tweet from '@/components/Tweet.vue';
 
 export default {
@@ -21,9 +20,11 @@ export default {
     }),
 
     async created() {
-        this.tweet = tweetMapper(
-            await this.fetchTweetById(this.$route.params.id)
-        );
+        try {
+            this.tweet = await this.fetchTweetById(this.$route.params.id);
+        } catch (error) {
+            console.error(error.message);
+        }
     },
 
     methods: {
