@@ -1,4 +1,9 @@
-import { SET_TWEETS, NEW_TWEET, SET_TWEET_IMAGE } from './mutationTypes';
+import {
+    SET_TWEETS,
+    NEW_TWEET,
+    SET_TWEET_IMAGE,
+    EDIT_TWEET
+} from './mutationTypes';
 import { tweetMapper } from '@/services/Normalizer';
 
 export default {
@@ -16,5 +21,14 @@ export default {
         if (tweet) {
             tweet.imageUrl = imageUrl;
         }
+    },
+
+    [EDIT_TWEET]: (state, { id, text }) => {
+        let updatedTweet = state.tweets.find(tw => tw.id === id);
+
+        updatedTweet = {
+            ...updatedTweet,
+            text
+        };
     },
 };

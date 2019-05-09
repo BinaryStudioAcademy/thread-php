@@ -47,6 +47,10 @@
                 <NewCommentForm :tweet-id="tweet.id" />
             </div>
         </article>
+
+        <b-modal :active.sync="isEditTweetModalActive" has-modal-card>
+            <EditTweetForm :tweet="tweet" />
+        </b-modal>
     </div>
 </template>
 
@@ -54,6 +58,7 @@
 import { mapGetters, mapActions } from 'vuex';
 import Comment from './Comment.vue';
 import NewCommentForm from './NewCommentForm.vue';
+import EditTweetForm from './EditTweetForm.vue';
 
 export default {
     name: 'Tweet',
@@ -61,6 +66,7 @@ export default {
     components: {
         Comment,
         NewCommentForm,
+        EditTweetForm
     },
 
     props: {
@@ -69,6 +75,10 @@ export default {
             required: true,
         },
     },
+
+    data: () => ({
+        isEditTweetModalActive: false
+    }),
 
     created() {
         this.fetchComments(this.tweet.id);
@@ -94,7 +104,7 @@ export default {
         ]),
 
         onEditTweet() {
-
+            this.isEditTweetModalActive = true;
         },
 
         onDeleteTweet() {

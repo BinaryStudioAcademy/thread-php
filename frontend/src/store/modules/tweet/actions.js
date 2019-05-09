@@ -1,4 +1,9 @@
-import { SET_TWEETS, NEW_TWEET, SET_TWEET_IMAGE } from './mutationTypes';
+import {
+    SET_TWEETS,
+    NEW_TWEET,
+    SET_TWEET_IMAGE,
+    EDIT_TWEET
+} from './mutationTypes';
 import { SET_LOADING } from '../../mutationTypes';
 import api from '@/api/Api';
 import { tweetMapper } from '@/services/Normalizer';
@@ -76,5 +81,22 @@ export default {
 
             return Promise.reject(error);
         }
-    }
+    },
+
+    async editTweet({ commit }, { id, text }) {
+        commit(SET_LOADING, true, { root: true });
+
+        try {
+            const tweet = await api.put(`/tweets/${id}`, { text });
+
+            commit(EDIT_TWEET, tweet);
+            commit(SET_LOADING, false, { root: true });
+
+            return Promise.resolve(tweetMapper(tweet));
+        } catch (error) {
+            commit(SET_LOADING, false, { root: true });
+
+            return Promise.reject(error);
+        }
+    },
 };
