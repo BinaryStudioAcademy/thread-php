@@ -3,9 +3,10 @@
     <div class="tweet box">
         <article class="media">
             <figure class="media-left">
-                <p class="image is-64x64 is-square">
+                <p class="image is-64x64 is-square" v-if="tweet.author.avatar">
                     <img class="is-rounded" :src="tweet.author.avatar" alt="Author avatar">
                 </p>
+                <DefaultAvatar v-else class="image is-64x64" :user="tweet.author" />
             </figure>
 
             <div class="media-content">
@@ -42,9 +43,14 @@
 
 <script>
 import router from '@/router';
+import DefaultAvatar from './DefaultAvatar.vue';
 
 export default {
     name: 'TweetPreview',
+
+    components: {
+        DefaultAvatar,
+    },
 
     props: {
         tweet: {
@@ -66,6 +72,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../styles/common';
+
 .tweet {
     cursor: pointer;
     padding: 15px;
