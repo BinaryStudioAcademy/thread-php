@@ -1,7 +1,7 @@
 import { SET_TWEETS, NEW_TWEET, SET_TWEET_IMAGE } from './mutationTypes';
 import { SET_LOADING } from '../../mutationTypes';
 import api from '@/api/Api';
-import {tweetMapper} from "../../../services/Normalizer";
+import { tweetMapper } from '@/services/Normalizer';
 
 export default {
     async fetchTweets({ commit }) {
