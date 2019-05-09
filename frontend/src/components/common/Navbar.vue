@@ -45,7 +45,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import DefaultAvatar from './common/DefaultAvatar.vue';
+import DefaultAvatar from './DefaultAvatar.vue';
 
 export default {
     name: 'Navbar',
@@ -74,7 +74,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/common';
+@import '../../styles/common';
 
 .navbar {
     margin-bottom: 20px;
