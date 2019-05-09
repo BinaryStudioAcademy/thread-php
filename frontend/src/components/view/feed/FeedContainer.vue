@@ -50,7 +50,6 @@ export default {
     data: () => ({
         isNewTweetModalActive: false,
         isImageModalActive: false,
-        currentTweet: null,
         currentImageUrl: null,
     }),
 
