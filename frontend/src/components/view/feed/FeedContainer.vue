@@ -2,6 +2,7 @@
     <div class="tweets-container">
         <div class="navigation">
             <b-button
+                class="btn-add-tweet"
                 rounded
                 size="is-medium"
                 type="is-primary"
@@ -9,7 +10,7 @@
                 icon-pack="fab"
                 @click="onAddTweetClick"
             >
-                New Tweet :)
+                Tweet :)
             </b-button>
         </div>
 
@@ -73,11 +74,10 @@ export default {
         },
 
         showAddTweetModal() {
-            this.isModalActive = true;
+            this.isNewTweetModalActive = true;
         },
 
-        onTweetClick(tweet, event) {
-            event.stopPropagation();
+        onTweetClick(tweet) {
             this.$router.push({ name: 'tweet-page', params: { id: tweet.id } });
         },
 
@@ -95,6 +95,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '~bulma/sass/utilities/initial-variables';
+
 .tweets-container {
     padding-bottom: 20px;
 
@@ -102,17 +104,23 @@ export default {
         transition: 0.2s ease-out all;
 
         &:hover {
-            background: #faf9ff;
+            box-shadow: 1px 1px 0 0 #00000020;
         }
     }
-}
 
-.navigation {
-    padding: 10px 0;
-    margin-bottom: 20px;
-}
+    .navigation {
+        padding: 10px 0;
+        margin-bottom: 20px;
+    }
 
-.modal-card {
-    border-radius: 6px;
+    .modal-card {
+        border-radius: 6px;
+    }
+
+    .btn-add-tweet {
+        @media screen and (max-width: $tablet) {
+            font-size: 1rem;
+        }
+    }
 }
 </style>

@@ -1,4 +1,10 @@
-import { SET_TWEETS, NEW_TWEET, SET_TWEET_IMAGE } from './mutationTypes';
+import {
+    SET_TWEETS,
+    NEW_TWEET,
+    SET_TWEET_IMAGE,
+    SET_TWEET,
+    DELETE_TWEET
+} from './mutationTypes';
 import { SET_LOADING } from '../../mutationTypes';
 import api from '@/api/Api';
 import { tweetMapper } from '@/services/Normalizer';
@@ -28,6 +34,7 @@ export default {
             const tweet = await api.get(`/tweets/${tweetId}`);
 
             commit(SET_LOADING, false, { root: true });
+            commit(SET_TWEET, tweet);
 
             return Promise.resolve(tweetMapper(tweet));
         } catch (error) {
@@ -76,5 +83,39 @@ export default {
 
             return Promise.reject(error);
         }
-    }
+    },
+
+    async editTweet({ commit }, { id, text }) {
+        commit(SET_LOADING, true, { root: true });
+
+        try {
+            const tweet = await api.put(`/tweets/${id}`, { text });
+
+            commit(SET_TWEET, tweet);
+            commit(SET_LOADING, false, { root: true });
+
+            return Promise.resolve(tweetMapper(tweet));
+        } catch (error) {
+            commit(SET_LOADING, false, { root: true });
+
+            return Promise.reject(error);
+        }
+    },
+
+    async deleteTweet({ commit }, id) {
+        commit(SET_LOADING, true, { root: true });
+
+        try {
+            await api.delete(`/tweets/${id}`);
+
+            commit(DELETE_TWEET, id);
+            commit(SET_LOADING, false, { root: true });
+
+            return Promise.resolve();
+        } catch (error) {
+            commit(SET_LOADING, false, { root: true });
+
+            return Promise.reject(error);
+        }
+    },
 };
