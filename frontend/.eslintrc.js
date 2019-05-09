@@ -40,8 +40,8 @@ module.exports = {
         'comma-dangle': 'off',
         'import/prefer-default-export': 'off',
         'max-len': ['error', {
-            'code': 120,
-            'tabWidth': 4
+            code: 120,
+            tabWidth: 4
         }],
         'no-trailing-spaces': 'off',
     },

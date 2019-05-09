@@ -12,12 +12,15 @@
                     <br>
                     {{ tweet.text }}
                     <br>
-                    <figure v-if="tweet.imageUrl" class="image is-3by1 tweet-image">
-                        <img :src="tweet.imageUrl" alt="Tweet image">
-                    </figure>
+                    <small>
+                        {{ tweet.created | createdDate }}
+                    </small>
                     <br>
-                    <small><a>Like</a> · <a>Reply</a> · {{ tweet.created | createdDate }}</small>
+                    <a>Like</a>
                 </p>
+                <figure v-if="tweet.imageUrl" class="image is-3by1 tweet-image">
+                    <img :src="tweet.imageUrl" alt="Tweet image">
+                </figure>
             </div>
             <template v-for="comment in getCommentsByTweetId(tweet.id)">
                 <Comment
@@ -25,7 +28,7 @@
                     :comment="comment"
                 />
             </template>
-            <NewCommentForm :tweetId="tweet.id" />
+            <NewCommentForm :tweet-id="tweet.id" />
         </div>
     </article>
 </template>

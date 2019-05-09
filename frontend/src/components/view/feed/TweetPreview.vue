@@ -1,11 +1,11 @@
 <template>
-    <!-- <div class="tweet box" @click="redirectToTweetPage"> -->
     <div class="tweet box">
         <article class="media">
             <figure class="media-left">
-                <p class="image is-64x64 is-square">
+                <p class="image is-64x64 is-square" v-if="tweet.author.avatar">
                     <img class="is-rounded" :src="tweet.author.avatar" alt="Author avatar">
                 </p>
+                <DefaultAvatar v-else class="image is-64x64" :user="tweet.author" />
             </figure>
 
             <div class="media-content">
@@ -23,14 +23,15 @@
                 <nav class="level is-mobile">
                     <div class="level-left">
                         <a class="level-item">
-                            <span class="icon is-medium"><font-awesome-icon icon="share" /></span>
-                        </a>
-                        <a class="level-item">
-                            <span class="icon is-medium"><font-awesome-icon icon="comments" /></span>
+                            <span class="icon is-medium">
+                                <font-awesome-icon icon="comments" />
+                            </span>
                             {{ tweet.comments_count || 0 }}
                         </a>
                         <a class="level-item">
-                            <span class="icon is-medium"><font-awesome-icon icon="heart" /></span>
+                            <span class="icon is-medium">
+                                <font-awesome-icon icon="heart" />
+                            </span>
                             {{ tweet.likes_count || 0 }}
                         </a>
                     </div>
@@ -41,10 +42,14 @@
 </template>
 
 <script>
-import router from '@/router';
+import DefaultAvatar from '../../common/DefaultAvatar.vue';
 
 export default {
     name: 'TweetPreview',
+
+    components: {
+        DefaultAvatar,
+    },
 
     props: {
         tweet: {
@@ -56,16 +61,12 @@ export default {
     data: () => ({
         isTweetModalActive: false,
     }),
-
-    methods: {
-        redirectToTweetPage() {
-            router.push({ name: 'tweet-page', params: { id: this.tweet.id } });
-        },
-    },
 };
 </script>
 
 <style lang="scss" scoped>
+@import '../../../styles/common';
+
 .tweet {
     cursor: pointer;
     padding: 15px;
@@ -87,9 +88,5 @@ export default {
     .created {
         margin-left: 5px;
     }
-}
-
-.tweet:hover {
-    background: #faf9ff;
 }
 </style>
