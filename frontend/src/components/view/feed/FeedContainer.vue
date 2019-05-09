@@ -78,7 +78,7 @@ export default {
         transition: 0.2s ease-out all;
 
         &:hover {
-            background: #faf9ff;
+            box-shadow: 1px 1px 0 0 #00000020;
         }
     }
 }
