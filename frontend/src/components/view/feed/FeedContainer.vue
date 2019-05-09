@@ -22,16 +22,8 @@
             />
         </template>
 
-        <b-modal :active.sync="isModalActive" has-modal-card>
+        <b-modal :active.sync="isNewTweetModalActive" has-modal-card>
             <NewTweetForm />
-        </b-modal>
-
-        <b-modal :active.sync="isTweetModalActive" has-modal-card>
-            <div class="modal-card">
-                <div class="modal-card-body">
-                    <Tweet :tweet="currentTweet" />
-                </div>
-            </div>
         </b-modal>
 
         <b-modal :active.sync="isImageModalActive">
@@ -44,9 +36,8 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import TweetPreview from '@/components/TweetPreview.vue';
-import NewTweetForm from '@/components/NewTweetForm.vue';
-import Tweet from '@/components/Tweet.vue';
+import TweetPreview from './TweetPreview.vue';
+import NewTweetForm from './NewTweetForm.vue';
 
 export default {
     name: 'FeedContainer',
@@ -54,12 +45,10 @@ export default {
     components: {
         TweetPreview,
         NewTweetForm,
-        Tweet,
     },
 
     data: () => ({
-        isModalActive: false,
-        isTweetModalActive: false,
+        isNewTweetModalActive: false,
         isImageModalActive: false,
         currentTweet: null,
         currentImageUrl: null,
@@ -72,7 +61,7 @@ export default {
     computed: {
         ...mapGetters('tweet', [
             'tweets'
-        ])
+        ]),
     },
 
     methods: {
@@ -90,12 +79,7 @@ export default {
 
         onTweetClick(tweet, event) {
             event.stopPropagation();
-            this.currentTweet = tweet;
-            this.showTweetModal();
-        },
-
-        showTweetModal() {
-            this.isTweetModalActive = true;
+            this.$router.push({ name: 'tweet-page', params: { id: tweet.id } });
         },
 
         onTweetImageClick(tweet, event) {
@@ -114,6 +98,14 @@ export default {
 <style scoped lang="scss">
 .tweets-container {
     padding-bottom: 20px;
+
+    .tweet {
+        transition: 0.2s ease-out all;
+
+        &:hover {
+            background: #faf9ff;
+        }
+    }
 }
 
 .navigation {

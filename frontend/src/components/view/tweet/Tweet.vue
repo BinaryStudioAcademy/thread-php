@@ -14,14 +14,15 @@
                     {{ tweet.text }}
                     <br>
                     <figure v-if="tweet.imageUrl" class="image is-3by1 tweet-image">
-                        <img 
+                        <img
                             :src="tweet.imageUrl"
                             alt="Tweet image"
                             @click="showImageModal"
                         >
                     </figure>
-                    <br>
-                    <small><a>Like</a> · <a>Reply</a> · {{ tweet.created | createdDate }}</small>
+                    <small>
+                         <a>Like</a> · {{ tweet.created | createdDate }}
+                    </small>
                 </p>
             </div>
 
@@ -31,8 +32,7 @@
                     :comment="comment"
                 />
             </template>
-
-            <NewCommentForm :tweetId="tweet.id" />
+            <NewCommentForm :tweet-id="tweet.id" />
         </div>
 
         <b-modal :active.sync="isImageModalActive">

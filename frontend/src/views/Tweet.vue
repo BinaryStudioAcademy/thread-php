@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import TweetContainer from '@/components/TweetContainer.vue';
+import TweetContainer from '@/components/view/tweet/TweetContainer.vue';
 
 export default {
     name: 'TweetPage',

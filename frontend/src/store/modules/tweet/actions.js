@@ -1,6 +1,7 @@
 import { SET_TWEETS, NEW_TWEET, SET_TWEET_IMAGE } from './mutationTypes';
 import { SET_LOADING } from '../../mutationTypes';
 import api from '@/api/Api';
+import { tweetMapper } from '@/services/Normalizer';
 
 export default {
     async fetchTweets({ commit }) {
@@ -28,7 +29,7 @@ export default {
 
             commit(SET_LOADING, false, { root: true });
 
-            return Promise.resolve(tweet);
+            return Promise.resolve(tweetMapper(tweet));
         } catch (error) {
             commit(SET_LOADING, false, { root: true });
 
@@ -45,7 +46,7 @@ export default {
             commit(NEW_TWEET, tweet);
             commit(SET_LOADING, false, { root: true });
 
-            return Promise.resolve(tweet);
+            return Promise.resolve(tweetMapper(tweet));
         } catch (error) {
             commit(SET_LOADING, false, { root: true });
 
@@ -69,7 +70,7 @@ export default {
 
             commit(SET_LOADING, false, { root: true });
 
-            return Promise.resolve(tweet);
+            return Promise.resolve();
         } catch (error) {
             commit(SET_LOADING, false, { root: true });
 

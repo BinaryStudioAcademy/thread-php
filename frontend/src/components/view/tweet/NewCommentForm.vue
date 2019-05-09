@@ -20,7 +20,7 @@
                     <button
                         class="button is-primary"
                         :disabled="!text.trim()"
-                        @click="handlePostComment"
+                        @click="onPostComment"
                     >
                         Post comment
                     </button>
@@ -62,7 +62,7 @@ export default {
             this.text = '';
         },
 
-        async handlePostComment() {
+        async onPostComment() {
             await this.addComment({
                 tweetId: this.tweetId,
                 text: this.text,
