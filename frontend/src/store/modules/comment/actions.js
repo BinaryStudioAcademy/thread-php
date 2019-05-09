@@ -31,6 +31,7 @@ export default {
             commit(ADD_COMMENT, { tweetId, comment });
             commit(SET_LOADING, false, { root: true });
 
+            // @todo comment mapper use
             return Promise.resolve(comment);
         } catch (error) {
             commit(SET_LOADING, false, { root: true });

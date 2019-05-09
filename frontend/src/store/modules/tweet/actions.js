@@ -28,6 +28,7 @@ export default {
 
             commit(SET_LOADING, false, { root: true });
 
+            // @todo tweet mapper use
             return Promise.resolve(tweet);
         } catch (error) {
             commit(SET_LOADING, false, { root: true });
@@ -45,6 +46,7 @@ export default {
             commit(NEW_TWEET, tweet);
             commit(SET_LOADING, false, { root: true });
 
+            // @todo tweet mapper use
             return Promise.resolve(tweet);
         } catch (error) {
             commit(SET_LOADING, false, { root: true });
@@ -69,7 +71,7 @@ export default {
 
             commit(SET_LOADING, false, { root: true });
 
-            return Promise.resolve(tweet);
+            return Promise.resolve();
         } catch (error) {
             commit(SET_LOADING, false, { root: true });
 
