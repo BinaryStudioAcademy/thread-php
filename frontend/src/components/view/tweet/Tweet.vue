@@ -24,7 +24,11 @@
                             </p>
 
                             <figure v-if="tweet.imageUrl" class="image is-3by1 tweet-image">
-                                <img :src="tweet.imageUrl" alt="Tweet image">
+                                <img
+                                    :src="tweet.imageUrl"
+                                    alt="Tweet image"
+                                    @click="showImageModal"
+                                >
                             </figure>
                         </div>
                     </div>
@@ -47,6 +51,12 @@
                 <NewCommentForm :tweet-id="tweet.id" />
             </div>
         </article>
+
+        <b-modal :active.sync="isImageModalActive">
+            <p class="image is-4by3">
+                <img :src="tweet.imageUrl">
+            </p>
+        </b-modal>
 
         <b-modal :active.sync="isEditTweetModalActive" has-modal-card>
             <EditTweetForm :tweet="tweet" />
@@ -77,7 +87,8 @@ export default {
     },
 
     data: () => ({
-        isEditTweetModalActive: false
+        isEditTweetModalActive: false,
+        isImageModalActive: false
     }),
 
     created() {
@@ -116,7 +127,11 @@ export default {
             await this.deleteTweet(this.tweet.id);
 
             this.$router.push({ name: 'feed' });
-        }
+        },
+
+        showImageModal() {
+            this.isImageModalActive = true;
+        },
     },
 };
 </script>
@@ -129,6 +144,7 @@ export default {
 
     img {
         width: auto;
+        cursor: pointer;
     }
 }
 
@@ -142,9 +158,5 @@ export default {
 
 .tweet-text {
     max-width: 100%;
-}
-
-.shrinked {
-    flex-shrink: 1;
 }
 </style>
