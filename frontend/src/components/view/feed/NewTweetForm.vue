@@ -58,6 +58,7 @@ export default {
                 const tweet = await this.addTweet(this.text);
 
                 if (this.image === null) {
+                    this.$parent.close();
                     return;
                 }
 
