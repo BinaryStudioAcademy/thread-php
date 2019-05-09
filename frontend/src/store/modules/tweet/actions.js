@@ -46,8 +46,7 @@ export default {
             commit(NEW_TWEET, tweet);
             commit(SET_LOADING, false, { root: true });
 
-            // @todo tweet mapper use
-            return Promise.resolve(tweet);
+            return Promise.resolve(tweetMapper(tweet));
         } catch (error) {
             commit(SET_LOADING, false, { root: true });
 
