@@ -5,6 +5,7 @@
                 <img class="is-rounded" :src="tweet.author.avatar">
             </p>
         </figure>
+
         <div class="media-content">
             <div class="content">
                 <p>
@@ -12,16 +13,19 @@
                     <br>
                     {{ tweet.text }}
                     <br>
+                    <figure v-if="tweet.imageUrl" class="image is-3by1 tweet-image">
+                        <img
+                            :src="tweet.imageUrl"
+                            alt="Tweet image"
+                            @click="showImageModal"
+                        >
+                    </figure>
                     <small>
-                        {{ tweet.created | createdDate }}
+                         <a>Like</a> · {{ tweet.created | createdDate }}
                     </small>
-                    <br>
-                    <a>Like</a>
                 </p>
-                <figure v-if="tweet.imageUrl" class="image is-3by1 tweet-image">
-                    <img :src="tweet.imageUrl" alt="Tweet image">
-                </figure>
             </div>
+
             <template v-for="comment in getCommentsByTweetId(tweet.id)">
                 <Comment
                     :key="comment.id"
@@ -30,6 +34,12 @@
             </template>
             <NewCommentForm :tweet-id="tweet.id" />
         </div>
+
+        <b-modal :active.sync="isImageModalActive">
+            <p class="image is-4by3">
+                <img :src="tweet.imageUrl">
+            </p>
+        </b-modal>
     </article>
 </template>
 
@@ -53,6 +63,10 @@ export default {
         },
     },
 
+    data: () => ({
+        isImageModalActive: false,
+    }),
+
     created() {
         this.fetchComments(this.tweet.id);
     },
@@ -67,6 +81,10 @@ export default {
         ...mapActions('comment', [
             'fetchComments',
         ]),
+
+        showImageModal() {
+            this.isImageModalActive = true;
+        },
     },
 };
 </script>
@@ -77,6 +95,7 @@ export default {
 
     img {
         width: auto;
+        cursor: pointer;
     }
 }
 </style>

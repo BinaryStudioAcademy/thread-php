@@ -1,5 +1,5 @@
 <template>
-    <div class="tweet box">
+    <div class="tweet box" @click="$emit('click', tweet, $event)">
         <article class="media">
             <figure class="media-left">
                 <p class="image is-64x64 is-square" v-if="tweet.author.avatar">
@@ -15,8 +15,15 @@
                     <small class="created">{{ tweet.created | createdDate }}</small>
                     <br>
                     {{ tweet.text }}
-                    <figure v-if="tweet.imageUrl" class="image is-3by1 tweet-image">
-                        <img :src="tweet.imageUrl" alt="Tweet image">
+                    <figure
+                        v-if="tweet.imageUrl"
+                        class="image is-3by1 tweet-image"
+                    >
+                        <img
+                            :src="tweet.imageUrl"
+                            alt="Tweet image"
+                            @click="$emit('image-click', tweet, $event)"
+                        >
                     </figure>
                 </div>
 
