@@ -122,11 +122,25 @@ export default {
             this.isEditTweetModalActive = true;
         },
 
-        async onDeleteTweet() {
-            // @todo add dialog confirm
-            await this.deleteTweet(this.tweet.id);
-
-            this.$router.push({ name: 'feed' });
+        onDeleteTweet() {
+            this.$dialog.confirm({
+                title: 'Deleting tweet',
+                message: 'Are you sure you want to <b>delete</b> your tweet? This action cannot be undone.',
+                confirmText: 'Delete Tweet',
+                type: 'is-danger',
+                onConfirm: async () => {
+                    try {
+                        await this.deleteTweet(this.tweet.id);
+                        this.$toast.open('Tweet deleted!');
+                        this.$router.push({ name: 'feed' });
+                    } catch {
+                        this.$toast.open({
+                            message: 'Unable to delete tweet!',
+                            type: 'is-danger',
+                        });
+                    }
+                }
+            });
         },
 
         showImageModal() {
