@@ -66,4 +66,42 @@ final class TweetApiTest extends ApiTestCase
                 'text' => 'Text'
             ]);
     }
+
+    public function test_delete_tweet_by_id()
+    {
+        $tweet = Tweet::first();
+        $user = User::find(
+            $tweet->getAuthorId()
+        );
+
+        $this->actingWithToken($user)
+            ->assertDeletedResponse(
+                $this->createResourceItemUri(self::API_URL, $tweet->id)
+            );
+    }
+
+    public function test_delete_tweet_by_id_not_found()
+    {
+        $this->actingWithToken()
+            ->assertDeleteNotFoundResponse(
+                $this->createResourceItemUri(
+                    self::API_URL,
+                    999
+                )
+            );
+    }
+
+    public function test_delete_tweet_by_id_forbidden()
+    {
+        $user = User::first();
+        $tweet = Tweet::where('author_id', '!=', $user->id)->first();
+
+        $this->actingWithToken($user)
+            ->assertDeleteForbidden(
+                $this->createResourceItemUri(
+                    self::API_URL,
+                    $tweet->id
+                )
+            );
+    }
 }
