@@ -2,9 +2,10 @@
     <div>
         <article class="media box tweet">
             <figure class="media-left">
-                <p class="image is-64x64 is-square">
+                <p v-if="tweet.author.avatar" class="image is-64x64 is-square">
                     <img class="is-rounded" :src="tweet.author.avatar">
                 </p>
+                <DefaultAvatar v-else class="image is-64x64" :user="tweet.author" />
             </figure>
 
             <div class="media-content">
@@ -69,6 +70,7 @@ import { mapGetters, mapActions } from 'vuex';
 import Comment from './Comment.vue';
 import NewCommentForm from './NewCommentForm.vue';
 import EditTweetForm from './EditTweetForm.vue';
+import DefaultAvatar from '../../common/DefaultAvatar.vue';
 
 export default {
     name: 'Tweet',
@@ -76,7 +78,8 @@ export default {
     components: {
         Comment,
         NewCommentForm,
-        EditTweetForm
+        EditTweetForm,
+        DefaultAvatar,
     },
 
     props: {
