@@ -33,7 +33,7 @@
                         </div>
                     </div>
 
-                    <div class="column is-narrow is-12-mobile">
+                    <div v-if="isTweetOwner" class="column is-narrow is-12-mobile">
                         <div class="buttons">
                             <b-button type="is-warning" @click="onEditTweet">Edit</b-button>
                             <b-button type="is-danger" @click="onDeleteTweet">Delete</b-button>
