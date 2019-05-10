@@ -19,11 +19,7 @@
                         v-if="tweet.imageUrl"
                         class="image is-3by1 tweet-image"
                     >
-                        <img
-                            :src="tweet.imageUrl"
-                            alt="Tweet image"
-                            @click.prevent="$emit('image-click', tweet, $event)"
-                        >
+                        <img :src="tweet.imageUrl" alt="Tweet image">
                     </figure>
                 </div>
 
@@ -64,10 +60,6 @@ export default {
             required: true,
         },
     },
-
-    data: () => ({
-        isTweetModalActive: false,
-    }),
 };
 </script>
 
