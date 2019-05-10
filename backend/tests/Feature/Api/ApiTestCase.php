@@ -72,7 +72,7 @@ abstract class ApiTestCase extends BaseTestCase
         $this->seedFakeData();
     }
 
-    protected function seedFakeData(int $itemsAmount = 2): void
+    protected function seedFakeData(int $itemsAmount = 10): void
     {
         factory(User::class, $itemsAmount)->create();
         factory(Tweet::class, $itemsAmount)->create();
@@ -170,6 +170,30 @@ abstract class ApiTestCase extends BaseTestCase
                     ]
                 ]
             ]);
+    }
+
+    protected function assertDeleteNotFoundResponse(string $uri): void
+    {
+        $this->assertUriIsValid($uri);
+
+        $this->delete($uri)
+            ->assertNotFound()
+            ->assertExactJson([
+                'errors' => [
+                    [
+                        'code' => ErrorCode::NOT_FOUND,
+                        'message' => 'Resource not found.'
+                    ]
+                ]
+            ]);
+    }
+
+    protected function assertDeleteForbidden(string $uri): void
+    {
+        $this->assertUriIsValid($uri);
+
+        $this->delete($uri)
+            ->assertForbidden();
     }
 
     protected function assertErrorResponse(string $uri, array $attributes = [], string $httpMethod = 'POST'): void

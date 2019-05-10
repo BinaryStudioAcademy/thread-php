@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Exceptions;
 
-use Throwable;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-final class TweetNotFoundException extends \DomainException
+final class TweetNotFoundException extends NotFoundHttpException
 {
-    public function __construct($message = "", $code = 0, Throwable $previous = null)
+    public function __construct($message = "", $code = 0, \Exception $previous = null)
     {
-        parent::__construct('Tweet not found.', $code, $previous);
+        parent::__construct('Tweet not found.', $previous, $code);
     }
 }
