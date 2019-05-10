@@ -72,7 +72,7 @@ abstract class ApiTestCase extends BaseTestCase
         $this->seedFakeData();
     }
 
-    protected function seedFakeData(int $itemsAmount = 10): void
+    protected function seedFakeData(int $itemsAmount = 5): void
     {
         factory(User::class, $itemsAmount)->create();
         factory(Tweet::class, $itemsAmount)->create();
