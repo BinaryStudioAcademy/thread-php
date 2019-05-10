@@ -1,24 +1,21 @@
 <template>
     <div class="modal-card" @keyup.ctrl.exact.enter="save">
         <header class="modal-card-head">
-            <p class="modal-card-title">Add</p>
+            <p class="modal-card-title">Edit</p>
         </header>
 
         <section class="modal-card-body">
             <div class="error has-text-danger" v-if="errorMessage">{{ errorMessage }}</div>
 
             <b-field label="Text">
-                <b-input
-                    type="textarea"
-                    v-model="text"
-                />
+                <b-input type="textarea" v-model="text" :placeholder="tweet.text" />
             </b-field>
 
             <b-field class="file">
                 <b-upload v-model="image">
                     <a class="button is-primary">
                         <b-icon pack="fa" icon="upload" />
-                        <span>Upload image</span>
+                        <span>Edit image</span>
                     </a>
                 </b-upload>
                 <span class="file-name" v-if="image">
@@ -39,7 +36,14 @@
 import { mapActions } from 'vuex';
 
 export default {
-    name: 'NewTweetForm',
+    name: 'EditTweetForm',
+
+    props: {
+        tweet: {
+            type: Object,
+            required: true
+        }
+    },
 
     data: () => ({
         text: '',
@@ -49,13 +53,13 @@ export default {
 
     methods: {
         ...mapActions('tweet', [
-            'addTweet',
+            'editTweet',
             'uploadTweetImage'
         ]),
 
         async save() {
             try {
-                const tweet = await this.addTweet(this.text);
+                const tweet = await this.editTweet({ id: this.tweet.id, text: this.text });
 
                 if (this.image === null) {
                     this.$parent.close();

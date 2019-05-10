@@ -1,5 +1,5 @@
 <template>
-    <div class="tweet box" @click="$emit('click', tweet, $event)">
+    <div class="tweet box" @click="$emit('click', tweet)">
         <article class="media">
             <figure class="media-left">
                 <p class="image is-64x64 is-square" v-if="tweet.author.avatar">
