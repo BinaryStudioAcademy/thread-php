@@ -35,7 +35,9 @@ export default {
 
             commit(SET_LOADING, false, { root: true });
 
-            return Promise.resolve(tweets);
+            return Promise.resolve(
+                tweets.map(tweetMapper)
+            );
         } catch (error) {
             commit(SET_LOADING, false, { root: true });
 
