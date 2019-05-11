@@ -36,11 +36,11 @@ final class AuthController extends ApiController
         AuthenticationResponseArrayPresenter $authenticationResponseArrayPresenter
     ) {
         $request = new RegisterRequest(
-            $httpRequest->email,
-            $httpRequest->password,
-            $httpRequest->first_name,
-            $httpRequest->last_name,
-            $httpRequest->nickname
+            $httpRequest->get('email'),
+            $httpRequest->get('password'),
+            $httpRequest->get('first_name'),
+            $httpRequest->get('last_name'),
+            $httpRequest->get('nickname')
         );
         $response = $action->execute($request);
 
@@ -83,8 +83,8 @@ final class AuthController extends ApiController
         $response = $action->execute(
             new UpdateProfileRequest(
                 $httpRequest->get('email'),
-                $httpRequest->get('firstName'),
-                $httpRequest->get('lastName'),
+                $httpRequest->get('first_name'),
+                $httpRequest->get('last_name'),
                 $httpRequest->get('nickname')
             )
         );

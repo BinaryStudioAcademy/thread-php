@@ -35,7 +35,7 @@
                         >
                         <DefaultAvatar v-else class="image is-32x32" :user="user" />
                     </figure>
-                    <span class="profile-name">{{ user.name }}</span>
+                    <span class="profile-name">{{ user.firstName }} {{ user.lastName }}</span>
                     <span class="icon is-medium"><font-awesome-icon icon="angle-down" /></span>
                 </div>
             </div>

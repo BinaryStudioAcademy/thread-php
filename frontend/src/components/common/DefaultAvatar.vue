@@ -17,7 +17,8 @@ export default {
 
     computed: {
         nameLatters() {
-            return this.user.name && this.user.name.substr(0, 2).toUpperCase();
+            return this.user.firstName.substr(0, 1).toUpperCase()
+                + this.user.lastName.substr(0, 1).toUpperCase();
         }
     }
 };

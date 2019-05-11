@@ -8,7 +8,9 @@
         <div class="media-content">
             <div class="content">
                 <p>
-                    <strong>{{ comment.author.name }}</strong>
+                    <strong>
+                        {{ comment.author.firstName }} {{ comment.author.lastName }}
+                    </strong>
                     <br>
                     {{ comment.body }}
                     <br>

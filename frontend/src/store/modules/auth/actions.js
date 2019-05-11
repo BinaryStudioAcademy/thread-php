@@ -24,7 +24,8 @@ export default {
     },
 
     async signUp({ commit }, {
-        name,
+        firstName,
+        lastName,
         email,
         password,
         nickname
@@ -33,7 +34,8 @@ export default {
 
         try {
             const data = await api.post('/auth/register', {
-                name,
+                first_name: firstName,
+                last_name: lastName,
                 email,
                 password,
                 nickname,

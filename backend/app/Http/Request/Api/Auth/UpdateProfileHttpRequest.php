@@ -17,8 +17,8 @@ final class UpdateProfileHttpRequest extends ApiFormRequest
     {
         return [
             'email' => 'email|unique:users',
-            'firstName' => 'string|min:2',
-            'lastName' => 'string|min:2',
+            'first_name' => 'string|min:2',
+            'last_name' => 'string|min:2',
             'nickname' => 'string|min:2|unique:users'
         ];
     }
