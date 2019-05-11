@@ -33,7 +33,8 @@ final class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'nickname',
         'email',
         'password',
@@ -79,13 +80,22 @@ final class User extends Authenticatable implements JWTSubject
         }
     }
 
-    public function changeName(string $name): void
+    public function changeFirstName(string $firstName): void
     {
-        if (empty($name)) {
-            throw new InvalidArgumentException('User name cannot be empty.');
+        if (empty($firstName)) {
+            throw new InvalidArgumentException('User first_name cannot be empty.');
         }
 
-        $this->attributes['name'] = $name;
+        $this->attributes['first_name'] = $firstName;
+    }
+    
+    public function changeLastName(string $lastName): void
+    {
+        if (empty($lastName)) {
+            throw new InvalidArgumentException('User last_name cannot be empty.');
+        }
+
+        $this->attributes['last_name'] = $lastName;
     }
 
     public function changeNickName(string $nickname): void
@@ -106,9 +116,14 @@ final class User extends Authenticatable implements JWTSubject
         $this->attributes['profile_image'] = $avatarUrl;
     }
 
-    public function getName(): string
+    public function getFirstName(): string
     {
-        return $this->name;
+        return $this->first_name;
+    }
+
+    public function getLastName(): string
+    {
+        return $this->last_name;
     }
 
     public function getNickName(): string

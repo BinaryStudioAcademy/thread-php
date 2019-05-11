@@ -18,7 +18,8 @@ final class RegisterHttpRequest extends ApiFormRequest
         return [
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6|string',
-            'name' => 'required|string|min:2',
+            'firstName' => 'required|string|min:2',
+            'lastName' => 'required|string|min:2',
             'nickname' => 'required|string|min:2|unique:users'
         ];
     }

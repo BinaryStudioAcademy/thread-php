@@ -38,7 +38,8 @@ final class AuthController extends ApiController
         $request = new RegisterRequest(
             $httpRequest->email,
             $httpRequest->password,
-            $httpRequest->name,
+            $httpRequest->first_name,
+            $httpRequest->last_name,
             $httpRequest->nickname
         );
         $response = $action->execute($request);
@@ -82,7 +83,8 @@ final class AuthController extends ApiController
         $response = $action->execute(
             new UpdateProfileRequest(
                 $httpRequest->get('email'),
-                $httpRequest->get('name'),
+                $httpRequest->get('firstName'),
+                $httpRequest->get('lastName'),
                 $httpRequest->get('nickname')
             )
         );

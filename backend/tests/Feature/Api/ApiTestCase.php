@@ -28,7 +28,8 @@ abstract class ApiTestCase extends BaseTestCase
      */
     protected const USER_RESOURCE_STRUCTURE = [
         'id',
-        'name',
+        'first_name',
+        'last_name',
         'nickname',
         'email',
         'avatar'

@@ -20,7 +20,8 @@ final class RegisterAction
         $user = $this->userRepository->create([
             'email' => $request->getEmail(),
             'password' => $request->getPassword(),
-            'name' => $request->getName(),
+            'first_name' => $request->getFirstName(),
+            'last_name' => $request->getLastName(),
             'nickname' => $request->getNickname()
         ]);
 
