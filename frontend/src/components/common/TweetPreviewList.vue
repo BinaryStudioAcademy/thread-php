@@ -28,8 +28,7 @@ export default {
     },
 
     methods: {
-        onTweetClick(tweet, event) {
-            event.stopPropagation();
+        onTweetClick(tweet) {
             this.$router.push({ name: 'tweet-page', params: { id: tweet.id } });
         },
     },
