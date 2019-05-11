@@ -1,11 +1,22 @@
 <template>
-    <div>
+    <div v-if="tweet">
         <article class="media box tweet">
             <figure class="media-left">
-                <p v-if="tweet.author.avatar" class="image is-64x64 is-square">
-                    <img class="is-rounded" :src="tweet.author.avatar">
-                </p>
-                <DefaultAvatar v-else class="image is-64x64" :user="tweet.author" />
+                <router-link
+                    v-if="tweet.author.avatar"
+                    class="image is-64x64 is-square"
+                    :to="{ name: 'user-page', params: { id: tweet.author.id } }"
+                >
+                    <img
+                        class="is-rounded"
+                        :src="tweet.author.avatar"
+                        alt="Author avatar"
+                    >
+                </router-link>
+
+                <router-link v-else :to="{ name: 'user-page', params: { id: tweet.author.id } }">
+                    <DefaultAvatar class="image is-64x64" :user="tweet.author" />
+                </router-link>
             </figure>
 
             <div class="media-content">

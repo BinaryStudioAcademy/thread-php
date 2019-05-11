@@ -10,7 +10,9 @@
                     <img class="is-rounded" :src="tweet.author.avatar" alt="Author avatar">
                 </router-link>
 
-                <DefaultAvatar v-else class="image is-64x64" :user="tweet.author" />
+                <router-link v-else :to="{ name: 'user-page', params: { id: tweet.author.id } }">
+                    <DefaultAvatar class="image is-64x64" :user="tweet.author" />
+                </router-link>
             </figure>
 
             <div class="media-content">
