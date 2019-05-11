@@ -4,6 +4,7 @@
             <a
                 role="button"
                 class="navbar-burger burger"
+                :class="{ 'is-active': isMobileMenuActive }"
                 aria-label="menu"
                 aria-expanded="false"
                 @click="toggleMobileMenu"
