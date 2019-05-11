@@ -2,6 +2,12 @@
 
 export const userMapper = user => ({ ...user });
 
+export const emptyUser = () => ({
+    id: null,
+    name: '',
+    avatar: '',
+});
+
 export const commentMapper = comment => ({
     ...comment,
     authorId: comment.author_id,
