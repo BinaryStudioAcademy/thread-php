@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container desktop">
         <FeedContainer />
     </div>
 </template>
@@ -17,9 +17,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
-    max-width: 960px;
-    padding-left: 10px;
-    padding-right: 10px;
-}
 </style>
