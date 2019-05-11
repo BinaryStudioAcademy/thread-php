@@ -44,9 +44,9 @@ export default {
     },
 
     computed: {
-        ...mapGetters('tweet', [
-            'tweets'
-        ]),
+        ...mapGetters('tweet', {
+            tweets: 'tweetsSortedByCreatedDate'
+        }),
     },
 
     methods: {

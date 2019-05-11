@@ -1,6 +1,5 @@
 import {
     SET_TWEETS,
-    NEW_TWEET,
     SET_TWEET_IMAGE,
     SET_TWEET,
     DELETE_TWEET
@@ -15,10 +14,6 @@ export default {
                 [tweet.id]: tweetMapper(tweet)
             };
         });
-    },
-
-    [NEW_TWEET]: (state, tweet) => {
-        state.tweets[tweet.id] = tweetMapper(tweet);
     },
 
     [SET_TWEET_IMAGE]: (state, { id, imageUrl }) => {
