@@ -1,5 +1,10 @@
+import moment from 'moment';
+
 export default {
-    // @todo sort data by created date
-    tweets: state => Object.values(state.tweets),
+    tweetsSortedByCreatedDate: state => Object.values(state.tweets).sort(
+        (a, b) => (
+            moment(a.created).isBefore(moment(b.created)) ? 1 : -1
+        )
+    ),
     getTweetById: state => id => state.tweets[id]
 };

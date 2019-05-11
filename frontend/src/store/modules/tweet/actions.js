@@ -1,6 +1,5 @@
 import {
     SET_TWEETS,
-    NEW_TWEET,
     SET_TWEET_IMAGE,
     SET_TWEET,
     DELETE_TWEET
@@ -68,7 +67,7 @@ export default {
         try {
             const tweet = await api.post('/tweets', { text });
 
-            commit(NEW_TWEET, tweet);
+            commit(SET_TWEET, tweet);
             commit(SET_LOADING, false, { root: true });
 
             return Promise.resolve(tweetMapper(tweet));
