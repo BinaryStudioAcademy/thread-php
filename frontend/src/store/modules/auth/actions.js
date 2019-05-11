@@ -1,4 +1,4 @@
-import { USER_LOGIN, SET_AUTHENTICATED_USER } from './mutationTypes';
+import {USER_LOGIN, SET_AUTHENTICATED_USER, USER_LOGOUT} from './mutationTypes';
 import { SET_LOADING } from '../../mutationTypes';
 import api from '@/api/Api';
 
@@ -66,4 +66,21 @@ export default {
             return Promise.reject(error);
         }
     },
+
+    async signOut({ commit }) {
+        commit(SET_LOADING, true, { root: true });
+
+        try {
+            await api.post('/auth/logout');
+
+            commit(USER_LOGOUT);
+            commit(SET_LOADING, false, { root: true });
+
+            return Promise.resolve();
+        } catch (error) {
+            commit(SET_LOADING, false, { root: true });
+
+            return Promise.reject(error);
+        }
+    }
 };

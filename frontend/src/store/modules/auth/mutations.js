@@ -24,6 +24,7 @@ export default {
 
     [SET_AUTHENTICATED_USER]: (state, user) => {
         state.isLoggedIn = true;
+        // @todo user mapper add
         state.user = user;
     },
 };

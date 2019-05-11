@@ -26,17 +26,30 @@
             </div>
 
             <div class="navbar-end">
-                <div class="navbar-item profile">
-                    <figure class="image is-32x32 is-square">
-                        <img
-                            v-if="user.avatar"
-                            class="profile-image is-rounded"
-                            :src="user.avatar"
-                        >
-                        <DefaultAvatar v-else class="image is-32x32" :user="user" />
-                    </figure>
-                    <span class="profile-name">{{ user.name }}</span>
-                    <span class="icon is-medium"><font-awesome-icon icon="angle-down" /></span>
+                <div class="navbar-item has-dropdown is-hoverable profile">
+                    <a class="navbar-link">
+                        <figure class="image is-32x32 is-square">
+                            <img
+                                v-if="user.avatar"
+                                class="profile-image is-rounded"
+                                :src="user.avatar"
+                            >
+                            <DefaultAvatar v-else class="image is-32x32" :user="user" />
+                        </figure>
+                        <span class="profile-name">{{ user.name }}</span>
+                    </a>
+
+                    <div class="navbar-dropdown is-right">
+                        <router-link class="navbar-item" :to="{ name: 'profile' }">
+                            Settings
+                        </router-link>
+
+                        <hr class="navbar-divider">
+
+                        <a class="navbar-item" @click="onSignOut">
+                            Exit
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -67,8 +80,15 @@ export default {
 
     methods: {
         ...mapActions('auth', [
-            'fetchAuthenticatedUser'
-        ])
+            'fetchAuthenticatedUser',
+            'signOut'
+        ]),
+
+        async onSignOut() {
+            await this.signOut();
+
+            this.$router.push({ name: 'auth.signIn' });
+        }
     }
 };
 </script>
