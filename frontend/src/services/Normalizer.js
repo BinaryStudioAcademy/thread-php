@@ -8,8 +8,11 @@ export const userMapper = user => ({
 
 export const emptyUser = () => ({
     id: null,
-    name: '',
-    avatar: '',
+    email: '',
+    firstName: '',
+    lastName: '',
+    avatar: null,
+    nickname: '',
 });
 
 export const commentMapper = comment => ({

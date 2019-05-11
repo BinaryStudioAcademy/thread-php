@@ -1,9 +1,10 @@
 <template>
     <article class="media">
         <figure class="media-left">
-            <p class="image is-48x48 is-square">
+            <p class="image is-48x48 is-square" v-if="comment.authoe.avatar">
                 <img class="is-rounded" :src="comment.author.avatar">
             </p>
+            <DefaultAvatar v-else class="image is-64x64" :user="tweet.author" />
         </figure>
         <div class="media-content">
             <div class="content">
