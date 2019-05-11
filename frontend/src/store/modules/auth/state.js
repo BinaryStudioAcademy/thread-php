@@ -1,12 +1,8 @@
 import Storage from '@/services/Storage';
+import { emptyUser } from '@/services/Normalizer';
 
 export default {
-    user: {
-        id: null,
-        firstName: '',
-        lastName: '',
-        avatar: '',
-    },
+    user: emptyUser(),
     isLoggedIn: Storage.hasToken(),
     token: Storage.getToken(),
 };

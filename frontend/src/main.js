@@ -7,9 +7,12 @@ import {
     faComments,
     faShare,
     faUpload,
+    faSignOutAlt,
+    faCog
 } from '@fortawesome/free-solid-svg-icons';
 import {
-    faTwitter
+    faTwitter,
+    faTwitterSquare
 } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import createFilters from './components/filter/filters';
@@ -23,7 +26,10 @@ library.add(
     faComments,
     faShare,
     faTwitter,
-    faUpload
+    faUpload,
+    faSignOutAlt,
+    faCog,
+    faTwitterSquare
 );
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);

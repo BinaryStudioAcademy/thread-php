@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import DefaultAvatar from '../../common/DefaultAvatar.vue';
+import DefaultAvatar from './DefaultAvatar.vue';
 
 export default {
     name: 'TweetPreview',
@@ -64,13 +64,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../../styles/common';
+@import '../../styles/common';
 
 .tweet {
     cursor: pointer;
     padding: 15px;
     border-radius: 5px;
     box-shadow: 5px 5px 5px 0 #00000020;
+    transition: 0.2s ease-out all;
+
+    &:hover {
+        box-shadow: 1px 1px 0 0 #00000020;
+    }
 
     &-image {
         margin: 12px 0 0 0;

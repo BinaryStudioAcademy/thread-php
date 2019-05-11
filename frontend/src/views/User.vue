@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container desktop">
         <UserContainer />
     </div>
 </template>
