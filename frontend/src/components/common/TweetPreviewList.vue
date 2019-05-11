@@ -27,10 +27,6 @@ export default {
         TweetPreview,
     },
 
-    data: () => ({
-        tweets: [],
-    }),
-
     methods: {
         onTweetClick(tweet, event) {
             event.stopPropagation();
@@ -43,13 +39,5 @@ export default {
 <style scoped lang="scss">
 .tweets-container {
     padding-bottom: 20px;
-
-    .tweet {
-        transition: 0.2s ease-out all;
-
-        &:hover {
-            background: #faf9ff;
-        }
-    }
 }
 </style>
