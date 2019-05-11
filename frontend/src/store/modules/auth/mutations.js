@@ -1,6 +1,6 @@
 import { USER_LOGIN, USER_LOGOUT, SET_AUTHENTICATED_USER } from './mutationTypes';
 import Storage from '@/services/Storage';
-import { userMapper } from '../../../services/Normalizer';
+import { emptyUser, userMapper } from '@/services/Normalizer';
 
 export default {
     [USER_LOGIN]: (state, accessToken) => {
@@ -15,14 +15,7 @@ export default {
 
         state.token = '';
         state.isLoggedIn = false;
-        state.user = {
-            id: null,
-            email: '',
-            firstName: '',
-            lastName: '',
-            nickname: '',
-            avatar: '',
-        };
+        state.user = emptyUser();
     },
 
     [SET_AUTHENTICATED_USER]: (state, user) => {

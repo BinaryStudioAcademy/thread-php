@@ -73,6 +73,7 @@ import Comment from './Comment.vue';
 import NewCommentForm from './NewCommentForm.vue';
 import EditTweetForm from './EditTweetForm.vue';
 import DefaultAvatar from '../../common/DefaultAvatar.vue';
+import showStatusToast from '../../mixin/showStatusToast';
 
 export default {
     name: 'Tweet',
@@ -83,6 +84,8 @@ export default {
         EditTweetForm,
         DefaultAvatar,
     },
+
+    mixins: [showStatusToast],
 
     props: {
         tweet: {
@@ -133,16 +136,16 @@ export default {
                 message: 'Are you sure you want to <b>delete</b> your tweet? This action cannot be undone.',
                 confirmText: 'Delete Tweet',
                 type: 'is-danger',
+
                 onConfirm: async () => {
                     try {
                         await this.deleteTweet(this.tweet.id);
-                        this.$toast.open('Tweet deleted!');
+
+                        this.showSuccessMessage('Tweet deleted!');
+
                         this.$router.push({ name: 'feed' });
                     } catch {
-                        this.$toast.open({
-                            message: 'Unable to delete tweet!',
-                            type: 'is-danger',
-                        });
+                        this.showErrorMessage('Unable to delete tweet!');
                     }
                 }
             });

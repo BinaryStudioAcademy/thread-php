@@ -1,7 +1,5 @@
 <template>
-    <div class="container">
-        <Tweet v-if="tweet" :tweet="tweet" />
-    </div>
+    <Tweet v-if="tweet" :tweet="tweet" />
 </template>
 
 <script>
@@ -38,7 +36,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.container {
-    max-width: 960px;
-}
 </style>
