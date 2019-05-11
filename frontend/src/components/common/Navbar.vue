@@ -77,7 +77,7 @@ export default {
 @import '../../styles/common';
 
 .navbar {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     box-shadow: 5px 5px 5px 0 #00000020;
 }
 
