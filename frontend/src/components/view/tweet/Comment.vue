@@ -1,9 +1,12 @@
 <template>
     <article class="media">
         <figure class="media-left">
-            <p class="image is-48x48 is-square">
+            <router-link
+                class="image is-48x48 is-square"
+                :to="{ name: 'user-page', params: { id: comment.author.id } }"
+            >
                 <img class="is-rounded" :src="comment.author.avatar">
-            </p>
+            </router-link>
         </figure>
         <div class="media-content">
             <div class="content">

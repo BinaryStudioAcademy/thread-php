@@ -2,9 +2,14 @@
     <div class="tweet box" @click="$emit('click', tweet)">
         <article class="media">
             <figure class="media-left">
-                <p class="image is-64x64 is-square" v-if="tweet.author.avatar">
+                <router-link
+                    v-if="tweet.author.avatar"
+                    class="image is-64x64 is-square"
+                    :to="{ name: 'user-page', params: { id: tweet.author.id } }"
+                >
                     <img class="is-rounded" :src="tweet.author.avatar" alt="Author avatar">
-                </p>
+                </router-link>
+
                 <DefaultAvatar v-else class="image is-64x64" :user="tweet.author" />
             </figure>
 
