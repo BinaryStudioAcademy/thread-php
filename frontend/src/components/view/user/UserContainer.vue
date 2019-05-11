@@ -1,24 +1,16 @@
 <template>
-    <div class="tweets-container">
-        <template v-for="tweet in tweets">
-            <TweetPreview
-                :key="tweet.id"
-                :tweet="tweet"
-                @click="onTweetClick"
-            />
-        </template>
-    </div>
+    <TweetPreviewList :tweets="tweets" />
 </template>
 
 <script>
 import { mapActions } from 'vuex';
-import TweetPreview from '@/components/view/feed/TweetPreview.vue';
+import TweetPreviewList from '@/components/common/TweetPreviewList.vue';
 
 export default {
     name: 'UserContainer',
 
     components: {
-        TweetPreview,
+        TweetPreviewList,
     },
 
     data: () => ({
@@ -38,11 +30,6 @@ export default {
         ...mapActions('tweet', [
             'fetchTweetsByUserId',
         ]),
-
-        onTweetClick(tweet, event) {
-            event.stopPropagation();
-            this.$router.push({ name: 'tweet-page', params: { id: tweet.id } });
-        },
     },
 };
 </script>

@@ -30,7 +30,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import TweetPreview from './TweetPreview.vue';
+import TweetPreview from '../../common/TweetPreview.vue';
 import NewTweetForm from './NewTweetForm.vue';
 
 export default {
