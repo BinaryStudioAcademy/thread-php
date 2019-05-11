@@ -6,11 +6,36 @@
                 class="navbar-burger burger"
                 aria-label="menu"
                 aria-expanded="false"
-                data-target="header-navbar"
+                @click="toggleMobileMenu"
             >
                 <span aria-hidden="true" />
                 <span aria-hidden="true" />
                 <span aria-hidden="true" />
+            </a>
+        </div>
+
+        <div class="navbar-menu is-hidden-desktop mobile-menu" :class="{ 'is-active': isMobileMenuActive }">
+            <router-link class="navbar-item" :to="{ name: 'feed' }">
+                <b-icon pack="fab" icon="twitter" />
+                <span>Feed</span>
+            </router-link>
+
+            <router-link class="navbar-item" :to="{ name: 'user-page', params: { id: user.id }}">
+                <b-icon pack="fab" icon="twitter-square" />
+                <span>My feed</span>
+            </router-link>
+
+            <hr class="navbar-divider">
+
+            <router-link class="navbar-item" :to="{ name: 'profile' }">
+                <b-icon pack="fa" icon="cog" />
+                <span>Settings</span>
+            </router-link>
+
+
+            <a class="navbar-item" @click="onSignOut">
+                <b-icon pack="fa" icon="sign-out-alt" />
+                <span>Exit</span>
             </a>
         </div>
 
@@ -69,6 +94,10 @@ export default {
         DefaultAvatar,
     },
 
+    data: () => ({
+        isMobileMenuActive: false
+    }),
+
     computed: {
         ...mapGetters('auth', {
             user: 'getAuthenticatedUser'
@@ -90,6 +119,10 @@ export default {
             await this.signOut();
 
             this.$router.push({ name: 'auth.signIn' });
+        },
+
+        toggleMobileMenu() {
+            this.isMobileMenuActive = !this.isMobileMenuActive;
         }
     }
 };
@@ -114,6 +147,21 @@ export default {
 .profile {
     .image.is-square {
         padding-top: 0;
+    }
+}
+
+.mobile-menu {
+    .navbar-item {
+        display: flex;
+        align-items: center;
+
+        .icon {
+            margin-right: 10px;
+        }
+
+        span:last-child {
+            line-height: 1.588;
+        }
     }
 }
 </style>
