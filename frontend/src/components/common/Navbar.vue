@@ -41,13 +41,15 @@
 
                     <div class="navbar-dropdown is-right">
                         <router-link class="navbar-item" :to="{ name: 'profile' }">
-                            Settings
+                            <b-icon pack="fa" icon="cog" />
+                            <span>Settings</span>
                         </router-link>
 
                         <hr class="navbar-divider">
 
                         <a class="navbar-item" @click="onSignOut">
-                            Exit
+                            <b-icon pack="fa" icon="sign-out-alt" />
+                            <span>Exit</span>
                         </a>
                     </div>
                 </div>

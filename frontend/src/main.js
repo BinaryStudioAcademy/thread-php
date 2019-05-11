@@ -7,6 +7,8 @@ import {
     faComments,
     faShare,
     faUpload,
+    faSignOutAlt,
+    faCog
 } from '@fortawesome/free-solid-svg-icons';
 import {
     faTwitter
@@ -23,7 +25,9 @@ library.add(
     faComments,
     faShare,
     faTwitter,
-    faUpload
+    faUpload,
+    faSignOutAlt,
+    faCog
 );
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
