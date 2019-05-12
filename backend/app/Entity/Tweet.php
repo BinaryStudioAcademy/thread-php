@@ -21,6 +21,7 @@ use InvalidArgumentException;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property int $comments_count
+ * @property int $likes_count
  * @property User $author
  */
 final class Tweet extends Model
@@ -88,6 +89,11 @@ final class Tweet extends Model
     {
         // cast to int, because if tweet doesn't have comments null will be returned
         return (int)$this->comments_count;
+    }
+
+    public function getLikesCount(): int
+    {
+        return (int)$this->likes_count;
     }
 
     public function changeContent(string $text): void
