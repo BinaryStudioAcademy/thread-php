@@ -25,7 +25,7 @@
                             <span class="icon is-medium has-text-info">
                                 <font-awesome-icon icon="heart" />
                             </span>
-                            {{ comment.likesCount || 0 }}
+                            {{ comment.likesCount }}
                         </a>
                     </div>
                 </nav>
