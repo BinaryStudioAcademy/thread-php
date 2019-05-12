@@ -32,8 +32,27 @@
                                 <br>
                                 {{ tweet.text }}
                                 <br>
-                                <a>Like</a>
                             </p>
+
+                            <nav class="level is-mobile">
+                                <div class="level-left">
+                                    <a class="level-item">
+                                        <span
+                                            class="icon is-medium has-text-info"
+                                            :class="{ 'has-text-danger': tweetIsCommentedByUser(tweet.id, user.id) }"
+                                        >
+                                            <font-awesome-icon icon="comments" />
+                                        </span>
+                                        {{ tweet.commentsCount }}
+                                    </a>
+                                    <a class="level-item">
+                                        <span class="icon is-medium has-text-info">
+                                            <font-awesome-icon icon="heart" />
+                                        </span>
+                                        {{ tweet.likes_count || 0 }}
+                                    </a>
+                                </div>
+                            </nav>
 
                             <figure v-if="tweet.imageUrl" class="image is-3by1 tweet-image">
                                 <img
@@ -45,7 +64,7 @@
                         </div>
                     </div>
 
-                    <div v-if="isTweetOwner" class="column is-narrow is-12-mobile">
+                    <div v-if="isTweetOwner(tweet.id, user.id)" class="column is-narrow is-12-mobile">
                         <div class="buttons">
                             <b-button type="is-warning" @click="onEditTweet">Edit</b-button>
                             <b-button type="is-danger" @click="onDeleteTweet">Delete</b-button>
@@ -117,20 +136,18 @@ export default {
         }),
 
         ...mapGetters('tweet', [
-            'getTweetById'
+            'getTweetById',
+            'isTweetOwner'
         ]),
 
         ...mapGetters('comment', [
-            'getCommentsByTweetId'
+            'getCommentsByTweetId',
+            'tweetIsCommentedByUser'
         ]),
 
         tweet() {
             return this.getTweetById(this.$route.params.id);
         },
-
-        isTweetOwner() {
-            return this.user.id === this.tweet.author.id;
-        }
     },
 
     methods: {

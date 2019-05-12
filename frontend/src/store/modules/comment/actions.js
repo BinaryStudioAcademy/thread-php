@@ -1,6 +1,7 @@
 import api from '@/api/Api';
 import { SET_LOADING } from '../../mutationTypes';
 import { SET_COMMENTS, ADD_COMMENT } from './mutationTypes';
+import { INCREMENT_COMMENTS_COUNT } from '../tweet/mutationTypes';
 import { commentMapper } from '@/services/Normalizer';
 
 export default {
@@ -30,6 +31,7 @@ export default {
             const comment = await api.post('/comments', { tweet_id: tweetId, body: text });
 
             commit(ADD_COMMENT, { tweetId, comment });
+            commit(`tweet/${INCREMENT_COMMENTS_COUNT}`, tweetId, { root: true });
             commit(SET_LOADING, false, { root: true });
 
             return Promise.resolve(commentMapper(comment));
