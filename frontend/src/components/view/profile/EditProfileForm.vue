@@ -7,7 +7,12 @@
                         <img v-if="user.avatar" class="image-avatar is-rounded" :src="user.avatar">
                         <DefaultAvatar v-else class="default-avatar" :user="user" />
                         <div class="actions">
-                            <b-upload class="upload" v-model="image" @input="uploadAvatar">
+                            <b-upload
+                                class="upload"
+                                v-model="image"
+                                accept="image/*"
+                                @input="uploadAvatar"
+                            >
                                 <font-awesome-icon icon="upload" size="5x" :style="{ color: 'white' }" />
                             </b-upload>
                         </div>
