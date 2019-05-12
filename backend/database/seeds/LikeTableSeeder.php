@@ -25,7 +25,7 @@ class LikeTableSeeder extends Seeder
         $now = Carbon::now();
 
         $tweetLikes = $tweets->map(
-            function(Tweet $tweet) use($users, $now) {
+            function(Tweet $tweet) use ($users, $now) {
                 $userIds = $users->shuffle()->shuffle()->take(self::LIKES_COUNT)->pluck('id');
 
                 return $userIds->map(
@@ -46,7 +46,7 @@ class LikeTableSeeder extends Seeder
                 $userIds = $users->shuffle()->shuffle()->take(self::LIKES_COUNT)->pluck('id');
 
                 return $userIds->map(
-                    function(int $userId) use($comment, $now) {
+                    function(int $userId) use ($comment, $now) {
                         return [
                             'user_id' => $userId,
                             'likeable_id' => $comment->id,
