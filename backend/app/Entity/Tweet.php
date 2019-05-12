@@ -80,7 +80,8 @@ final class Tweet extends Model
 
     public function getCommentsCount(): int
     {
-        return $this->comments_count;
+        // cast to int, because if tweet doesn't have comments null will be returned
+        return (int)$this->comments_count;
     }
 
     public function changeContent(string $text): void
