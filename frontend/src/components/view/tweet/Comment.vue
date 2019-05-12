@@ -15,7 +15,10 @@
                     <br>
                     {{ comment.body }}
                     <br>
-                    <small><a>Like</a> · <a>Reply</a> · {{ comment.created | createdDate }}</small>
+                    <small>
+                        <a>Like</a> ·
+                        {{ comment.created | createdDate }}
+                    </small>
                 </p>
             </div>
         </div>
