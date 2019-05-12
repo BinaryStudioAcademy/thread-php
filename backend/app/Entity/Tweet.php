@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use InvalidArgumentException;
 
 /**
  * Class Tweet
@@ -18,13 +19,18 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int $author_id
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ * @property int $comments_count
+ * @property User $author
  */
 final class Tweet extends Model
 {
     protected $table = 'tweets';
-    
-    // The relations to eager load on every query.
-    protected $with = ['author', 'comments'];
+
+    // Relations to eager load on every query.
+    protected $with = ['author'];
+
+    // Eager load related comments count each time.
+    protected $withCount = ['comments'];
 
     protected $fillable = [
         'text',
@@ -67,10 +73,21 @@ final class Tweet extends Model
         return $this->author_id;
     }
 
+    public function getAuthor(): User
+    {
+        return $this->author;
+    }
+
+    public function getCommentsCount(): int
+    {
+        // cast to int, because if tweet doesn't have comments null will be returned
+        return (int)$this->comments_count;
+    }
+
     public function changeContent(string $text): void
     {
         if (empty($text)) {
-            throw new \InvalidArgumentException('Tweet content cannot be empty.');
+            throw new InvalidArgumentException('Tweet content cannot be empty.');
         }
 
         $this->text = $text;
@@ -79,7 +96,7 @@ final class Tweet extends Model
     public function changePreviewImage(string $imageUrl): void
     {
         if (empty($imageUrl)) {
-            throw new \InvalidArgumentException('Empty image url.');
+            throw new InvalidArgumentException('Empty image url.');
         }
 
         $this->image_url = $imageUrl;
