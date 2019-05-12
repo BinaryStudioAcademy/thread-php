@@ -9,7 +9,9 @@ use App\Exceptions\ErrorCode;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Foundation\Testing\TestResponse;
 use Illuminate\Support\Facades\Auth;
+use InvalidArgumentException;
 use Tests\CreatesApplication;
 
 abstract class ApiTestCase extends BaseTestCase
@@ -43,7 +45,8 @@ abstract class ApiTestCase extends BaseTestCase
         'id',
         'text',
         'image_url',
-        'author' => self::USER_RESOURCE_STRUCTURE
+        'author' => self::USER_RESOURCE_STRUCTURE,
+        'comments_count'
     ];
 
     /**
@@ -91,7 +94,7 @@ abstract class ApiTestCase extends BaseTestCase
      * @param array $files
      * @param array $server
      * @param null $content
-     * @return \Illuminate\Foundation\Testing\TestResponse
+     * @return TestResponse
      */
     public function call($method, $uri, $parameters = [], $cookies = [], $files = [], $server = [], $content = null)
     {
@@ -121,7 +124,7 @@ abstract class ApiTestCase extends BaseTestCase
     private function assertUriIsValid(string $uri): void
     {
         if (empty($uri)) {
-            throw new \InvalidArgumentException('Request URI cannot be empty.');
+            throw new InvalidArgumentException('Request URI cannot be empty.');
         }
     }
 
@@ -240,7 +243,7 @@ abstract class ApiTestCase extends BaseTestCase
     private function assertAttributesIsValid(array $attributes): void
     {
         if (empty($attributes)) {
-            throw new \InvalidArgumentException('Request attributes are empty.');
+            throw new InvalidArgumentException('Request attributes are empty.');
         }
     }
 }
