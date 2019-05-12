@@ -8,19 +8,14 @@ use App\Entity\Tweet;
 use App\Http\Presenter\CollectionAsArrayPresenter;
 use Illuminate\Support\Collection;
 use App\Http\Presenter\User\UserArrayPresenter;
-use App\Http\Presenter\Comment\CommentAsArrayPresenter;
 
 final class TweetArrayPresenter implements CollectionAsArrayPresenter
 {
     private $userPresenter;
-    private $commentPresenter;
 
-    public function __construct(
-        UserArrayPresenter $userPresenter,
-        CommentAsArrayPresenter $commentPresenter
-    ) {
+    public function __construct(UserArrayPresenter $userPresenter)
+    {
         $this->userPresenter = $userPresenter;
-        $this->commentPresenter = $commentPresenter;
     }
 
     public function present(Tweet $tweet): array
@@ -30,8 +25,8 @@ final class TweetArrayPresenter implements CollectionAsArrayPresenter
             'text' => $tweet->getText(),
             'image_url' => $tweet->getImageUrl(),
             'created_at' => $tweet->getCreatedAt()->toDateTimeString(),
-            'author' => $this->userPresenter->present($tweet->author),
-            'comments' => $this->commentPresenter->presentCollection($tweet->comments)
+            'author' => $this->userPresenter->present($tweet->getAuthor()),
+            'comments_count' => $tweet->getCommentsCount()
         ];
     }
 

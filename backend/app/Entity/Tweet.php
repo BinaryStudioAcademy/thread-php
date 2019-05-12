@@ -19,6 +19,8 @@ use InvalidArgumentException;
  * @property int $author_id
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ * @property int $comments_count
+ * @property User $author
  */
 final class Tweet extends Model
 {
@@ -69,6 +71,16 @@ final class Tweet extends Model
     public function getAuthorId(): int
     {
         return $this->author_id;
+    }
+
+    public function getAuthor(): User
+    {
+        return $this->author;
+    }
+
+    public function getCommentsCount(): int
+    {
+        return $this->comments_count;
     }
 
     public function changeContent(string $text): void
