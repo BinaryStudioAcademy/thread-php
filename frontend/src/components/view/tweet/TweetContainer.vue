@@ -64,7 +64,7 @@
                         </div>
                     </div>
 
-                    <div v-if="isTweetOwner" class="column is-narrow is-12-mobile">
+                    <div v-if="isTweetOwner(tweet.id, user.id)" class="column is-narrow is-12-mobile">
                         <div class="buttons">
                             <b-button type="is-warning" @click="onEditTweet">Edit</b-button>
                             <b-button type="is-danger" @click="onDeleteTweet">Delete</b-button>
@@ -136,7 +136,8 @@ export default {
         }),
 
         ...mapGetters('tweet', [
-            'getTweetById'
+            'getTweetById',
+            'isTweetOwner'
         ]),
 
         ...mapGetters('comment', [
@@ -146,10 +147,6 @@ export default {
 
         tweet() {
             return this.getTweetById(this.$route.params.id);
-        },
-
-        isTweetOwner() {
-            return this.user.id === this.tweet.author.id;
         },
     },
 
