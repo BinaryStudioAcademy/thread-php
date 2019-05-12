@@ -16,10 +16,19 @@
                     {{ comment.body }}
                     <br>
                     <small>
-                        <a>Like</a> ·
                         {{ comment.created | createdDate }}
                     </small>
                 </p>
+                <nav class="level is-mobile">
+                    <div class="level-left">
+                        <a class="level-item">
+                            <span class="icon is-medium has-text-info">
+                                <font-awesome-icon icon="heart" />
+                            </span>
+                            {{ comment.likesCount || 0 }}
+                        </a>
+                    </div>
+                </nav>
             </div>
         </div>
     </article>
@@ -39,5 +48,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+nav {
+    margin-left: -8px;
+}
 
+.content {
+    p {
+        margin-bottom: 0;
+    }
+}
 </style>
