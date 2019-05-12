@@ -1,5 +1,10 @@
 <template>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav
+        v-if="user.id"
+        class="navbar"
+        role="navigation"
+        aria-label="main navigation"
+    >
         <div class="navbar-brand">
             <a
                 role="button"
@@ -105,9 +110,12 @@ export default {
         }),
     },
 
-    created() {
-        this.fetchAuthenticatedUser()
-            .catch(error => console.log(`Error occurred: ${error.message}`));
+    async created() {
+        try {
+            await this.fetchAuthenticatedUser();
+        } catch (error) {
+            console.log(`Error occurred: ${error.message}`);
+        }
     },
 
     methods: {
