@@ -34,9 +34,9 @@
                                 <br>
                             </p>
 
-                            <nav class="level is-mobile">
+                            <nav class="level is-mobile activity">
                                 <div class="level-left">
-                                    <a class="level-item">
+                                    <a class="level-item auto-cursor">
                                         <span
                                             class="icon is-medium has-text-info"
                                             :class="{ 'has-text-danger': tweetIsCommentedByUser(tweet.id, user.id) }"
@@ -49,7 +49,7 @@
                                         <span class="icon is-medium has-text-info">
                                             <font-awesome-icon icon="heart" />
                                         </span>
-                                        {{ tweet.likes_count || 0 }}
+                                        {{ tweet.likesCount }}
                                     </a>
                                 </div>
                             </nav>
@@ -194,6 +194,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~bulma/sass/utilities/initial-variables";
+@import "../../../styles/common";
 
 .tweet-image {
     margin: 12px 0 0 0;
@@ -214,5 +215,15 @@ export default {
 
 .tweet-text {
     max-width: 100%;
+}
+
+.activity {
+    margin-bottom: 16px;
+}
+
+.content {
+    figure {
+        margin-top: 0;
+    }
 }
 </style>
