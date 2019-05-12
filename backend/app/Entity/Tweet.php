@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use InvalidArgumentException;
 
 /**
@@ -30,7 +31,7 @@ final class Tweet extends Model
     protected $with = ['author'];
 
     // Eager load related comments count each time.
-    protected $withCount = ['comments'];
+    protected $withCount = ['comments', 'likes'];
 
     protected $fillable = [
         'text',
@@ -46,6 +47,11 @@ final class Tweet extends Model
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function likes(): MorphMany
+    {
+        return $this->morphMany(Like::class, 'likeable');
     }
 
     public function getId(): int
