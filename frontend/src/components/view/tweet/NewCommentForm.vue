@@ -4,7 +4,7 @@
             <p class="image is-48x48 is-square" v-if="user.avatar">
                 <img class="is-rounded" :src="user.avatar">
             </p>
-            <DefaultAvatar v-else class="image is-64x64" :user="tweet.author" />
+            <DefaultAvatar v-else class="image is-48x48" :user="user" />
         </figure>
         <div class="media-content">
             <div class="field">
@@ -34,9 +34,14 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import DefaultAvatar from '@/components/common/DefaultAvatar.vue';
 
 export default {
     name: 'NewCommentForm',
+
+    components: {
+        DefaultAvatar,
+    },
 
     props: {
         tweetId: {
