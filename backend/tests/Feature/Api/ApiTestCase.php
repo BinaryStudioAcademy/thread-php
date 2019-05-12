@@ -46,7 +46,8 @@ abstract class ApiTestCase extends BaseTestCase
         'text',
         'image_url',
         'author' => self::USER_RESOURCE_STRUCTURE,
-        'comments_count'
+        'comments_count',
+        'likes_count'
     ];
 
     /**
