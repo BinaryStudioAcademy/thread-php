@@ -25,6 +25,8 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  */
 final class Like extends Model
 {
+    protected $table = 'likes';
+
     protected $fillable = [
         'user_id',
         'likeable_id',
