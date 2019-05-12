@@ -7,9 +7,10 @@ use App\Entity\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class LikesSeeder extends Seeder
+class LikeTableSeeder extends Seeder
 {
-    private const LIKES_COUNT = 5;
+    private const MIN_LIKES_COUNT = 1;
+    private const MAX_LIKES_COUNT = 5;
 
     /**
      * Run the database seeds.
@@ -24,7 +25,9 @@ class LikesSeeder extends Seeder
 
         $tweetLikes = $tweets->map(
             function(Tweet $tweet) use($users) {
-                return factory(Like::class, self::LIKES_COUNT)->make([
+                $likesCount = random_int(self::MIN_LIKES_COUNT, self::MAX_LIKES_COUNT);
+
+                return factory(Like::class, $likesCount)->make([
                     'user_id' => $users->random()->id,
                     'likeable_id' => $tweet->id,
                     'likeable_type' => Tweet::class,
@@ -34,7 +37,9 @@ class LikesSeeder extends Seeder
 
         $commentLikes = $comments->map(
             function(Comment $comment) use($users) {
-                return factory(Like::class, self::LIKES_COUNT)->make([
+                $likesCount = random_int(self::MIN_LIKES_COUNT, self::MAX_LIKES_COUNT);
+
+                return factory(Like::class, $likesCount)->make([
                     'user_id' => $users->random()->id,
                     'likeable_id' => $comment->id,
                     'likeable_type' => Comment::class,
