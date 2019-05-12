@@ -68,6 +68,7 @@ export default {
                 tweetId: this.tweetId,
                 text: this.text,
             });
+
             this.clearInput();
         },
     },

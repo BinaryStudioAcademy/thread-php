@@ -2,7 +2,8 @@ import {
     SET_TWEETS,
     SET_TWEET_IMAGE,
     SET_TWEET,
-    DELETE_TWEET
+    DELETE_TWEET,
+    INCREMENT_COMMENTS_COUNT
 } from './mutationTypes';
 import { tweetMapper } from '@/services/Normalizer';
 
@@ -29,5 +30,9 @@ export default {
 
     [DELETE_TWEET]: (state, id) => {
         delete state.tweets[id];
+    },
+
+    [INCREMENT_COMMENTS_COUNT]: (state, id) => {
+        state.tweets[id].commentsCount++;
     }
 };
