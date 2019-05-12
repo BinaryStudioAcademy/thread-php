@@ -44,6 +44,7 @@ module.exports = {
             tabWidth: 4
         }],
         'no-trailing-spaces': 'off',
+        'no-plusplus': 'off'
     },
     parserOptions: {
         parser: 'babel-eslint',

@@ -2,10 +2,17 @@
     <div class="tweet box" @click="$emit('click', tweet)">
         <article class="media">
             <figure class="media-left">
-                <p class="image is-64x64 is-square" v-if="tweet.author.avatar">
+                <router-link
+                    v-if="tweet.author.avatar"
+                    class="image is-64x64 is-square"
+                    :to="{ name: 'user-page', params: { id: tweet.author.id } }"
+                >
                     <img class="is-rounded" :src="tweet.author.avatar" alt="Author avatar">
-                </p>
-                <DefaultAvatar v-else class="image is-64x64" :user="tweet.author" />
+                </router-link>
+
+                <router-link v-else :to="{ name: 'user-page', params: { id: tweet.author.id } }">
+                    <DefaultAvatar class="image is-64x64" :user="tweet.author" />
+                </router-link>
             </figure>
 
             <div class="media-content">
@@ -28,13 +35,13 @@
                 <nav class="level is-mobile">
                     <div class="level-left">
                         <a class="level-item">
-                            <span class="icon is-medium">
+                            <span class="icon is-medium has-text-info">
                                 <font-awesome-icon icon="comments" />
                             </span>
-                            {{ tweet.comments_count || 0 }}
+                            {{ tweet.commentsCount }}
                         </a>
                         <a class="level-item">
-                            <span class="icon is-medium">
+                            <span class="icon is-medium has-text-info">
                                 <font-awesome-icon icon="heart" />
                             </span>
                             {{ tweet.likes_count || 0 }}

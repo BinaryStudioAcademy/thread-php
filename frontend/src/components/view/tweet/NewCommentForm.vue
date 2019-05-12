@@ -13,6 +13,7 @@
                         class="textarea"
                         v-model="text"
                         placeholder="Add a comment..."
+                        @keyup.ctrl.exact.enter="onPostComment"
                     />
                 </p>
             </div>
@@ -68,6 +69,7 @@ export default {
                 tweetId: this.tweetId,
                 text: this.text,
             });
+
             this.clearInput();
         },
     },
