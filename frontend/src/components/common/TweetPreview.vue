@@ -36,7 +36,7 @@
                             <span class="icon is-medium">
                                 <font-awesome-icon icon="comments" />
                             </span>
-                            {{ tweet.comments_count || 0 }}
+                            {{ tweet.commentsCount }}
                         </a>
                         <a class="level-item">
                             <span class="icon is-medium">
