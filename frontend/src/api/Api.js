@@ -27,7 +27,15 @@ class Api {
             .use(
                 response => response.data.data,
                 errorResponse => {
-                    const error = errorResponse.response.data.errors[0];
+                    const { response } = errorResponse;
+
+                    if (!response) {
+                        return Promise.reject({
+                            message: 'Unexpected error!'
+                        });
+                    }
+
+                    const error = response.data.errors[0];
 
                     if (error.code === UNAUTHENTICATED) {
                         EventEmitter.$emit(TOKEN_EXPIRED_EVENT, error);
