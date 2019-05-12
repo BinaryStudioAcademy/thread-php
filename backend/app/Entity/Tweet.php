@@ -24,8 +24,11 @@ final class Tweet extends Model
 {
     protected $table = 'tweets';
 
-    // The relations to eager load on every query.
+    // Relations to eager load on every query.
     protected $with = ['author'];
+
+    // Eager load related comments count each time.
+    protected $withCount = ['comments'];
 
     protected $fillable = [
         'text',
