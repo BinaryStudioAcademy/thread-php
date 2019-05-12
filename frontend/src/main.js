@@ -29,7 +29,8 @@ library.add(
     faUpload,
     faSignOutAlt,
     faCog,
-    faTwitterSquare
+    faTwitterSquare,
+    faUpload,
 );
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);

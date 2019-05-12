@@ -33,7 +33,9 @@ final class UploadProfileImageAction
             $user->id,
             'public'
         );
-        $user->profile_image = $disk->url($filePath);
+
+        // added timestamp to url to let browser know that image was changed
+        $user->profile_image = $disk->url($filePath) . '?t=' . time();
 
         $user = $this->userRepository->save($user);
 
