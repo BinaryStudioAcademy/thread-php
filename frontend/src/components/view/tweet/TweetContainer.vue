@@ -37,7 +37,10 @@
                             <nav class="level is-mobile">
                                 <div class="level-left">
                                     <a class="level-item">
-                                        <span class="icon is-medium has-text-info">
+                                        <span
+                                            class="icon is-medium has-text-info"
+                                            :class="{ 'has-text-danger': tweetIsCommentedByUser(tweet.id, user.id) }"
+                                        >
                                             <font-awesome-icon icon="comments" />
                                         </span>
                                         {{ tweet.commentsCount }}
@@ -137,7 +140,8 @@ export default {
         ]),
 
         ...mapGetters('comment', [
-            'getCommentsByTweetId'
+            'getCommentsByTweetId',
+            'tweetIsCommentedByUser'
         ]),
 
         tweet() {
@@ -146,7 +150,7 @@ export default {
 
         isTweetOwner() {
             return this.user.id === this.tweet.author.id;
-        }
+        },
     },
 
     methods: {
