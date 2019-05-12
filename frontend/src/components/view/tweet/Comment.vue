@@ -19,16 +19,6 @@
                         {{ comment.created | createdDate }}
                     </small>
                 </p>
-                <nav class="level is-mobile">
-                    <div class="level-left">
-                        <a class="level-item">
-                            <span class="icon is-medium has-text-info">
-                                <font-awesome-icon icon="heart" />
-                            </span>
-                            {{ comment.likesCount }}
-                        </a>
-                    </div>
-                </nav>
             </div>
         </div>
     </article>
