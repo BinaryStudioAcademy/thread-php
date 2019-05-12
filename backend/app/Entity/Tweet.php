@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use InvalidArgumentException;
 
 /**
  * Class Tweet
@@ -22,9 +23,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 final class Tweet extends Model
 {
     protected $table = 'tweets';
-    
+
     // The relations to eager load on every query.
-    protected $with = ['author', 'comments'];
+    protected $with = ['author'];
 
     protected $fillable = [
         'text',
@@ -70,7 +71,7 @@ final class Tweet extends Model
     public function changeContent(string $text): void
     {
         if (empty($text)) {
-            throw new \InvalidArgumentException('Tweet content cannot be empty.');
+            throw new InvalidArgumentException('Tweet content cannot be empty.');
         }
 
         $this->text = $text;
@@ -79,7 +80,7 @@ final class Tweet extends Model
     public function changePreviewImage(string $imageUrl): void
     {
         if (empty($imageUrl)) {
-            throw new \InvalidArgumentException('Empty image url.');
+            throw new InvalidArgumentException('Empty image url.');
         }
 
         $this->image_url = $imageUrl;
