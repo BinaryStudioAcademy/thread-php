@@ -29,7 +29,7 @@ class LikeTableSeeder extends Seeder
                 $userIds = $users->shuffle()->shuffle()->take(self::LIKES_COUNT)->pluck('id');
 
                 return $userIds->map(
-                    function(int $userId) use($tweet, $now) {
+                    function(int $userId) use ($tweet, $now) {
                         return [
                             'user_id' => $userId,
                             'likeable_id' => $tweet->id,
@@ -42,7 +42,7 @@ class LikeTableSeeder extends Seeder
         );
 
         $commentLikes = $comments->map(
-            function(Comment $comment) use($users, $now) {
+            function(Comment $comment) use ($users, $now) {
                 $userIds = $users->shuffle()->shuffle()->take(self::LIKES_COUNT)->pluck('id');
 
                 return $userIds->map(
