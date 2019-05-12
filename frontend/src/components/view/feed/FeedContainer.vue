@@ -5,7 +5,7 @@
                 class="btn-add-tweet"
                 rounded
                 size="is-medium"
-                type="is-primary"
+                type="is-danger"
                 icon-left="twitter"
                 icon-pack="fab"
                 @click="onAddTweetClick"
@@ -78,6 +78,13 @@ export default {
 }
 
 .btn-add-tweet {
+    transition: 0.2s ease-out all;
+    box-shadow: 1px 5px 5px 0 #00000020;
+
+    &:hover {
+        box-shadow: 1px 1px 0 0 #00000020;
+    }
+
     @media screen and (max-width: $tablet) {
         font-size: 1rem;
     }
