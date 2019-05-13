@@ -46,3 +46,7 @@ services:
         - MYSQL_DATABASE=thread-testing
         - MYSQL_USER=user
         - MYSQL_PASSWORD=secret
+
+    beanstalkd:
+      image: schickling/beanstalkd
+      container_name: thread-beanstalkd
