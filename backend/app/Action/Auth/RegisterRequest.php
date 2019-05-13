@@ -8,18 +8,21 @@ final class RegisterRequest
 {
     private $email;
     private $password;
-    private $name;
+    private $firstName;
+    private $lastName;
     private $nickname;
 
     public function __construct(
         string $email,
         string $password,
-        string $name,
+        string $firstName,
+        string $lastName,
         string $nickname
     ) {
         $this->email = $email;
         $this->password = $password;
-        $this->name = $name;
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
         $this->nickname = $nickname;
     }
 
@@ -33,9 +36,14 @@ final class RegisterRequest
         return $this->password;
     }
 
-    public function getName(): string
+    public function getFirstName(): string
     {
-        return $this->name;
+        return $this->firstName;
+    }
+
+    public function getLastName(): string
+    {
+        return $this->lastName;
     }
 
     public function getNickname(): string

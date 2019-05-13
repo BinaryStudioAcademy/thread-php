@@ -24,7 +24,7 @@
                     <div class="column">
                         <div class="content">
                             <p class="tweet-text">
-                                <strong>{{ tweet.author.name }}</strong>
+                                <strong>{{ tweet.author.firstName }} {{ tweet.author.lastName }}</strong>
                                 <br>
                                 <small>
                                     {{ tweet.created | createdDate }}

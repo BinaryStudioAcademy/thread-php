@@ -67,7 +67,7 @@
                             >
                             <DefaultAvatar v-else class="image is-32x32" :user="user" />
                         </figure>
-                        <span class="profile-name">{{ user.name }}</span>
+                        <span class="profile-name">{{ this.fullName }}</span>
                     </a>
 
                     <div class="navbar-dropdown is-right">
@@ -106,7 +106,8 @@ export default {
 
     computed: {
         ...mapGetters('auth', {
-            user: 'getAuthenticatedUser'
+            user: 'getAuthenticatedUser',
+            fullName: 'getFullName',
         }),
     },
 

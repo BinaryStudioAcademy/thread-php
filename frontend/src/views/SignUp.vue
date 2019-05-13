@@ -17,11 +17,18 @@
                                 @submit.prevent
                                 novalidate="true"
                             >
-                                <b-field label="Name">
+                                <b-field label="First Name">
                                     <b-input
-                                        v-model="user.name"
-                                        name="name"
+                                        v-model="user.firstName"
+                                        name="first_name"
                                         autofocus
+                                    />
+                                </b-field>
+
+                                <b-field label="Last Name">
+                                    <b-input
+                                        v-model="user.lastName"
+                                        name="last_name"
                                     />
                                 </b-field>
 
@@ -76,7 +83,8 @@ export default {
 
     data: () => ({
         user: {
-            name: '',
+            firstName: '',
+            lastName: '',
             email: '',
             password: '',
             nickname: ''

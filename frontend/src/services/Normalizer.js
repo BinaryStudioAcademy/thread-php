@@ -1,11 +1,18 @@
 // map api response into our custom format
 
-export const userMapper = user => ({ ...user });
+export const userMapper = user => ({
+    ...user,
+    firstName: user.first_name,
+    lastName: user.last_name,
+});
 
 export const emptyUser = () => ({
     id: null,
-    name: '',
-    avatar: '',
+    email: '',
+    firstName: '',
+    lastName: '',
+    avatar: null,
+    nickname: '',
 });
 
 export const commentMapper = comment => ({

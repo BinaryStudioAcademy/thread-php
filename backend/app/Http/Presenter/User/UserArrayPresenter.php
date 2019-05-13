@@ -15,7 +15,8 @@ final class UserArrayPresenter implements CollectionAsArrayPresenter
         return [
             'id' => $user->getId(),
             'email' => $user->getEmail(),
-            'name' => $user->getName(),
+            'first_name' => $user->getFirstName(),
+            'last_name' => $user->getLastName(),
             'nickname' => $user->getNickName(),
             'avatar' => $user->getAvatar()
         ];

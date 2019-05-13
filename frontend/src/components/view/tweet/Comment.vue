@@ -2,16 +2,23 @@
     <article class="media">
         <figure class="media-left">
             <router-link
+                v-if="comment.author.avatar"
                 class="image is-48x48 is-square"
                 :to="{ name: 'user-page', params: { id: comment.author.id } }"
             >
                 <img class="is-rounded" :src="comment.author.avatar">
             </router-link>
+
+            <router-link v-else :to="{ name: 'user-page', params: { id: comment.author.id } }">
+                <DefaultAvatar class="image is-48x48" :user="comment.author" />
+            </router-link>
         </figure>
         <div class="media-content">
             <div class="content">
                 <p>
-                    <strong>{{ comment.author.name }}</strong>
+                    <strong>
+                        {{ comment.author.firstName }} {{ comment.author.lastName }}
+                    </strong>
                     <br>
                     {{ comment.body }}
                     <br>
@@ -25,8 +32,14 @@
 </template>
 
 <script>
+import DefaultAvatar from '../../common/DefaultAvatar.vue';
+
 export default {
     name: 'Comment',
+
+    components: {
+        DefaultAvatar,
+    },
 
     props: {
         comment: {

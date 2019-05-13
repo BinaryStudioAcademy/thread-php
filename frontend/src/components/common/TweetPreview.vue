@@ -17,7 +17,9 @@
 
             <div class="media-content">
                 <div class="content">
-                    <strong class="name">{{ tweet.author.name }}</strong>
+                    <strong class="name">
+                        {{ tweet.author.firstName }} {{ tweet.author.lastName }}
+                    </strong>
                     <small class="nickname">@{{ tweet.author.nickname }}</small>
                     <small class="created">{{ tweet.created | createdDate }}</small>
                     <br>
