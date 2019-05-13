@@ -7,7 +7,6 @@ import actions from './store/actions';
 import auth from './store/modules/auth';
 import tweet from './store/modules/tweet';
 import comment from './store/modules/comment';
-import profile from './store/modules/profile';
 
 Vue.use(Vuex);
 
@@ -21,6 +20,5 @@ export default new Vuex.Store({
         auth,
         tweet,
         comment,
-        profile,
     },
 });

@@ -33,7 +33,7 @@
                     <b-field label="Email">
                         <b-input v-model="editUser.email" type="email" />
                     </b-field>
-                    <b-button type="is-primary" @click="handleSaveClick">Save</b-button>
+                    <b-button type="is-primary" @click="onSaveClick">Save</b-button>
                 </div>
             </div>
         </div>
@@ -77,9 +77,9 @@ export default {
     },
 
     methods: {
-        ...mapActions('profile', ['updateProfile', 'updateProfileImage']),
+        ...mapActions('auth', ['updateProfile', 'updateProfileImage']),
 
-        async handleSaveClick() {
+        async onSaveClick() {
             try {
                 await this.updateProfile(this.editUser);
 

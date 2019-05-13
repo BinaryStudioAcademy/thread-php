@@ -83,7 +83,7 @@ final class User extends Authenticatable implements JWTSubject
     public function changeFirstName(string $firstName): void
     {
         if (empty($firstName)) {
-            throw new InvalidArgumentException('User first_name cannot be empty.');
+            throw new InvalidArgumentException('User first name cannot be empty.');
         }
 
         $this->attributes['first_name'] = $firstName;
@@ -92,7 +92,7 @@ final class User extends Authenticatable implements JWTSubject
     public function changeLastName(string $lastName): void
     {
         if (empty($lastName)) {
-            throw new InvalidArgumentException('User last_name cannot be empty.');
+            throw new InvalidArgumentException('User last name cannot be empty.');
         }
 
         $this->attributes['last_name'] = $lastName;
