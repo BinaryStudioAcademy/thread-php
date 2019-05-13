@@ -34,7 +34,6 @@ export default {
         commit(SET_LOADING, true, { root: true });
 
         try {
-
             const formData = new FormData();
             formData.append('image', image, image.name);
 
