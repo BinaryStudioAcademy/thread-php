@@ -21,8 +21,6 @@ export const commentMapper = comment => ({
     created: comment.created_at,
     updated: comment.updated_at,
     author: userMapper(comment.author),
-    // @todo fix backend api
-    likesCount: comment.likes_count || 0
 });
 
 export const tweetMapper = tweet => ({
@@ -30,5 +28,6 @@ export const tweetMapper = tweet => ({
     imageUrl: tweet.image_url,
     created: tweet.created_at,
     author: userMapper(tweet.author),
-    commentsCount: tweet.comments_count
+    commentsCount: tweet.comments_count,
+    likesCount: tweet.likes_count
 });

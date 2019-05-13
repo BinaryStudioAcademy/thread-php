@@ -33,14 +33,14 @@
                 </div>
 
                 <nav class="level is-mobile">
-                    <div class="level-left">
-                        <a class="level-item">
+                    <div class="level-left auto-cursor">
+                        <a class="level-item auto-cursor">
                             <span class="icon is-medium has-text-info">
                                 <font-awesome-icon icon="comments" />
                             </span>
                             {{ tweet.commentsCount }}
                         </a>
-                        <a class="level-item">
+                        <a class="level-item auto-cursor">
                             <span class="icon is-medium has-text-info">
                                 <font-awesome-icon icon="heart" />
                             </span>

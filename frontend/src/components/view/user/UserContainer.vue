@@ -1,16 +1,21 @@
 <template>
-    <TweetPreviewList :tweets="tweets" />
+    <div class="user-container">
+        <TweetPreviewList :tweets="tweets" />
+        <NoContent :show="!tweets.length" title="No tweets yet :)" />
+    </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
 import TweetPreviewList from '@/components/common/TweetPreviewList.vue';
+import NoContent from '@/components/common/NoContent.vue';
 
 export default {
     name: 'UserContainer',
 
     components: {
         TweetPreviewList,
+        NoContent
     },
 
     data: () => ({

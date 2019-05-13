@@ -26,7 +26,8 @@ final class TweetArrayPresenter implements CollectionAsArrayPresenter
             'image_url' => $tweet->getImageUrl(),
             'created_at' => $tweet->getCreatedAt()->toDateTimeString(),
             'author' => $this->userPresenter->present($tweet->getAuthor()),
-            'comments_count' => $tweet->getCommentsCount()
+            'comments_count' => $tweet->getCommentsCount(),
+            'likes_count' => $tweet->getLikesCount()
         ];
     }
 
