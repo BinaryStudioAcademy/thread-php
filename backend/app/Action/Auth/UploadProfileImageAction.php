@@ -5,37 +5,31 @@ declare(strict_types=1);
 namespace App\Action\Auth;
 
 use App\Repository\UserRepository;
-use Illuminate\Filesystem\FilesystemManager;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Config;
 
 final class UploadProfileImageAction
 {
-    private const UPLOAD_DIR = 'profile-images';
-
     private $userRepository;
-    private $filesystemManager;
 
-    public function __construct(UserRepository $userRepository, FilesystemManager $filesystemManager)
+    public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
-        $this->filesystemManager = $filesystemManager;
     }
 
     public function execute(UploadProfileImageRequest $request): UploadProfileImageResponse
     {
         $user = Auth::user();
 
-        $disk = $this->filesystemManager->disk('public');
-
-        $filePath = $disk->putFileAs(
-            self::UPLOAD_DIR,
+        $filePath = Storage::putFileAs(
+            Config::get('filesystems.profile_images_dir'),
             $request->getImage(),
-            $user->id,
+            $request->getImage()->hashName(),
             'public'
         );
 
-        // added timestamp to url to let browser know that image was changed
-        $user->profile_image = $disk->url($filePath) . '?t=' . time();
+        $user->profile_image = Storage::url($filePath);
 
         $user = $this->userRepository->save($user);
 
