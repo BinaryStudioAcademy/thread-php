@@ -3,8 +3,8 @@
         <div class="tile is-ancestor">
             <div class="tile is-parent">
                 <div class="tile is-child avatar">
-                    <div class="image is-square">
-                        <img v-if="user.avatar" class="image-avatar is-rounded" :src="user.avatar">
+                    <div class="image">
+                        <img v-if="user.avatar" class="image-avatar is-rounded fit" :src="user.avatar">
                         <DefaultAvatar v-else class="default-avatar" :user="user" />
                         <div class="actions">
                             <b-upload
@@ -153,5 +153,12 @@ export default {
             cursor: pointer;
         }
     }
+}
+
+.fit {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
 }
 </style>
