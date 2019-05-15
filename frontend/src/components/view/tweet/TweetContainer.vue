@@ -8,7 +8,7 @@
                     :to="{ name: 'user-page', params: { id: tweet.author.id } }"
                 >
                     <img
-                        class="is-rounded"
+                        class="is-rounded fit"
                         :src="tweet.author.avatar"
                         alt="Author avatar"
                     >
