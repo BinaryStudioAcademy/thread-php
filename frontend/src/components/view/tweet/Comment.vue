@@ -6,7 +6,7 @@
                 class="image is-48x48 is-square"
                 :to="{ name: 'user-page', params: { id: comment.author.id } }"
             >
-                <img class="is-rounded" :src="comment.author.avatar">
+                <img class="is-rounded fit" :src="comment.author.avatar">
             </router-link>
 
             <router-link v-else :to="{ name: 'user-page', params: { id: comment.author.id } }">
