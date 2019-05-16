@@ -30,6 +30,7 @@ import TweetPreviewList from '../../common/TweetPreviewList.vue';
 import NoContent from '../../common/NoContent.vue';
 import NewTweetForm from './NewTweetForm.vue';
 import { pusher } from '@/services/Pusher';
+import { SET_TWEET } from '@/store/modules/tweet/mutationTypes';
 
 export default {
     name: 'FeedContainer',
@@ -50,7 +51,7 @@ export default {
         const channel = pusher.subscribe('private-tweets');
 
         channel.bind('tweet.added', (data) => {
-            console.log('Pusher:', JSON.stringify(data));
+            this.$store.commit(`tweet/${SET_TWEET}`, data.tweet);
         });
     },
 
