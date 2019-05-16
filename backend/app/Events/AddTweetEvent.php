@@ -15,7 +15,7 @@ class AddTweetEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    private $tweet;
+    public $tweet;
 
     public function __construct(Tweet $tweet)
     {
@@ -27,7 +27,7 @@ class AddTweetEvent implements ShouldBroadcast
         return 'tweet.added';
     }
 
-    public function broadcastOn()
+    public function broadcastOn(): PrivateChannel
     {
         return new PrivateChannel('tweets');
     }
