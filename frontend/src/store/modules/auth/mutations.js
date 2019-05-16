@@ -1,10 +1,12 @@
 import { USER_LOGIN, USER_LOGOUT, SET_AUTHENTICATED_USER } from './mutationTypes';
 import Storage from '@/services/Storage';
 import { emptyUser, userMapper } from '@/services/Normalizer';
+import { updateSocketAuthToken } from '@/services/Pusher';
 
 export default {
     [USER_LOGIN]: (state, accessToken) => {
         Storage.setToken(accessToken);
+        updateSocketAuthToken(accessToken);
 
         state.token = accessToken;
         state.isLoggedIn = true;

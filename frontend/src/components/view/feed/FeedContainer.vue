@@ -29,6 +29,7 @@ import { mapGetters, mapActions } from 'vuex';
 import TweetPreviewList from '../../common/TweetPreviewList.vue';
 import NoContent from '../../common/NoContent.vue';
 import NewTweetForm from './NewTweetForm.vue';
+import { pusher } from '@/services/Pusher';
 
 export default {
     name: 'FeedContainer',
@@ -45,6 +46,16 @@ export default {
 
     created() {
         this.fetchTweets();
+
+        const channel = pusher.subscribe('private-tweets');
+
+        channel.bind('tweet.added', (data) => {
+            console.log('Pusher:', JSON.stringify(data));
+        });
+    },
+
+    beforeDestroy() {
+        pusher.unsubscribe('private-tweets');
     },
 
     computed: {
