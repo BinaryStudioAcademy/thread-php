@@ -1,7 +1,7 @@
 import { USER_LOGIN, USER_LOGOUT, SET_AUTHENTICATED_USER } from './mutationTypes';
 import Storage from '@/services/Storage';
 import { emptyUser, userMapper } from '@/services/Normalizer';
-import { updateSocketAuthToken } from '@/services/Pusher';
+import { updateSocketAuthToken, removeSocketAuthToken } from '@/services/Pusher';
 
 export default {
     [USER_LOGIN]: (state, accessToken) => {
@@ -14,6 +14,7 @@ export default {
 
     [USER_LOGOUT]: state => {
         Storage.removeToken();
+        removeSocketAuthToken();
 
         state.token = '';
         state.isLoggedIn = false;

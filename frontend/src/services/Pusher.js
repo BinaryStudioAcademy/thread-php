@@ -10,19 +10,22 @@ const config = {
     }
 };
 
-export const updateSocketAuthToken = (token) => {
-    config.auth.headers = {
-        Authorization: `Bearer ${token}`
-    };
-};
-
 if (Storage.hasToken()) {
-    updateSocketAuthToken(Storage.getToken());
+    config.auth.headers = {
+        Authorization: `Bearer ${Storage.getToken()}`
+    };
 }
-
 
 export const pusher = new Pusher(process.env.VUE_APP_PUSHER_APP_KEY, config);
 
 export const getSocketId = () => {
     return pusher.connection.socket_id;
 };
+
+export const updateSocketAuthToken = (token) => {
+    pusher.config.auth.headers.Authorization = `Bearer ${token}`;
+};
+
+export const removeSocketAuthToken = () => {
+    pusher.config.auth.headers = {};
+}
