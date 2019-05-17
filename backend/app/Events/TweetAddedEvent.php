@@ -10,8 +10,10 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use App\Entity\Tweet;
+use App\Http\Presenter\Tweet\TweetArrayPresenter;
+use Illuminate\Support\Facades\App;
 
-class AddTweetEvent implements ShouldBroadcast
+class TweetAddedEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -19,7 +21,7 @@ class AddTweetEvent implements ShouldBroadcast
 
     public function __construct(Tweet $tweet)
     {
-        $this->tweet = $tweet;
+        $this->tweet = App::make(TweetArrayPresenter::class)->present($tweet);
     }
 
     public function broadcastAs(): string

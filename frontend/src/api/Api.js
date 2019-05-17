@@ -35,9 +35,7 @@ class Api {
                     const { response } = errorResponse;
 
                     if (!response) {
-                        return Promise.reject({
-                            message: 'Unexpected error!'
-                        });
+                        return Promise.reject(new Error('Unexpected error!'));
                     }
 
                     const error = response.data.errors[0];

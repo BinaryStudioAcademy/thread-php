@@ -7,7 +7,7 @@ namespace App\Action\Tweet;
 use App\Entity\Tweet;
 use App\Repository\TweetRepository;
 use Illuminate\Support\Facades\Auth;
-use App\Events\AddTweetEvent;
+use App\Events\TweetAddedEvent;
 
 final class AddTweetAction
 {
@@ -25,8 +25,8 @@ final class AddTweetAction
         $tweet->text = $request->getText();
 
         $tweet = $this->tweetRepository->save($tweet);
-
-        broadcast(new AddTweetEvent($tweet))->toOthers();
+        
+        broadcast(new TweetAddedEvent($tweet))->toOthers();
 
         return new AddTweetResponse($tweet);
     }
