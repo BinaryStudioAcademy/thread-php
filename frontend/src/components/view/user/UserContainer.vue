@@ -1,6 +1,6 @@
 <template>
     <div class="user-container">
-        <TweetPreviewList :tweets="tweets" />
+        <TweetPreviewList :tweets="tweets" @infinite="infiniteHandler" />
         <NoContent :show="!tweets.length" title="No tweets yet :)" />
     </div>
 </template>
@@ -20,20 +20,35 @@ export default {
 
     data: () => ({
         tweets: [],
+        page: 1,
     }),
-
-    async created() {
-        try {
-            this.tweets = await this.fetchTweetsByUserId(this.$route.params.id);
-        } catch (error) {
-            console.error(error.message);
-        }
-    },
 
     methods: {
         ...mapActions('tweet', [
             'fetchTweetsByUserId',
         ]),
+
+        async infiniteHandler($state) {
+            try {
+                const tweets = await this.fetchTweetsByUserId({
+                    userId: this.$route.params.id,
+                    params: { 
+                        page: this.page
+                    }
+                });
+
+                if (tweets.length) {
+                    this.tweets.push(...tweets);
+                    this.page++;
+                    $state.loaded();
+                } else {
+                    $state.complete();
+                }
+            } catch (error) {
+                console.error(error);
+                $state.loaded();
+            }
+        },
     },
 };
 </script>

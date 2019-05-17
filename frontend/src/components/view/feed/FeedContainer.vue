@@ -16,7 +16,7 @@
 
         <NoContent :show="!tweets.length" title="No tweets yet :)" />
 
-        <TweetPreviewList :tweets="tweets" />
+        <TweetPreviewList :tweets="tweets" @infinite="infiniteHandler" />
 
         <b-modal :active.sync="isNewTweetModalActive" has-modal-card>
             <NewTweetForm />
@@ -46,6 +46,7 @@ export default {
 
     data: () => ({
         isNewTweetModalActive: false,
+        page: 1,
     }),
 
     async created() {
@@ -83,6 +84,21 @@ export default {
 
         showAddTweetModal() {
             this.isNewTweetModalActive = true;
+        },
+
+        async infiniteHandler($state) {
+            try {
+                const tweets = await this.fetchTweets({ page: this.page });
+
+                if (tweets.length) {
+                    this.page++;
+                    $state.loaded();
+                } else {
+                    $state.complete();
+                }
+            } catch {
+                $state.complete();
+            }
         },
     },
 };

@@ -7,10 +7,14 @@
                 @click="onTweetClick"
             />
         </template>
+        <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading" >
+            <span slot="no-more" />
+        </infinite-loading>
     </div>
 </template>
 
 <script>
+import InfiniteLoading from 'vue-infinite-loading';
 import TweetPreview from './TweetPreview.vue';
 
 export default {
@@ -20,16 +24,21 @@ export default {
         tweets: {
             type: Array,
             required: true
-        }
+        },
     },
 
     components: {
         TweetPreview,
+        InfiniteLoading,
     },
 
     methods: {
         onTweetClick(tweet) {
             this.$router.push({ name: 'tweet-page', params: { id: tweet.id } });
+        },
+
+        infiniteHandler($state) {
+            this.$emit('infinite', $state);
         },
     },
 };

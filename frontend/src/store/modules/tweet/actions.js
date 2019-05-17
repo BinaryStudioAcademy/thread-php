@@ -9,16 +9,16 @@ import api from '@/api/Api';
 import { tweetMapper } from '@/services/Normalizer';
 
 export default {
-    async fetchTweets({ commit }) {
+    async fetchTweets({ commit }, params) {
         commit(SET_LOADING, true, { root: true });
 
         try {
-            const data = await api.get('/tweets');
+            const data = await api.get('/tweets', params);
 
             commit(SET_TWEETS, data);
             commit(SET_LOADING, false, { root: true });
 
-            return Promise.resolve();
+            return Promise.resolve(data);
         } catch (error) {
             commit(SET_LOADING, false, { root: true });
 
@@ -26,11 +26,10 @@ export default {
         }
     },
 
-    async fetchTweetsByUserId({ commit }, userId) {
+    async fetchTweetsByUserId({ commit }, { userId, params }) {
         commit(SET_LOADING, true, { root: true });
-
         try {
-            const tweets = await api.get(`/users/${userId}/tweets`);
+            const tweets = await api.get(`/users/${userId}/tweets`, params);
 
             commit(SET_LOADING, false, { root: true });
 
