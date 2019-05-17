@@ -4,9 +4,10 @@ import { emptyUser, userMapper } from '@/services/Normalizer';
 import { updateSocketAuthToken, removeSocketAuthToken } from '@/services/Pusher';
 
 export default {
-    [USER_LOGIN]: (state, accessToken) => {
+    [USER_LOGIN]: (state, { accessToken, tokenType }) => {
         Storage.setToken(accessToken);
-        updateSocketAuthToken(accessToken);
+        Storage.setTokenType(tokenType);
+        updateSocketAuthToken(tokenType, accessToken);
 
         state.token = accessToken;
         state.isLoggedIn = true;
@@ -14,6 +15,7 @@ export default {
 
     [USER_LOGOUT]: state => {
         Storage.removeToken();
+        Storage.removeTokenType();
         removeSocketAuthToken();
 
         state.token = '';

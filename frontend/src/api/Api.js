@@ -5,7 +5,7 @@ import { UNAUTHENTICATED } from '@/api/ErrorCodes';
 import { getSocketId } from '@/services/Pusher';
 
 class Api {
-    constructor(apiUrl, authHeaderName = 'Authorization', authHeaderPrefix = 'Bearer') {
+    constructor(apiUrl, authHeaderName = 'Authorization') {
         this.axios = axios.create({ baseURL: apiUrl });
 
         this.axios
@@ -14,7 +14,7 @@ class Api {
             .use(
                 config => {
                     if (Storage.hasToken()) {
-                        config.headers[authHeaderName] = `${authHeaderPrefix} ${Storage.getToken()}`;
+                        config.headers[authHeaderName] = `${Storage.getTokenType()} ${Storage.getToken()}`;
                     }
 
                     if (getSocketId()) {
