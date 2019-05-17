@@ -52,7 +52,7 @@ export default {
         try {
             await this.fetchTweets();
         } catch (error) {
-            this.showErrorMessage(error.message)
+            this.showErrorMessage(error.message);
         }
 
         const channel = pusher.subscribe('private-tweets');
