@@ -22,7 +22,6 @@ export default {
         tweets: [],
     }),
 
-
     async created() {
         try {
             this.tweets = await this.fetchTweetsByUserId(this.$route.params.id);

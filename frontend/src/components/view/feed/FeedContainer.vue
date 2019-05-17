@@ -29,9 +29,14 @@ import { mapGetters, mapActions } from 'vuex';
 import TweetPreviewList from '../../common/TweetPreviewList.vue';
 import NoContent from '../../common/NoContent.vue';
 import NewTweetForm from './NewTweetForm.vue';
+import { pusher } from '@/services/Pusher';
+import { SET_TWEET } from '@/store/modules/tweet/mutationTypes';
+import showStatusToast from '@/components/mixin/showStatusToast';
 
 export default {
     name: 'FeedContainer',
+
+    mixins: [showStatusToast],
 
     components: {
         TweetPreviewList,
@@ -43,8 +48,22 @@ export default {
         isNewTweetModalActive: false,
     }),
 
-    created() {
-        this.fetchTweets();
+    async created() {
+        try {
+            await this.fetchTweets();
+        } catch (error) {
+            this.showErrorMessage(error.message);
+        }
+
+        const channel = pusher.subscribe('private-tweets');
+
+        channel.bind('tweet.added', (data) => {
+            this.$store.commit(`tweet/${SET_TWEET}`, data.tweet);
+        });
+    },
+
+    beforeDestroy() {
+        pusher.unsubscribe('private-tweets');
     },
 
     computed: {

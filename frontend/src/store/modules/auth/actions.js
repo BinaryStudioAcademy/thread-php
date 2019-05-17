@@ -12,7 +12,10 @@ export default {
                 password,
             });
 
-            commit(USER_LOGIN, data.access_token);
+            commit(USER_LOGIN, {
+                accessToken: data.access_token,
+                tokenType: data.token_type
+            });
             commit(SET_LOADING, false, { root: true });
 
             return Promise.resolve();
@@ -41,7 +44,10 @@ export default {
                 nickname,
             });
 
-            commit(USER_LOGIN, data.access_token);
+            commit(USER_LOGIN, {
+                accessToken: data.access_token,
+                tokenType: data.token_type
+            });
             commit(SET_LOADING, false, { root: true });
 
             return Promise.resolve();

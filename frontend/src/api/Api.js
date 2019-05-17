@@ -2,9 +2,10 @@ import axios from 'axios/index';
 import Storage from '@/services/Storage';
 import { EventEmitter, TOKEN_EXPIRED_EVENT } from '@/services/EventEmitter';
 import { UNAUTHENTICATED } from '@/api/ErrorCodes';
+import { getSocketId } from '@/services/Pusher';
 
 class Api {
-    constructor(apiUrl, authHeaderName = 'Authorization', authHeaderPrefix = 'Bearer') {
+    constructor(apiUrl, authHeaderName = 'Authorization') {
         this.axios = axios.create({ baseURL: apiUrl });
 
         this.axios
@@ -13,7 +14,11 @@ class Api {
             .use(
                 config => {
                     if (Storage.hasToken()) {
-                        config.headers[authHeaderName] = `${authHeaderPrefix} ${Storage.getToken()}`;
+                        config.headers[authHeaderName] = `${Storage.getTokenType()} ${Storage.getToken()}`;
+                    }
+
+                    if (getSocketId()) {
+                        config.headers['X-Socket-ID'] = getSocketId();
                     }
 
                     return config;
@@ -30,9 +35,7 @@ class Api {
                     const { response } = errorResponse;
 
                     if (!response) {
-                        return Promise.reject({
-                            message: 'Unexpected error!'
-                        });
+                        return Promise.reject(new Error('Unexpected error!'));
                     }
 
                     const error = response.data.errors[0];
