@@ -2,6 +2,7 @@ import axios from 'axios/index';
 import Storage from '@/services/Storage';
 import { EventEmitter, TOKEN_EXPIRED_EVENT } from '@/services/EventEmitter';
 import { UNAUTHENTICATED } from '@/api/ErrorCodes';
+import { getSocketId } from '@/services/Pusher';
 
 class Api {
     constructor(apiUrl, authHeaderName = 'Authorization', authHeaderPrefix = 'Bearer') {
@@ -14,6 +15,10 @@ class Api {
                 config => {
                     if (Storage.hasToken()) {
                         config.headers[authHeaderName] = `${authHeaderPrefix} ${Storage.getToken()}`;
+                    }
+
+                    if (getSocketId()) {
+                        config.headers['X-Socket-ID'] = getSocketId();
                     }
 
                     return config;
