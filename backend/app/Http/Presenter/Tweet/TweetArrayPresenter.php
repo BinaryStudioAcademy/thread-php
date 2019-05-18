@@ -8,7 +8,7 @@ use App\Entity\Tweet;
 use App\Http\Presenter\CollectionAsArrayPresenter;
 use App\Http\Presenter\LikeArrayPresenter;
 use Illuminate\Support\Collection;
-use App\Http\Presenter\User\UserArrayPresenter;
+use App\Http\Presenter\UserArrayPresenter;
 
 final class TweetArrayPresenter implements CollectionAsArrayPresenter
 {

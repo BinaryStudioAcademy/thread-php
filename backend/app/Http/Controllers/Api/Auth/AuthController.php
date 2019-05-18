@@ -16,7 +16,7 @@ use App\Action\Auth\UploadProfileImageAction;
 use App\Action\Auth\UploadProfileImageRequest;
 use App\Http\Controllers\ApiController;
 use App\Http\Presenter\Auth\AuthenticationResponseArrayPresenter;
-use App\Http\Presenter\User\UserArrayPresenter;
+use App\Http\Presenter\UserArrayPresenter;
 use App\Http\Request\Api\Auth\RegisterHttpRequest;
 use App\Http\Request\Api\Auth\LoginHttpRequest;
 use App\Http\Request\Api\Auth\UpdateProfileHttpRequest;

@@ -6,7 +6,7 @@ namespace App\Http\Presenter\Comment;
 
 use App\Entity\Comment;
 use App\Http\Presenter\CollectionAsArrayPresenter;
-use App\Http\Presenter\User\UserArrayPresenter;
+use App\Http\Presenter\UserArrayPresenter;
 use Illuminate\Support\Collection;
 
 final class CommentAsArrayPresenter implements CollectionAsArrayPresenter
