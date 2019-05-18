@@ -3,7 +3,8 @@ import {
     SET_TWEET_IMAGE,
     SET_TWEET,
     DELETE_TWEET,
-    INCREMENT_COMMENTS_COUNT
+    INCREMENT_COMMENTS_COUNT,
+    LIKE_OR_DISLIKE_TWEET
 } from './mutationTypes';
 import { tweetMapper } from '@/services/Normalizer';
 
@@ -34,5 +35,9 @@ export default {
 
     [INCREMENT_COMMENTS_COUNT]: (state, id) => {
         state.tweets[id].commentsCount++;
+    },
+
+    [LIKE_OR_DISLIKE_TWEET]: (state, id) => {
+        state.tweets[id].likesCount++;
     }
 };
