@@ -14,9 +14,7 @@
             </b-button>
         </div>
 
-        <NoContent :show="!tweets.length" title="No tweets yet :)" />
-
-        <TweetPreviewList :tweets="tweets" @infinite="infiniteHandler" />
+        <TweetPreviewList :tweets="tweets" />
 
         <b-modal :active.sync="isNewTweetModalActive" has-modal-card>
             <NewTweetForm />
@@ -27,7 +25,6 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import TweetPreviewList from '../../common/TweetPreviewList.vue';
-import NoContent from '../../common/NoContent.vue';
 import NewTweetForm from './NewTweetForm.vue';
 import { pusher } from '@/services/Pusher';
 import { SET_TWEET } from '@/store/modules/tweet/mutationTypes';
@@ -41,7 +38,6 @@ export default {
     components: {
         TweetPreviewList,
         NewTweetForm,
-        NoContent
     },
 
     data: () => ({

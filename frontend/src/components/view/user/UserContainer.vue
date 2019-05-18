@@ -1,7 +1,7 @@
 <template>
     <div class="user-container">
         <TweetPreviewList :tweets="tweets" @infinite="infiniteHandler" />
-        <NoContent :show="!tweets.length" title="No tweets yet :)" />
+        <NoContent :show="noContent" title="No tweets yet :)" />
     </div>
 </template>
 
@@ -24,6 +24,7 @@ export default {
     data: () => ({
         tweets: [],
         page: 1,
+        noContent: false,
     }),
 
     async created() {
@@ -34,6 +35,10 @@ export default {
                     page: 1
                 }
             });
+
+            if (!this.tweets.length) {
+                this.noContent = true;
+            }
         } catch (error) {
             this.showErrorMessage(error.message);
         }
