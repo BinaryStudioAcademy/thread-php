@@ -14,7 +14,7 @@
             </b-button>
         </div>
 
-        <TweetPreviewList :tweets="tweets" />
+        <TweetPreviewList :tweets="tweets" @infinite="infiniteHandler" />
 
         <b-modal :active.sync="isNewTweetModalActive" has-modal-card>
             <NewTweetForm />
@@ -94,7 +94,8 @@ export default {
                 } else {
                     $state.complete();
                 }
-            } catch {
+            } catch (error) {
+                this.showErrorMessage(error.message);
                 $state.complete();
             }
         },
