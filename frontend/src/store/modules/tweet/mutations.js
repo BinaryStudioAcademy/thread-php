@@ -11,12 +11,16 @@ import { tweetMapper } from '@/services/Normalizer';
 
 export default {
     [SET_TWEETS]: (state, tweets) => {
+        let storeTweets = {};
+
         tweets.forEach(tweet => {
-            state.tweets = {
-                ...state.tweets,
+            storeTweets = {
+                ...storeTweets,
                 [tweet.id]: tweetMapper(tweet)
             };
         });
+
+        state.tweets = storeTweets;
     },
 
     [SET_TWEET_IMAGE]: (state, { id, imageUrl }) => {

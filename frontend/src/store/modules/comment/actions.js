@@ -13,7 +13,7 @@ export default {
                 direction: 'asc',
             });
 
-            commit(SET_COMMENTS, { tweetId, comments });
+            commit(SET_COMMENTS, comments);
             commit(SET_LOADING, false, { root: true });
 
             return Promise.resolve();
@@ -30,7 +30,7 @@ export default {
         try {
             const comment = await api.post('/comments', { tweet_id: tweetId, body: text });
 
-            commit(ADD_COMMENT, { tweetId, comment });
+            commit(ADD_COMMENT, comment);
             commit(`tweet/${INCREMENT_COMMENTS_COUNT}`, tweetId, { root: true });
             commit(SET_LOADING, false, { root: true });
 
