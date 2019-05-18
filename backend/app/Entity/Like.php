@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use InvalidArgumentException;
 
 /**
  * Class Like
@@ -26,6 +27,9 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 final class Like extends Model
 {
     protected $table = 'likes';
+
+    // no timestamps for likes migration
+    public $timestamps = false;
 
     protected $fillable = [
         'user_id',
@@ -63,5 +67,27 @@ final class Like extends Model
     public function getUser(): User
     {
         return $this->user;
+    }
+
+    public function forTweet(int $userId, int $tweetId): void
+    {
+        $this->assertIdIsValid($userId);
+        $this->assertIdIsValid($tweetId);
+
+        $this->user_id = $userId;
+        $this->likeable_id = $tweetId;
+        $this->likeable_type = Tweet::class;
+        $this->created_at = Carbon::now();
+    }
+
+    /**
+     * @param int $id
+     * @throws InvalidArgumentException
+     */
+    private function assertIdIsValid(int $id): void
+    {
+        if ($id < 1) {
+            throw new InvalidArgumentException('Id cannot be less than 1.');
+        }
     }
 }
