@@ -2,13 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace App\Http\Presenter\Tweet;
+namespace App\Http\Presenter;
 
 use App\Entity\Tweet;
-use App\Http\Presenter\CollectionAsArrayPresenter;
-use App\Http\Presenter\LikeArrayPresenter;
 use Illuminate\Support\Collection;
-use App\Http\Presenter\UserArrayPresenter;
 
 final class TweetArrayPresenter implements CollectionAsArrayPresenter
 {
