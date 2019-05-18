@@ -45,6 +45,7 @@ Route::prefix('v1')->group(function () {
             Route::post('/{id}/image', 'TweetController@uploadTweetImage');
             Route::put('/{id}', 'TweetController@updateTweetById');
             Route::delete('/{id}', 'TweetController@deleteTweetById');
+            Route::put('/{id}/like', 'LikeController@likeOrDislikeTweet');
         });
 
         Route::group([
