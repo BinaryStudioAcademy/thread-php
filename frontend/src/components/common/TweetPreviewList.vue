@@ -1,12 +1,14 @@
 <template>
     <div class="tweets-container">
-        <template v-for="tweet in tweets">
-            <TweetPreview
-                :key="tweet.id"
-                :tweet="tweet"
-                @click="onTweetClick"
-            />
-        </template>
+        <transition-group name="slide-prev" tag="div">
+            <template v-for="tweet in tweets">
+                <TweetPreview
+                    :key="tweet.id"
+                    :tweet="tweet"
+                    @click="onTweetClick"
+                />
+            </template>
+        </transition-group>
     </div>
 </template>
 
