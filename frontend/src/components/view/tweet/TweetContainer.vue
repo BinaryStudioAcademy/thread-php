@@ -36,7 +36,7 @@
 
                             <nav class="level is-mobile activity">
                                 <div class="level-left">
-                                    <b-tooltip label="Comments" animated type="is-warning">
+                                    <b-tooltip label="Comments" animated>
                                         <a class="level-item auto-cursor">
                                             <span
                                                 class="icon is-medium has-text-info"
@@ -50,9 +50,14 @@
                                         </a>
                                     </b-tooltip>
 
-                                    <b-tooltip label="Like" animated type="is-danger">
+                                    <b-tooltip label="Like" animated>
                                         <a class="level-item" @click="onLikeOrDislikeTweet">
-                                            <span class="icon is-medium has-text-info">
+                                            <span
+                                                class="icon is-medium has-text-info"
+                                                :class="{
+                                                    'has-text-danger': tweetIsLikedByUser(tweet.id, user.id)
+                                                }"
+                                            >
                                                 <font-awesome-icon icon="heart" />
                                             </span>
                                             {{ tweet.likesCount }}
@@ -144,7 +149,8 @@ export default {
 
         ...mapGetters('tweet', [
             'getTweetById',
-            'isTweetOwner'
+            'isTweetOwner',
+            'tweetIsLikedByUser'
         ]),
 
         ...mapGetters('comment', [
