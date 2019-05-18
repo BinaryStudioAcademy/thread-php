@@ -1,6 +1,7 @@
 class Storage {
     constructor() {
-        this.keyName = 'auth.token';
+        this.tokenKeyName = 'auth.access_token';
+        this.tokenTypeKeyName = 'auth.token_type';
         this.store = window.localStorage;
     }
 
@@ -13,19 +14,31 @@ class Storage {
     }
 
     getToken() {
-        return this.get(this.keyName);
+        return this.get(this.tokenKeyName);
     }
 
     setToken(token) {
-        return this.set(this.keyName, token);
+        return this.set(this.tokenKeyName, token);
     }
 
     hasToken() {
-        return !!this.get(this.keyName);
+        return !!this.get(this.tokenKeyName);
     }
 
     removeToken() {
-        return this.store.removeItem(this.keyName);
+        return this.store.removeItem(this.tokenKeyName);
+    }
+
+    getTokenType() {
+        return this.get(this.tokenTypeKeyName);
+    }
+
+    setTokenType(type) {
+        return this.set(this.tokenTypeKeyName, type);
+    }
+
+    removeTokenType() {
+        return this.store.removeItem(this.tokenTypeKeyName);
     }
 }
 

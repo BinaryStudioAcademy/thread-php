@@ -2,7 +2,7 @@
     <article class="media">
         <figure class="media-left">
             <p class="image is-48x48 is-square" v-if="user.avatar">
-                <img class="is-rounded" :src="user.avatar">
+                <img class="is-rounded fit" :src="user.avatar">
             </p>
             <DefaultAvatar v-else class="image is-48x48" :user="user" />
         </figure>

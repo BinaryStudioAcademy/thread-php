@@ -7,7 +7,7 @@
                     class="image is-64x64 is-square"
                     :to="{ name: 'user-page', params: { id: tweet.author.id } }"
                 >
-                    <img class="is-rounded" :src="tweet.author.avatar" alt="Author avatar">
+                    <img class="is-rounded fit" :src="tweet.author.avatar" alt="Author avatar">
                 </router-link>
 
                 <router-link v-else :to="{ name: 'user-page', params: { id: tweet.author.id } }">
