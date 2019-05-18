@@ -11,6 +11,7 @@
         </transition-group>
         <infinite-loading @infinite="infiniteHandler">
             <span slot="no-more" />
+            <div slot="no-results" />
         </infinite-loading>
     </div>
 </template>
