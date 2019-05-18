@@ -10,4 +10,9 @@ export default {
     getTweetById: state => id => state.tweets[id],
 
     isTweetOwner: (state, getters) => (tweetId, userId) => getters.getTweetById(tweetId).author.id === userId,
+
+    tweetIsLikedByUser: (state, getters) => (tweetId, userId) => getters
+        .getTweetById(tweetId)
+        .likes
+        .find(like => like.userId === userId) !== undefined
 };

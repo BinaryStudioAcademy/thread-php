@@ -23,11 +23,17 @@ export const commentMapper = comment => ({
     author: userMapper(comment.author),
 });
 
+export const likeMapper = like => ({
+    userId: like.user_id,
+    createdAt: like.created_at
+});
+
 export const tweetMapper = tweet => ({
     ...tweet,
     imageUrl: tweet.image_url,
     created: tweet.created_at,
     author: userMapper(tweet.author),
     commentsCount: tweet.comments_count,
-    likesCount: tweet.likes_count
+    likesCount: tweet.likes_count,
+    likes: tweet.likes.map(likeMapper)
 });

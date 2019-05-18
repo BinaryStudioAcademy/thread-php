@@ -2,7 +2,9 @@ import {
     SET_TWEETS,
     SET_TWEET_IMAGE,
     SET_TWEET,
-    DELETE_TWEET
+    DELETE_TWEET,
+    LIKE_TWEET,
+    DISLIKE_TWEET
 } from './mutationTypes';
 import { SET_LOADING } from '../../mutationTypes';
 import api from '@/api/Api';
@@ -126,6 +128,28 @@ export default {
             await api.delete(`/tweets/${id}`);
 
             commit(DELETE_TWEET, id);
+            commit(SET_LOADING, false, { root: true });
+
+            return Promise.resolve();
+        } catch (error) {
+            commit(SET_LOADING, false, { root: true });
+
+            return Promise.reject(error);
+        }
+    },
+
+    async likeOrDislikeTweet({ commit }, id) {
+        commit(SET_LOADING, true, { root: true });
+
+        try {
+            const data = await api.put(`/tweets/${id}/like`);
+
+            if (data.status === 'added') {
+                commit(LIKE_TWEET, id);
+            } else {
+                commit(DISLIKE_TWEET, id);
+            }
+
             commit(SET_LOADING, false, { root: true });
 
             return Promise.resolve();
