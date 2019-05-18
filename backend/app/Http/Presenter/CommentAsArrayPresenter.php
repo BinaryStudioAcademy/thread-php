@@ -2,11 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Presenter\Comment;
+namespace App\Http\Presenter;
 
 use App\Entity\Comment;
-use App\Http\Presenter\CollectionAsArrayPresenter;
-use App\Http\Presenter\User\UserArrayPresenter;
 use Illuminate\Support\Collection;
 
 final class CommentAsArrayPresenter implements CollectionAsArrayPresenter
@@ -24,6 +22,7 @@ final class CommentAsArrayPresenter implements CollectionAsArrayPresenter
             'id' => $comment->getId(),
             'body' => $comment->getBody(),
             'author_id' => $comment->getAuthorId(),
+            'tweet_id' => $comment->getTweetId(),
             'created_at' => $comment->getCreatedAt()->toDateTimeString(),
             'updated_at' => $comment->getUpdatedAt() ? $comment->getUpdatedAt()->toDateTimeString() : null,
             'author' => $this->userArrayPresenter->present($comment->author)

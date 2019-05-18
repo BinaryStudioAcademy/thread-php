@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Http\Presenter\Auth;
+namespace App\Http\Presenter;
 
 use App\Action\Auth\AuthenticationResponse;
 

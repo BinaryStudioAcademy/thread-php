@@ -36,21 +36,33 @@
 
                             <nav class="level is-mobile activity">
                                 <div class="level-left">
-                                    <a class="level-item auto-cursor">
-                                        <span
-                                            class="icon is-medium has-text-info"
-                                            :class="{ 'has-text-danger': tweetIsCommentedByUser(tweet.id, user.id) }"
-                                        >
-                                            <font-awesome-icon icon="comments" />
-                                        </span>
-                                        {{ tweet.commentsCount }}
-                                    </a>
-                                    <a class="level-item">
-                                        <span class="icon is-medium has-text-info">
-                                            <font-awesome-icon icon="heart" />
-                                        </span>
-                                        {{ tweet.likesCount }}
-                                    </a>
+                                    <b-tooltip label="Comments" animated>
+                                        <a class="level-item auto-cursor">
+                                            <span
+                                                class="icon is-medium has-text-info"
+                                                :class="{
+                                                    'has-text-danger': tweetIsCommentedByUser(tweet.id, user.id)
+                                                }"
+                                            >
+                                                <font-awesome-icon icon="comments" />
+                                            </span>
+                                            {{ tweet.commentsCount }}
+                                        </a>
+                                    </b-tooltip>
+
+                                    <b-tooltip label="Like" animated>
+                                        <a class="level-item" @click="onLikeOrDislikeTweet">
+                                            <span
+                                                class="icon is-medium has-text-info"
+                                                :class="{
+                                                    'has-text-danger': tweetIsLikedByUser(tweet.id, user.id)
+                                                }"
+                                            >
+                                                <font-awesome-icon icon="heart" />
+                                            </span>
+                                            {{ tweet.likesCount }}
+                                        </a>
+                                    </b-tooltip>
                                 </div>
                             </nav>
 
@@ -137,7 +149,8 @@ export default {
 
         ...mapGetters('tweet', [
             'getTweetById',
-            'isTweetOwner'
+            'isTweetOwner',
+            'tweetIsLikedByUser'
         ]),
 
         ...mapGetters('comment', [
@@ -154,6 +167,7 @@ export default {
         ...mapActions('tweet', [
             'fetchTweetById',
             'deleteTweet',
+            'likeOrDislikeTweet'
         ]),
 
         ...mapActions('comment', [
@@ -188,6 +202,17 @@ export default {
         showImageModal() {
             this.isImageModalActive = true;
         },
+
+        async onLikeOrDislikeTweet() {
+            try {
+                await this.likeOrDislikeTweet({
+                    id: this.tweet.id,
+                    userId: this.user.id
+                });
+            } catch (error) {
+                console.error(error.message);
+            }
+        }
     },
 };
 </script>
