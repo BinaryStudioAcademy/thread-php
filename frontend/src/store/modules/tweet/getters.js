@@ -3,7 +3,7 @@ import moment from 'moment';
 export default {
     tweetsSortedByCreatedDate: state => Object.values(state.tweets).sort(
         (a, b) => (
-            moment(a.created).isBefore(moment(b.created)) ? 1 : -1
+            moment(b.created) - moment(a.created)
         )
     ),
 

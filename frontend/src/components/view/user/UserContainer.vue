@@ -1,6 +1,6 @@
 <template>
     <div class="user-container">
-        <TweetPreviewList :tweets="tweets" />
+        <TweetPreviewList :tweets="tweets" @infinite="infiniteHandler" />
         <NoContent :show="noContent" title="No tweets yet :)" />
     </div>
 </template>
@@ -9,9 +9,12 @@
 import { mapActions } from 'vuex';
 import TweetPreviewList from '@/components/common/TweetPreviewList.vue';
 import NoContent from '@/components/common/NoContent.vue';
+import showStatusToast from '@/components/mixin/showStatusToast';
 
 export default {
     name: 'UserContainer',
+
+    mixins: [showStatusToast],
 
     components: {
         TweetPreviewList,
@@ -20,18 +23,24 @@ export default {
 
     data: () => ({
         tweets: [],
-        noContent: false
+        page: 1,
+        noContent: false,
     }),
 
     async created() {
         try {
-            this.tweets = await this.fetchTweetsByUserId(this.$route.params.id);
+            this.tweets = await this.fetchTweetsByUserId({
+                userId: this.$route.params.id,
+                params: {
+                    page: 1
+                }
+            });
 
             if (!this.tweets.length) {
                 this.noContent = true;
             }
         } catch (error) {
-            console.error(error.message);
+            this.showErrorMessage(error.message);
         }
     },
 
@@ -39,6 +48,28 @@ export default {
         ...mapActions('tweet', [
             'fetchTweetsByUserId',
         ]),
+
+        async infiniteHandler($state) {
+            try {
+                const tweets = await this.fetchTweetsByUserId({
+                    userId: this.$route.params.id,
+                    params: {
+                        page: this.page + 1
+                    }
+                });
+
+                if (tweets.length) {
+                    this.tweets.push(...tweets);
+                    this.page += 1;
+                    $state.loaded();
+                } else {
+                    $state.complete();
+                }
+            } catch (error) {
+                this.showErrorMessage(error.message);
+                $state.complete();
+            }
+        },
     },
 };
 </script>

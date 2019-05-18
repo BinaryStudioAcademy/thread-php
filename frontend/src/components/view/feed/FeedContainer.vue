@@ -14,7 +14,7 @@
             </b-button>
         </div>
 
-        <TweetPreviewList :tweets="tweets" />
+        <TweetPreviewList :tweets="tweets" @infinite="infiniteHandler" />
 
         <b-modal :active.sync="isNewTweetModalActive" has-modal-card>
             <NewTweetForm />
@@ -42,11 +42,14 @@ export default {
 
     data: () => ({
         isNewTweetModalActive: false,
+        page: 1,
     }),
 
     async created() {
         try {
-            await this.fetchTweets();
+            await this.fetchTweets({
+                page: 1
+            });
         } catch (error) {
             this.showErrorMessage(error.message);
         }
@@ -79,6 +82,22 @@ export default {
 
         showAddTweetModal() {
             this.isNewTweetModalActive = true;
+        },
+
+        async infiniteHandler($state) {
+            try {
+                const tweets = await this.fetchTweets({ page: this.page + 1 });
+
+                if (tweets.length) {
+                    this.page += 1;
+                    $state.loaded();
+                } else {
+                    $state.complete();
+                }
+            } catch (error) {
+                this.showErrorMessage(error.message);
+                $state.complete();
+            }
         },
     },
 };
