@@ -14,8 +14,6 @@
             </b-button>
         </div>
 
-        <NoContent :show="!tweets.length" title="No tweets yet :)" />
-
         <TweetPreviewList :tweets="tweets" />
 
         <b-modal :active.sync="isNewTweetModalActive" has-modal-card>
@@ -27,7 +25,6 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import TweetPreviewList from '../../common/TweetPreviewList.vue';
-import NoContent from '../../common/NoContent.vue';
 import NewTweetForm from './NewTweetForm.vue';
 
 export default {
@@ -36,15 +33,18 @@ export default {
     components: {
         TweetPreviewList,
         NewTweetForm,
-        NoContent
     },
 
     data: () => ({
         isNewTweetModalActive: false,
     }),
 
-    created() {
-        this.fetchTweets();
+    async created() {
+        try {
+            await this.fetchTweets();
+        } catch (error) {
+            console.error(error.message);
+        }
     },
 
     computed: {
