@@ -1,7 +1,7 @@
 <template>
     <div class="user-container">
         <TweetPreviewList :tweets="tweets" />
-        <NoContent :show="!tweets.length" title="No tweets yet :)" />
+        <NoContent :show="noContent" title="No tweets yet :)" />
     </div>
 </template>
 
@@ -20,11 +20,16 @@ export default {
 
     data: () => ({
         tweets: [],
+        noContent: false
     }),
 
     async created() {
         try {
             this.tweets = await this.fetchTweetsByUserId(this.$route.params.id);
+
+            if (!this.tweets.length) {
+                this.noContent = true;
+            }
         } catch (error) {
             console.error(error.message);
         }
