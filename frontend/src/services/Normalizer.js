@@ -24,8 +24,7 @@ export const commentMapper = comment => ({
 });
 
 export const likeMapper = like => ({
-    userId: like.user_id,
-    createdAt: like.created_at
+    userId: like.user_id
 });
 
 export const tweetMapper = tweet => ({

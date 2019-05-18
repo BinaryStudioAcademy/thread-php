@@ -38,11 +38,15 @@ export default {
         state.tweets[id].commentsCount++;
     },
 
-    [LIKE_TWEET]: (state, id) => {
+    [LIKE_TWEET]: (state, { id, userId }) => {
         state.tweets[id].likesCount++;
+
+        state.tweets[id].likes.push({ userId });
     },
 
-    [DISLIKE_TWEET]: (state, id) => {
+    [DISLIKE_TWEET]: (state, { id, userId }) => {
         state.tweets[id].likesCount--;
+
+        state.tweets[id].likes = state.tweets[id].likes.filter(like => like.userId !== userId);
     }
 };

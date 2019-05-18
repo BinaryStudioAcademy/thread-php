@@ -205,11 +205,12 @@ export default {
 
         async onLikeOrDislikeTweet() {
             try {
-                await this.likeOrDislikeTweet(this.tweet.id);
-
-                this.showSuccessMessage('Success');
+                await this.likeOrDislikeTweet({
+                    id: this.tweet.id,
+                    userId: this.user.id
+                });
             } catch (error) {
-                this.showErrorMessage('Error');
+                console.error(error.message);
             }
         }
     },
