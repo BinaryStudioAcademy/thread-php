@@ -75,4 +75,9 @@ final class Comment extends Model
 
         $this->body = $text;
     }
+
+    public function getTweetId(): int
+    {
+        return $this->tweet_id;
+    }
 }
