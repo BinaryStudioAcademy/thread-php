@@ -20,8 +20,8 @@ final class LikeController extends ApiController
 
     public function likeOrDislikeTweet(string $id): ApiResponse
     {
-        $this->likeTweetAction->execute(new LikeTweetRequest((int)$id));
+        $response = $this->likeTweetAction->execute(new LikeTweetRequest((int)$id));
 
-        return $this->createEmptyResponse();
+        return $this->createSuccessResponse(['status' => $response->getStatus()]);
     }
 }
