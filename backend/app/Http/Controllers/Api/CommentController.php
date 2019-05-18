@@ -12,7 +12,7 @@ use App\Action\Comment\GetCommentCollectionByTweetIdAction;
 use App\Action\GetByIdRequest;
 use App\Action\GetCollectionRequest;
 use App\Http\Controllers\ApiController;
-use App\Http\Presenter\Comment\CommentAsArrayPresenter;
+use App\Http\Presenter\CommentAsArrayPresenter;
 use App\Http\Request\Api\AddCommentHttpRequest;
 use App\Http\Response\ApiResponse;
 use App\Http\Request\Api\CollectionHttpRequest;

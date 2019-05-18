@@ -2,10 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace App\Http\Presenter\User;
+namespace App\Http\Presenter;
 
 use App\Entity\User;
-use App\Http\Presenter\CollectionAsArrayPresenter;
 use Illuminate\Support\Collection;
 
 final class UserArrayPresenter implements CollectionAsArrayPresenter

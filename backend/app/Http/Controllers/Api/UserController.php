@@ -9,7 +9,7 @@ use App\Action\GetCollectionRequest;
 use App\Action\User\GetUserByIdAction;
 use App\Action\User\GetUserCollectionAction;
 use App\Http\Controllers\ApiController;
-use App\Http\Presenter\User\UserArrayPresenter;
+use App\Http\Presenter\UserArrayPresenter;
 use App\Http\Request\Api\CollectionHttpRequest;
 use App\Http\Response\ApiResponse;
 

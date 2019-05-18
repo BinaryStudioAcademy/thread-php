@@ -19,7 +19,7 @@ use App\Action\Tweet\UpdateTweetRequest;
 use App\Action\Tweet\UploadTweetImageAction;
 use App\Action\Tweet\UploadTweetImageRequest;
 use App\Http\Controllers\ApiController;
-use App\Http\Presenter\Tweet\TweetArrayPresenter;
+use App\Http\Presenter\TweetArrayPresenter;
 use App\Http\Request\Api\CollectionHttpRequest;
 use App\Http\Request\Api\Tweet\AddTweetHttpRequest;
 use App\Http\Request\Api\Tweet\UpdateTweetHttpRequest;

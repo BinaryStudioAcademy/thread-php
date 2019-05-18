@@ -2,20 +2,20 @@
 
 declare(strict_types = 1);
 
-namespace App\Http\Presenter\Tweet;
+namespace App\Http\Presenter;
 
 use App\Entity\Tweet;
-use App\Http\Presenter\CollectionAsArrayPresenter;
 use Illuminate\Support\Collection;
-use App\Http\Presenter\User\UserArrayPresenter;
 
 final class TweetArrayPresenter implements CollectionAsArrayPresenter
 {
     private $userPresenter;
+    private $likeArrayPresenter;
 
-    public function __construct(UserArrayPresenter $userPresenter)
+    public function __construct(UserArrayPresenter $userPresenter, LikeArrayPresenter $likeArrayPresenter)
     {
         $this->userPresenter = $userPresenter;
+        $this->likeArrayPresenter = $likeArrayPresenter;
     }
 
     public function present(Tweet $tweet): array
@@ -27,7 +27,8 @@ final class TweetArrayPresenter implements CollectionAsArrayPresenter
             'created_at' => $tweet->getCreatedAt()->toDateTimeString(),
             'author' => $this->userPresenter->present($tweet->getAuthor()),
             'comments_count' => $tweet->getCommentsCount(),
-            'likes_count' => $tweet->getLikesCount()
+            'likes_count' => $tweet->getLikesCount(),
+            'likes' => $this->likeArrayPresenter->presentCollection($tweet->likes)
         ];
     }
 

@@ -37,8 +37,6 @@ final class Like extends Model
         'likeable_type'
     ];
 
-    protected $with = ['user'];
-
     public function likeable(): MorphTo
     {
         return $this->morphTo();
@@ -56,7 +54,7 @@ final class Like extends Model
 
     public function getCreatedAt(): Carbon
     {
-        return $this->created_at;
+        return Carbon::createFromTimeString($this->created_at);
     }
 
     public function getUserId(): int

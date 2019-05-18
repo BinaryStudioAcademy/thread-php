@@ -14,13 +14,16 @@ final class LikeTweetAction
     private $tweetRepository;
     private $likeRepository;
 
+    private const ADD_LIKE_STATUS = 'added';
+    private const REMOVE_LIKE_STATUS = 'removed';
+
     public function __construct(TweetRepository $tweetRepository, LikeRepository $likeRepository)
     {
         $this->tweetRepository = $tweetRepository;
         $this->likeRepository = $likeRepository;
     }
 
-    public function execute(LikeTweetRequest $request): void
+    public function execute(LikeTweetRequest $request): LikeTweetResponse
     {
         $tweet = $this->tweetRepository->getById($request->getTweetId());
 
@@ -30,12 +33,14 @@ final class LikeTweetAction
         if ($this->likeRepository->existsForTweetByUser($tweet->id, $userId)) {
             $this->likeRepository->deleteForTweetByUser($tweet->id, $userId);
 
-            return;
+            return new LikeTweetResponse(self::REMOVE_LIKE_STATUS);
         }
 
         $like = new Like();
         $like->forTweet(Auth::id(), $tweet->id);
 
         $this->likeRepository->save($like);
+
+        return new LikeTweetResponse(self::ADD_LIKE_STATUS);
     }
 }
