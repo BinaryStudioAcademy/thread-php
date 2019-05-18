@@ -29,8 +29,8 @@ export default {
 
     async created() {
         try {
-            this.tweets = await this.fetchTweetsByUserId({ 
-                userId: this.$route.params.id, 
+            this.tweets = await this.fetchTweetsByUserId({
+                userId: this.$route.params.id,
                 params: {
                     page: 1
                 }
@@ -67,7 +67,7 @@ export default {
                 }
             } catch (error) {
                 this.showErrorMessage(error.message);
-                $state.loaded();
+                $state.complete();
             }
         },
     },
