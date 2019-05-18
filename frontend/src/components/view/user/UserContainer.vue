@@ -9,9 +9,12 @@
 import { mapActions } from 'vuex';
 import TweetPreviewList from '@/components/common/TweetPreviewList.vue';
 import NoContent from '@/components/common/NoContent.vue';
+import showStatusToast from '@/components/mixin/showStatusToast';
 
 export default {
     name: 'UserContainer',
+
+    mixins: [showStatusToast],
 
     components: {
         TweetPreviewList,
@@ -23,6 +26,19 @@ export default {
         page: 1,
     }),
 
+    async created() {
+        try {
+            this.tweets = await this.fetchTweetsByUserId({ 
+                userId: this.$route.params.id, 
+                params: {
+                    page: 1
+                }
+            });
+        } catch (error) {
+            this.showErrorMessage(error.message);
+        }
+    },
+
     methods: {
         ...mapActions('tweet', [
             'fetchTweetsByUserId',
@@ -32,20 +48,20 @@ export default {
             try {
                 const tweets = await this.fetchTweetsByUserId({
                     userId: this.$route.params.id,
-                    params: { 
-                        page: this.page
+                    params: {
+                        page: this.page + 1
                     }
                 });
 
                 if (tweets.length) {
                     this.tweets.push(...tweets);
-                    this.page++;
+                    this.page += 1;
                     $state.loaded();
                 } else {
                     $state.complete();
                 }
             } catch (error) {
-                console.error(error);
+                this.showErrorMessage(error.message);
                 $state.loaded();
             }
         },

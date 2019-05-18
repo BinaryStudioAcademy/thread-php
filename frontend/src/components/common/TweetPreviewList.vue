@@ -7,7 +7,7 @@
                 @click="onTweetClick"
             />
         </template>
-        <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading" >
+        <infinite-loading @infinite="infiniteHandler">
             <span slot="no-more" />
         </infinite-loading>
     </div>
