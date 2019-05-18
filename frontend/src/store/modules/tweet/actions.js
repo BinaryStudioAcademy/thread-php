@@ -138,16 +138,22 @@ export default {
         }
     },
 
-    async likeOrDislikeTweet({ commit }, id) {
+    async likeOrDislikeTweet({ commit }, { id, userId }) {
         commit(SET_LOADING, true, { root: true });
 
         try {
             const data = await api.put(`/tweets/${id}/like`);
 
             if (data.status === 'added') {
-                commit(LIKE_TWEET, id);
+                commit(LIKE_TWEET, {
+                    id,
+                    userId
+                });
             } else {
-                commit(DISLIKE_TWEET, id);
+                commit(DISLIKE_TWEET, {
+                    id,
+                    userId
+                });
             }
 
             commit(SET_LOADING, false, { root: true });
