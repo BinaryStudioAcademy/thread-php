@@ -17,6 +17,7 @@
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "pda/pheanstalk": "^4.0",
+        "predis/predis": "^1.1",
         "pusher/pusher-php-server": "^3.4",
         "tymon/jwt-auth": "1.0.*"
     },
