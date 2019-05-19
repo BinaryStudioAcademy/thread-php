@@ -10,8 +10,9 @@
             </template>
         </transition-group>
         <infinite-loading @infinite="infiniteHandler">
-            <span slot="no-more" />
+            <div slot="no-more" />
             <div slot="no-results" />
+            <div slot="spinner" />
         </infinite-loading>
     </div>
 </template>
