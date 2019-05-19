@@ -13,6 +13,7 @@ use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class Handler extends ExceptionHandler
 {
@@ -69,11 +70,14 @@ class Handler extends ExceptionHandler
             );
         }
 
-        if ($exception instanceof AuthenticationException) {
-            return ApiResponse::error(
-                ErrorCode::UNAUTHENTICATED,
-                'Unauthenticated.'
+        if ($exception instanceof AuthorizationException) {
+            return ApiResponse::forbidden(
+                'Forbidden.'
             );
+        }
+
+        if ($exception instanceof AuthenticationException) {
+            return ApiResponse::unauthenticated();
         }
 
         // NotFoundHttpException - route doesn't exist

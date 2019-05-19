@@ -18,6 +18,8 @@ Route::prefix('v1')->group(function () {
         Route::post('/register', 'AuthController@register');
         Route::post('/login', 'AuthController@login');
         Route::get('/me', 'AuthController@me');
+        Route::put('/me', 'AuthController@update');
+        Route::post('/me/image', 'AuthController@uploadProfileImage');
         Route::post('/logout', 'AuthController@logout');
     });
 
@@ -30,6 +32,20 @@ Route::prefix('v1')->group(function () {
         ], function () {
             Route::get('/', 'UserController@getUserCollection');
             Route::get('/{id}', 'UserController@getUserById');
+            Route::get('/{id}/tweets', 'TweetController@getTweetCollectionByUserId');
+        });
+
+        Route::group([
+            'prefix' => '/tweets',
+        ], function () {
+            Route::get('/', 'TweetController@getTweetCollection');
+            Route::post('/', 'TweetController@addTweet');
+            Route::get('/{id}', 'TweetController@getTweetById');
+            Route::get('/{id}/comments', 'CommentController@getCommentCollectionByTweetId');
+            Route::post('/{id}/image', 'TweetController@uploadTweetImage');
+            Route::put('/{id}', 'TweetController@updateTweetById');
+            Route::delete('/{id}', 'TweetController@deleteTweetById');
+            Route::put('/{id}/like', 'LikeController@likeOrDislikeTweet');
         });
 
         Route::group([

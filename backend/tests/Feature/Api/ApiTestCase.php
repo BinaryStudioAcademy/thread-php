@@ -9,7 +9,9 @@ use App\Exceptions\ErrorCode;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Foundation\Testing\TestResponse;
 use Illuminate\Support\Facades\Auth;
+use InvalidArgumentException;
 use Tests\CreatesApplication;
 
 abstract class ApiTestCase extends BaseTestCase
@@ -28,10 +30,25 @@ abstract class ApiTestCase extends BaseTestCase
      */
     protected const USER_RESOURCE_STRUCTURE = [
         'id',
-        'name',
+        'first_name',
+        'last_name',
         'nickname',
         'email',
         'avatar'
+    ];
+
+    /**
+     * @var array
+     *
+     * Tweet response item structure
+     */
+    protected const TWEET_RESOURCE_STRUCTURE = [
+        'id',
+        'text',
+        'image_url',
+        'author' => self::USER_RESOURCE_STRUCTURE,
+        'comments_count',
+        'likes_count'
     ];
 
     /**
@@ -60,7 +77,7 @@ abstract class ApiTestCase extends BaseTestCase
         $this->seedFakeData();
     }
 
-    protected function seedFakeData(int $itemsAmount = 2): void
+    protected function seedFakeData(int $itemsAmount = 5): void
     {
         factory(User::class, $itemsAmount)->create();
         factory(Tweet::class, $itemsAmount)->create();
@@ -79,7 +96,7 @@ abstract class ApiTestCase extends BaseTestCase
      * @param array $files
      * @param array $server
      * @param null $content
-     * @return \Illuminate\Foundation\Testing\TestResponse
+     * @return TestResponse
      */
     public function call($method, $uri, $parameters = [], $cookies = [], $files = [], $server = [], $content = null)
     {
@@ -97,7 +114,7 @@ abstract class ApiTestCase extends BaseTestCase
         $this->jwtToken = Auth::login($user);
     }
 
-    protected function actingWithToken(Authenticatable $user = null) : self
+    protected function actingWithToken(Authenticatable $user = null): self
     {
         $user = $user ?? factory(User::class)->create();
 
@@ -109,7 +126,7 @@ abstract class ApiTestCase extends BaseTestCase
     private function assertUriIsValid(string $uri): void
     {
         if (empty($uri)) {
-            throw new \InvalidArgumentException('Request URI cannot be empty.');
+            throw new InvalidArgumentException('Request URI cannot be empty.');
         }
     }
 
@@ -160,6 +177,30 @@ abstract class ApiTestCase extends BaseTestCase
             ]);
     }
 
+    protected function assertDeleteNotFoundResponse(string $uri): void
+    {
+        $this->assertUriIsValid($uri);
+
+        $this->delete($uri)
+            ->assertNotFound()
+            ->assertExactJson([
+                'errors' => [
+                    [
+                        'code' => ErrorCode::NOT_FOUND,
+                        'message' => 'Resource not found.'
+                    ]
+                ]
+            ]);
+    }
+
+    protected function assertDeleteForbidden(string $uri): void
+    {
+        $this->assertUriIsValid($uri);
+
+        $this->delete($uri)
+            ->assertForbidden();
+    }
+
     protected function assertErrorResponse(string $uri, array $attributes = [], string $httpMethod = 'POST'): void
     {
         $this->assertUriIsValid($uri);
@@ -187,6 +228,13 @@ abstract class ApiTestCase extends BaseTestCase
         $this->json('PUT', $uri, $attributes)->assertStatus(200);
     }
 
+    protected function assertDeletedResponse(string $uri): void
+    {
+        $this->assertUriIsValid($uri);
+
+        $this->json('DELETE', $uri)->assertStatus(204);
+    }
+
     protected function createResourceItemUri(string $uri, int $id): string
     {
         $this->assertUriIsValid($uri);
@@ -197,7 +245,7 @@ abstract class ApiTestCase extends BaseTestCase
     private function assertAttributesIsValid(array $attributes): void
     {
         if (empty($attributes)) {
-            throw new \InvalidArgumentException('Request attributes are empty.');
+            throw new InvalidArgumentException('Request attributes are empty.');
         }
     }
 }

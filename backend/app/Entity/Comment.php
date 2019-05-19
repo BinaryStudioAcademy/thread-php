@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use InvalidArgumentException;
 
 /**
  * Class Comment
@@ -29,18 +29,8 @@ final class Comment extends Model
         'tweet_id'
     ];
 
-    protected static function boot()
-    {
-        parent::boot();
-
-        // append author relation in entity by default
-        self::addGlobalScope(
-            'with-author',
-            function(Builder $builder) {
-                $builder->with('author');
-            }
-        );
-    }
+    // append author relation in entity by default
+    protected $with = ['author'];
 
     public function author(): BelongsTo
     {
@@ -80,9 +70,14 @@ final class Comment extends Model
     public function edit(string $text): void
     {
         if (empty($text)) {
-            throw new \InvalidArgumentException('Comment body cannot be empty.');
+            throw new InvalidArgumentException('Comment body cannot be empty.');
         }
 
         $this->body = $text;
+    }
+
+    public function getTweetId(): int
+    {
+        return $this->tweet_id;
     }
 }

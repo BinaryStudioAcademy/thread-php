@@ -12,7 +12,7 @@ final class AddCommentHttpRequest extends ApiFormRequest
     {
         return [
             'body' => 'required',
-            'tweet_id' => 'required|integer',
+            'tweet_id' => 'required|integer|min:1',
         ];
     }
 }
