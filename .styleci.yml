@@ -8,3 +8,7 @@ disabled:
   - single_import_per_statement
   - function_declaration
 
+finder:
+  not-name:
+    - "backend/_ide_helper.php"
+    - "backend/.phpstorm.meta.php"    
