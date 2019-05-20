@@ -1,0 +1,19 @@
+{
+    "version": 2,
+    "name": "thread",
+    "build": {
+      "env": {
+        "VUE_APP_API_URL": "@api-url",
+        "VUE_APP_PUSHER_APP_KEY": "@pusher-app-key",
+        "VUE_APP_PUSHER_APP_CLUSTER": "@pusher-app-cluster",
+        "VUE_APP_PUSHER_APP_AUTH_ENDPOINT": "@pusher-app-auth-endpoint"
+      }
+    },
+    "builds": [{ "src": "package.json", "use": "@now/static-build" }],
+    "routes": [
+        { "src": "^/js/(.*)", "dest": "/js/$1" },
+        { "src": "^/css/(.*)", "dest": "/css/$1" },
+        { "src": "^/img/(.*)", "dest": "/img/$1" },
+        { "src": ".*", "dest": "/index.html" }
+    ]
+  }
