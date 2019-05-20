@@ -93,8 +93,8 @@
         </article>
 
         <b-modal :active.sync="isImageModalActive">
-            <p class="image">
-                <img :src="tweet.imageUrl">
+            <p class="image is-4by3">
+                <img class="fit" :src="tweet.imageUrl">
             </p>
         </b-modal>
 
