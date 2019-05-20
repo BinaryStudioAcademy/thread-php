@@ -44,7 +44,7 @@
                             <span class="icon is-medium has-text-info">
                                 <font-awesome-icon icon="heart" />
                             </span>
-                            {{ tweet.likes_count || 0 }}
+                            {{ tweet.likesCount }}
                         </a>
                     </div>
                 </nav>
