@@ -61,9 +61,30 @@ Helpful articles or materials:
 * [Repository pattern](https://designpatternsphp.readthedocs.io/en/latest/More/Repository/README.html) (*Repository\UserRepository.php*)
 * [Command pattern](https://designpatternsphp.readthedocs.io/en/latest/Behavioral/Command/README.html) (*Action\AddTweetAction.php*)
 * [DTO pattern](https://dzone.com/articles/how-to-manage-traffic-and-preserve-rankings-when-y) (*Action\AddTweetRequest.php*)
+* [Laracasts](https://laracasts.com)
+* [Vue.js](https://www.youtube.com/playlist?list=PL5r0NkdgM0UOxb4Hl81FV5UIgexwTf8h7) tutorial
+* [Vuex](https://www.youtube.com/playlist?list=PL4cUxeGkcC9i371QO_Rtkl26MwtiJ30P2) tutorial
 
 ## Tasks:
 
+Task list is prioritized, more relevant are on top.
+
+1. [`/tweets/:id` page] As a user I can edit own comment text and attach an image file;
+2. [`/tweets/:id` page] As a user I can delete own commment;
+3. [`/tweets/:id` page] As a user I can like any comment and see commen's likes count;
+4. [`/feed` page] As a user I want to receive an email if anyone liked my post or comment;
+5. [`/tweets/:id` page] As a user I can share a tweet in some social network by tweet's page unique URL;
+6. [`/feed` page] As a user I want to sort tweets by created date(descending) or popularity(likes count) by click on some icon or button;
+7. [`/tweets/:id` page] As a user I can see modal window which shows all users who liked a post by click on likes count;
+8. [`/feed` page] As a user I can filter tweets and see only my favourite(was liked by me);
+9. [`/tweets/:id` page] As a user I can paginate comments list using infinite scroll;
+10. [`/tweets/:id` page] As a user I can see modal window which shows all users who liked a comment by click on likes count;
+11. As a user I should be able to forgot and reset my password using an email;
+12. [`/feed` page] As a user I want to see tweet's likes or comments count icon highlighted by some color if I liked or commented this tweet;
+13. [`/tweets/:id` page] As a user I want see newly added comments in realtime similar to tweets;
+14. [`/feed` page] As a user I want to switch between tweets layout view([cards](https://bulma.io/documentation/components/card/) or [media](https://bulma.io/documentation/layout/media-object/) objects);
+
+You can use [Trello](https://trello.com) board to manage your tasks. Create lists like: Backlog, In Progress, Done. Put all tickets into Backlog first and move them into appropriate list depends on their status.
 
 ## Install
 
