@@ -22,7 +22,7 @@
                     <br>
                     {{ comment.body }}
                     <br>
-                    <small>
+                    <small class="has-text-grey">
                         {{ comment.created | createdDate }}
                     </small>
                 </p>

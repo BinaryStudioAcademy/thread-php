@@ -26,15 +26,20 @@
                             <p class="tweet-text">
                                 <strong>{{ tweet.author.firstName }} {{ tweet.author.lastName }}</strong>
                                 <br>
-                                <small>
+                                <small class="has-text-grey">
                                     {{ tweet.created | createdDate }}
                                 </small>
                                 <br>
                                 {{ tweet.text }}
-                                <br>
                             </p>
-
-                            <nav class="level is-mobile activity">
+                            <figure v-if="tweet.imageUrl" class="image is-3by1 tweet-image">
+                                <img
+                                    :src="tweet.imageUrl"
+                                    alt="Tweet image"
+                                    @click="showImageModal"
+                                >
+                            </figure>
+                            <nav class="level is-mobile">
                                 <div class="level-left">
                                     <b-tooltip label="Comments" animated>
                                         <a class="level-item auto-cursor">
@@ -65,14 +70,6 @@
                                     </b-tooltip>
                                 </div>
                             </nav>
-
-                            <figure v-if="tweet.imageUrl" class="image is-3by1 tweet-image">
-                                <img
-                                    :src="tweet.imageUrl"
-                                    alt="Tweet image"
-                                    @click="showImageModal"
-                                >
-                            </figure>
                         </div>
                     </div>
 
@@ -97,7 +94,7 @@
 
         <b-modal :active.sync="isImageModalActive">
             <p class="image is-4by3">
-                <img :src="tweet.imageUrl">
+                <img class="fit" :src="tweet.imageUrl">
             </p>
         </b-modal>
 
@@ -249,6 +246,11 @@ export default {
 .content {
     figure {
         margin-top: 0;
+        margin-bottom: .75rem;
     }
+}
+
+.column {
+    padding-bottom: 0;
 }
 </style>
