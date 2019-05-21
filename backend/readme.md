@@ -23,7 +23,7 @@ cp .env.example .env
 
 Step inside project directory
 ```bash
-cd <project_dir>
+cd <project_dir>/backend
 ```
 
 Start application docker containers:
