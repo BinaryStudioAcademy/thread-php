@@ -11,6 +11,7 @@
 * [CORS](https://developer.mozilla.org/ru/docs/Web/HTTP/CORS)
 * [JWT](https://ru.wikipedia.org/wiki/JSON_Web_Token) tokens
 * Websockets and [Pusher](https://pusher.com/) service
+* MySQL 5.7
 
 ## Install
 

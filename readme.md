@@ -1,27 +1,22 @@
 # BSA 2019 Thread
 
-[![Build Status](https://travis-ci.org/BinaryStudioAcademy/thread-php.svg?branch=dev)](https://travis-ci.org/BinaryStudioAcademy/thread-php)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d1280e7b47b9492abd59cf0081a95cdb)](https://app.codacy.com/app/pavelnemoi/thread-php?utm_source=github.com&utm_medium=referral&utm_content=BinaryStudioAcademy/thread-php&utm_campaign=Badge_Grade_Settings)
-[![StyleCI](https://github.styleci.io/repos/178824653/shield)](https://styleci.io/repos/178824653)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
+## Описание
 
-## Description
+Этот мини-проект является [SPA](https://en.wikipedia.org/wiki/Single-page_application), который немного похож на Twitter :)
 
-This is a learning goal [SPA](https://en.wikipedia.org/wiki/Single-page_application) mini-project which is much like real Twitter, but even better of course :)
+Возможности:
 
-Core features:
+* Регистрация
+* Создание твита(или поста)
+* Комментрование твита
+* Обновление профиля пользователя
 
-* Registration
-* Add tweets(or posts)
-* Add tweet's comments
-* Edit user's profile data
+*Основная идея этой стадии в том, чтобы получить понимание архитектуры приложения, организации и написания 
+backend/frontend кода, использования дизайн паттернов и понимания алгоритма обработки данных.
+Нет необходимости в том, чтобы глубоко изучить каждую технологию, использованную в проекте, но важно получить
+общее понимание построения современного SPA веб-приложения и инструментов, которые могут в этом помочь.*
 
-*Main idea for this stage is to get better understanding of application backend/frontend codebase,
-what design patterns was used and how to solve some widespread data processing tasks.
-There is no need to deeply learn all tech stack that was used to built this app, 
-but just get an idea of modern SPA web application architecture and tools that can help to built it.*  
-
-## Technologies
+## Технологии
 
 Backend:
 
@@ -34,6 +29,7 @@ Backend:
 * [CORS](https://developer.mozilla.org/ru/docs/Web/HTTP/CORS)
 * [JWT](https://ru.wikipedia.org/wiki/JSON_Web_Token) tokens
 * Websockets and [Pusher](https://pusher.com/) service
+* MySQL 5.7
 
 Frontend:
 
@@ -44,18 +40,18 @@ Frontend:
 * [Buefy](https://buefy.org/) UI framework
 * [pusher-js](https://github.com/pusher/pusher-js)
 
-Additional software which might be helpful
+## Дополнительные утилиты, которые могут быть полезны:
 
 * [Postman](https://www.getpostman.com/) (debug your backend api endpoints)
 * [Vue devtools](https://github.com/vuejs/vue-devtools) (debug your frontend components state)
 * [MySQL Workbench](https://www.mysql.com/products/workbench/) (database management tool)
 * [PHPStorm](https://www.jetbrains.com/phpstorm/) || [VSCode](https://code.visualstudio.com/)
 
-Github repository [https://github.com/BinaryStudioAcademy/thread-php](https://github.com/BinaryStudioAcademy/thread-php)
+Github репозиторий [https://github.com/BinaryStudioAcademy/thread-php](https://github.com/BinaryStudioAcademy/thread-php)
 
-Application link [https://bsa-thread.now.sh](https://bsa-thread.now.sh).
+Адресс приложения [https://bsa-thread.now.sh](https://bsa-thread.now.sh).
 
-Helpful articles or materials:
+## Вспомогательные материалы:
 
 * [Dependency Injection](https://designpatternsphp.readthedocs.io/en/latest/Structural/DependencyInjection/README.html)
 * [Repository pattern](https://designpatternsphp.readthedocs.io/en/latest/More/Repository/README.html) (*Repository\UserRepository.php*)
@@ -65,9 +61,7 @@ Helpful articles or materials:
 * [Vue.js](https://www.youtube.com/playlist?list=PL5r0NkdgM0UOxb4Hl81FV5UIgexwTf8h7) tutorial
 * [Vuex](https://www.youtube.com/playlist?list=PL4cUxeGkcC9i371QO_Rtkl26MwtiJ30P2) tutorial
 
-## Tasks:
-
-Task list is prioritized, more relevant are on top.
+## Список задач, отсортирован по релевантности
 
 1. [`/tweets/:id` page] As a user I can edit own comment text and attach an image file;
 2. [`/tweets/:id` page] As a user I can delete own commment;
@@ -79,17 +73,14 @@ Task list is prioritized, more relevant are on top.
 8. [`/feed` page] As a user I can filter tweets and see only my favourite(was liked by me);
 9. [`/tweets/:id` page] As a user I can paginate comments list using infinite scroll;
 10. [`/tweets/:id` page] As a user I can see modal window which shows all users who liked a comment by click on likes count;
-11. As a user I should be able to forgot and reset my password using an email;
+11. As a user I should be able to reset my password using an email (forgot password feature);
 12. [`/feed` page] As a user I want to see tweet's likes or comments count icon highlighted by some color if I liked or commented this tweet;
 13. [`/tweets/:id` page] As a user I want see newly added comments in realtime similar to tweets;
 14. [`/feed` page] As a user I want to switch between tweets layout view([cards](https://bulma.io/documentation/components/card/) or [media](https://bulma.io/documentation/layout/media-object/) objects);
 
-You can use [Trello](https://trello.com) board to manage your tasks. Create lists like: Backlog, In Progress, Done. Put all tickets into Backlog first and move them into appropriate list depends on their status.
+Для удобства вам предлагается создать [Trello](https://trello.com) доску для организации процесса выполнения задач. Создайте списки: Backlog, In Progress, Done. Создайте задачи в Backlog списке и перемещайте их в соответствующий список(In Progress, Done) в зависимости от их статуса.
 
-## Install
+## Послесловие
 
-Installation is described inside backend and frontend folders independently.
+Основная идея выполнения задач к этому проекту заключается в том, чтобы получить небольшой опыт в решении практических задач и расширении функционала, набить шишки, копаясь в чужом коде, и ознакомиться с архитектурой приложения в целом, а также научиться писать свой "production ready" кодешник :) Это задание не будет оцениваться предметно, используя систему баллов, как в предыдущих домашних заданиях, оцениваться будет ваше старание и мотивация разобраться.
 
-## License
-
-[MIT license](https://opensource.org/licenses/MIT).
