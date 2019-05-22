@@ -40,7 +40,7 @@ Frontend:
 * [Buefy](https://buefy.org/) UI framework
 * [pusher-js](https://github.com/pusher/pusher-js)
 
-## Дополнительные утилиты, которые могут быть полезны:
+## Дополнительные утилиты, которые могут быть полезны
 
 * [Postman](https://www.getpostman.com/) (debug your backend api endpoints)
 * [Vue devtools](https://github.com/vuejs/vue-devtools) (debug your frontend components state)
@@ -51,7 +51,7 @@ Github репозиторий [https://github.com/BinaryStudioAcademy/thread-php
 
 Адресс приложения [https://bsa-thread.now.sh](https://bsa-thread.now.sh).
 
-## Вспомогательные материалы:
+## Вспомогательные материалы
 
 * [Dependency Injection](https://designpatternsphp.readthedocs.io/en/latest/Structural/DependencyInjection/README.html)
 * [Repository pattern](https://designpatternsphp.readthedocs.io/en/latest/More/Repository/README.html) (*Repository\UserRepository.php*)
