@@ -10,6 +10,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -41,9 +42,18 @@ class Handler extends ExceptionHandler
      *
      * @param Exception $exception
      * @return void
+     * @throws Exception
      */
     public function report(Exception $exception)
     {
+        if (
+            $this->shouldReport($exception)
+            && Config::get('app.env') === 'production'
+            && app()->bound('sentry')
+        ) {
+            app('sentry')->captureException($exception);
+        }
+
         parent::report($exception);
     }
 
