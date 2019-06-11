@@ -46,7 +46,7 @@ docker exec -it thread-app php artisan db:seed
 
 Generate jwt key and create link to public folder for file uploads (you should have `FILESYSTEM_DRIVER=public` in .env):
 ```bash
-docker exec -it thread-app php artisan jwt:generate
+docker exec -it thread-app php artisan jwt:secret
 docker exec -it thread-app php artisan storage:link
 ```
 
