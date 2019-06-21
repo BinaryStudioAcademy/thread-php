@@ -29,7 +29,7 @@ Frontend:
 * [Buefy](https://buefy.org/) UI framework
 * [pusher-js](https://github.com/pusher/pusher-js)
 
-Application link [https://bsa-thread.now.sh](https://bsa-thread.now.sh).
+Application link [https://thread-php.now.sh/](https://thread-php.now.sh/).
 
 ## Install
 
