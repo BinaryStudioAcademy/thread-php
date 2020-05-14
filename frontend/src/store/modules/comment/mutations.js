@@ -1,5 +1,5 @@
-import { SET_COMMENTS, ADD_COMMENT } from './mutationTypes';
 import { commentMapper } from '@/services/Normalizer';
+import { SET_COMMENTS, ADD_COMMENT } from './mutationTypes';
 
 export default {
     [SET_COMMENTS]: (state, comments) => {
