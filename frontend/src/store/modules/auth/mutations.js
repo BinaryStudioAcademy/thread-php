@@ -1,7 +1,7 @@
-import { USER_LOGIN, USER_LOGOUT, SET_AUTHENTICATED_USER } from './mutationTypes';
 import Storage from '@/services/Storage';
 import { emptyUser, userMapper } from '@/services/Normalizer';
 import { updateSocketAuthToken, removeSocketAuthToken } from '@/services/Pusher';
+import { USER_LOGIN, USER_LOGOUT, SET_AUTHENTICATED_USER } from './mutationTypes';
 
 export default {
     [USER_LOGIN]: (state, { accessToken, tokenType }) => {
