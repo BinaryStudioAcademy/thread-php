@@ -17,7 +17,7 @@
     "buefy": "^0.8.18",
     "moment": "^2.25.3",
     "pusher-js": "^6.0.3",
-    "vue": "^2.6.6",
+    "vue": "^2.6.11",
     "vue-infinite-loading": "^2.4.4",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
