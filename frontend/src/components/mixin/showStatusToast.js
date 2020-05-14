@@ -1,14 +1,14 @@
 export default {
     methods: {
         showErrorMessage(message) {
-            this.$toast.open({
+            this.$buefy.toast.open({
                 message,
                 type: 'is-danger',
             });
         },
 
         showSuccessMessage(message) {
-            this.$toast.open({
+            this.$buefy.toast.open({
                 message,
                 type: 'is-success',
             });
