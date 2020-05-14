@@ -1,4 +1,4 @@
-FROM php:7.2-fpm-stretch
+FROM php:7.3-fpm-stretch
 
 # Fix debconf warnings upon build
 ARG DEBIAN_FRONTEND=noninteractive
@@ -26,7 +26,7 @@ RUN apt-get update \
 
 RUN pecl channel-update pecl.php.net \
     && pecl install redis-4.3.0 \
-    && pecl install xdebug-2.6.1 \
+    && pecl install xdebug \
     && docker-php-ext-enable redis xdebug
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer

@@ -9,7 +9,7 @@
 
 Backend:
 
-* PHP 7.2 || 7.3
+* PHP 7.3
 * [Laravel 5.8](https://laravel.com)
 * [Docker](https://www.docker.com/)
 * [Docker-compose](https://docs.docker.com/compose/)
