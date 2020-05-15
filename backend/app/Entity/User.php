@@ -8,8 +8,8 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use InvalidArgumentException;
 use Tymon\JWTAuth\Contracts\JWTSubject;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * Class User
@@ -88,7 +88,7 @@ final class User extends Authenticatable implements JWTSubject
 
         $this->attributes['first_name'] = $firstName;
     }
-    
+
     public function changeLastName(string $lastName): void
     {
         if (empty($lastName)) {

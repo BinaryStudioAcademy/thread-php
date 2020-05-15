@@ -3,7 +3,7 @@
 ## Technologies
 
 * PHP 7.3
-* [Laravel 5.8](https://laravel.com)
+* [Laravel 6](https://laravel.com)
 * [Docker](https://www.docker.com/)
 * [Docker-compose](https://docs.docker.com/compose/)
 * [Beanstalkd](https://github.com/beanstalkd/beanstalkd) - message queue (очередь сообщений для обработки тяжелых задач асинхронно)
