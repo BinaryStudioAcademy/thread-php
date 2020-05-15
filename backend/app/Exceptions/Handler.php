@@ -3,7 +3,6 @@
 namespace App\Exceptions;
 
 use App\Http\Response\ApiResponse;
-use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -15,6 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Auth\Access\AuthorizationException;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -40,12 +40,12 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param Exception $exception
+     * @param Throwable $exception
      * @return void
      *
-     * @throws Exception
+     * @throws Throwable
      */
-    public function report(Exception $exception)
+    public function report(Throwable $exception)
     {
         if (
             $this->shouldReport($exception)
@@ -62,12 +62,12 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param  Request  $request
-     * @param Exception $exception
+     * @param Throwable $exception
      * @return Response|JsonResponse
      *
-     * @throws Exception
+     * @throws Throwable
      */
-    public function render($request, Exception $exception)
+    public function render($request, Throwable $exception)
     {
         if ($exception instanceof ValidationException) {
             return ApiResponse::error(
