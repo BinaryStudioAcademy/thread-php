@@ -1,4 +1,4 @@
-# BSA 2019 Thread (backend)
+# BSA Mini-Project - Thread (backend)
 
 ## Technologies
 
