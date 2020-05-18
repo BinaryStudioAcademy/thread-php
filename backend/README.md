@@ -67,4 +67,4 @@ MAIL_FROM_ADDRESS=admin@thread.com
 MAIL_FROM_NAME="BSA Thread Admin"
 ```
 
-You can debug your app with [Telescope](https://laravel.com/docs/5.8/telescope) tool which is installed already :)
+You can debug your app with [Telescope](https://laravel.com/docs/6.x/telescope) tool which is installed already :)
