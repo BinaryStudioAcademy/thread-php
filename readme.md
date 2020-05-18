@@ -1,4 +1,4 @@
-# BSA 2019 Thread
+# BSA Mini-Project - Thread
 
 [![Build Status](https://travis-ci.org/BinaryStudioAcademy/thread-php.svg?branch=dev)](https://travis-ci.org/BinaryStudioAcademy/thread-php)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d1280e7b47b9492abd59cf0081a95cdb)](https://app.codacy.com/app/pavelnemoi/thread-php?utm_source=github.com&utm_medium=referral&utm_content=BinaryStudioAcademy/thread-php&utm_campaign=Badge_Grade_Settings)
