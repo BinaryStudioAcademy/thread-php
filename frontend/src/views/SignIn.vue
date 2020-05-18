@@ -77,7 +77,7 @@ export default {
                 .then(() => {
                     this.showSuccessMessage('Welcome!');
 
-                    this.$router.push({ path: '/' });
+                    this.$router.push({ path: '/' }).catch(() => {});
                 })
                 .catch(error => this.showErrorMessage(error.message));
         },
