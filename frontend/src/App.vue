@@ -37,7 +37,7 @@ export default {
     created() {
         EventEmitter.$on(TOKEN_EXPIRED_EVENT, () => {
             this.logout();
-            this.$router.push({ name: 'auth.signIn' });
+            this.$router.push({ name: 'auth.signIn' }).catch(() => {});
         });
     },
 

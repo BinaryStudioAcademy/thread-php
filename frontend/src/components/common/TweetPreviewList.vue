@@ -38,7 +38,7 @@ export default {
 
     methods: {
         onTweetClick(tweet) {
-            this.$router.push({ name: 'tweet-page', params: { id: tweet.id } });
+            this.$router.push({ name: 'tweet-page', params: { id: tweet.id } }).catch(() => {});
         },
 
         infiniteHandler($state) {

@@ -1,3 +1,4 @@
+import { tweetMapper } from '@/services/Normalizer';
 import {
     SET_TWEETS,
     SET_TWEET_IMAGE,
@@ -7,7 +8,6 @@ import {
     LIKE_TWEET,
     DISLIKE_TWEET
 } from './mutationTypes';
-import { tweetMapper } from '@/services/Normalizer';
 
 export default {
     [SET_TWEETS]: (state, tweets) => {

@@ -18,6 +18,8 @@ class AppServiceProvider extends ServiceProvider
             $this->app->register(TelescopeServiceProvider::class);
             $this->app->register(IdeHelperServiceProvider::class);
         }
+
+        $this->app->register(FakerServiceProvider::class);
     }
 
     /**

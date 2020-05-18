@@ -1,8 +1,8 @@
 import api from '@/api/Api';
+import { commentMapper } from '@/services/Normalizer';
 import { SET_LOADING } from '../../mutationTypes';
 import { SET_COMMENTS, ADD_COMMENT } from './mutationTypes';
 import { INCREMENT_COMMENTS_COUNT } from '../tweet/mutationTypes';
-import { commentMapper } from '@/services/Normalizer';
 
 export default {
     async fetchComments({ commit }, tweetId) {

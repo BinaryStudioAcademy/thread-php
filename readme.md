@@ -1,4 +1,4 @@
-# BSA 2019 Thread
+# BSA Mini-Project - Thread
 
 [![Build Status](https://travis-ci.org/BinaryStudioAcademy/thread-php.svg?branch=dev)](https://travis-ci.org/BinaryStudioAcademy/thread-php)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d1280e7b47b9492abd59cf0081a95cdb)](https://app.codacy.com/app/pavelnemoi/thread-php?utm_source=github.com&utm_medium=referral&utm_content=BinaryStudioAcademy/thread-php&utm_campaign=Badge_Grade_Settings)
@@ -9,8 +9,8 @@
 
 Backend:
 
-* PHP 7.2 || 7.3
-* [Laravel 5.8](https://laravel.com)
+* PHP 7.3
+* [Laravel 6](https://laravel.com)
 * [Docker](https://www.docker.com/)
 * [Docker-compose](https://docs.docker.com/compose/)
 * [Beanstalkd](https://github.com/beanstalkd/beanstalkd) - message queue (очередь сообщений для обработки тяжелых задач асинхронно)
@@ -28,8 +28,6 @@ Frontend:
 * [vuex](https://vuex.vuejs.org/)
 * [Buefy](https://buefy.org/) UI framework
 * [pusher-js](https://github.com/pusher/pusher-js)
-
-Application link [https://thread-php.now.sh/](https://thread-php.now.sh/).
 
 ## Install
 

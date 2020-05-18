@@ -24,11 +24,11 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import TweetPreviewList from '../../common/TweetPreviewList.vue';
-import NewTweetForm from './NewTweetForm.vue';
+import TweetPreviewList from '@/components/common/TweetPreviewList.vue';
 import { pusher } from '@/services/Pusher';
 import { SET_TWEET } from '@/store/modules/tweet/mutationTypes';
 import showStatusToast from '@/components/mixin/showStatusToast';
+import NewTweetForm from './NewTweetForm.vue';
 
 export default {
     name: 'FeedContainer',

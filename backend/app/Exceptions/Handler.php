@@ -9,9 +9,9 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -42,6 +42,7 @@ class Handler extends ExceptionHandler
      *
      * @param Exception $exception
      * @return void
+     *
      * @throws Exception
      */
     public function report(Exception $exception)
@@ -63,6 +64,8 @@ class Handler extends ExceptionHandler
      * @param  Request  $request
      * @param Exception $exception
      * @return Response|JsonResponse
+     *
+     * @throws Exception
      */
     public function render($request, Exception $exception)
     {
