@@ -188,7 +188,7 @@ export default {
 
                         this.showSuccessMessage('Tweet deleted!');
 
-                        this.$router.push({ name: 'feed' });
+                        this.$router.push({ name: 'feed' }).catch(() => {});
                     } catch {
                         this.showErrorMessage('Unable to delete tweet!');
                     }

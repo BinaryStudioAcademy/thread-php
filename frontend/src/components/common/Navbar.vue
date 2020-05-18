@@ -135,7 +135,7 @@ export default {
         async onSignOut() {
             await this.signOut();
 
-            this.$router.push({ name: 'auth.signIn' });
+            this.$router.push({ name: 'auth.signIn' }).catch(() => {});
         },
 
         toggleMobileMenu() {
