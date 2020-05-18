@@ -29,8 +29,6 @@ Frontend:
 * [Buefy](https://buefy.org/) UI framework
 * [pusher-js](https://github.com/pusher/pusher-js)
 
-Application link [https://thread-php.now.sh/](https://thread-php.now.sh/).
-
 ## Install
 
 Installation is described inside backend and frontend folders independently.
