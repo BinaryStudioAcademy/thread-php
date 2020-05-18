@@ -1,5 +1,7 @@
 <?php
 
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+
 use App\Entity\Tweet;
 use App\Entity\User;
 use Carbon\Carbon;
@@ -11,7 +13,7 @@ $factory->define(Tweet::class, function (Faker $faker) {
     return [
         'text' => $faker->text(),
         'author_id' => User::query()->inRandomOrder()->first()->id,
-        'image_url' => random_int(0, 1) ? $faker->unique()->imageUrl() : null,
+        'image_url' => random_int(0, 1) ? $faker->unique()->picsumUrl() : null,
         'created_at' => $now->toDateTimeString(),
     ];
 });

@@ -1,5 +1,7 @@
 <?php
 
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+
 use App\Entity\Comment;
 use App\Entity\Tweet;
 use App\Entity\User;

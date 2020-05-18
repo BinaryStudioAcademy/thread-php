@@ -28,6 +28,7 @@
         "facade/ignition": "^1.4",
         "fzaninotto/faker": "^1.9.1",
         "laravel/telescope": "^2.0",
+        "mmo/faker-images": "^0.1.0",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^2.0",
         "phpunit/phpunit": "^8.0"
