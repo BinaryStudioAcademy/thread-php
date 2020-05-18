@@ -1,4 +1,4 @@
-# BSA 2019 Thread project (frontend)
+# BSA Mini-Project - Thread (frontend)
 
 ## Technologies
 
