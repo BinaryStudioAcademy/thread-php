@@ -20,7 +20,7 @@ Set your .env vars:
 cp .env.example .env
 ```
 
-### Launch local environment:
+### Launch local environment
 
 Step inside project directory
 ```bash
@@ -50,7 +50,7 @@ docker exec -it thread-app php artisan jwt:secret
 docker exec -it thread-app php artisan storage:link
 ```
 
-Application server should be ready on http://localhost:<APP_PORT>
+Application server should be ready on `http://localhost:<APP_PORT>`
 
 Pusher websocket server install:
 * Create an account and application on [pusher.com](https://pusher.com/) and copy your credentials to your .env (`PUSHER_APP_ID=...`).
