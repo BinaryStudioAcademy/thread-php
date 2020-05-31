@@ -17,7 +17,7 @@ services:
       working_dir: /var/www/app
       volumes:
         - .:/var/www/app
-        - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
+        - ./docker/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
 
     mysql:
       image: mysql:5.7.22
