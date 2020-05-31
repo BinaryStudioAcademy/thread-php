@@ -176,7 +176,7 @@ export default {
         },
 
         onDeleteTweet() {
-            this.$dialog.confirm({
+            this.$buefy.dialog.confirm({
                 title: 'Deleting tweet',
                 message: 'Are you sure you want to <b>delete</b> your tweet? This action cannot be undone.',
                 confirmText: 'Delete Tweet',
