@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import Navbar from '@/components/common/Navbar.vue';
 import { mapGetters, mapMutations } from 'vuex';
+import Navbar from '@/components/common/Navbar.vue';
 import { USER_LOGOUT } from './store/modules/auth/mutationTypes';
 import { EventEmitter, TOKEN_EXPIRED_EVENT } from './services/EventEmitter';
 
