@@ -14,7 +14,7 @@ class CommentTable extends Migration
     public function up()
     {
         Schema::create('comments', function (Blueprint $blueprint) {
-            $blueprint->bigIncrements('id');
+            $blueprint->id();
             $blueprint->longText('body');
             $blueprint->unsignedBigInteger('author_id');
             $blueprint->unsignedBigInteger('tweet_id');

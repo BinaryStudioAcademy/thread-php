@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Action\Tweet;
 
-use App\Entity\Tweet;
+use App\Models\Tweet;
 
 final class UpdateTweetResponse
 {

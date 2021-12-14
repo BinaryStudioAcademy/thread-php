@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Action\Comment;
 
-use App\Entity\Comment;
+use App\Models\Comment;
 
 final class GetCommentByIdResponse
 {

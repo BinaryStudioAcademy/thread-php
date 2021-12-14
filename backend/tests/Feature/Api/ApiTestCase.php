@@ -2,15 +2,15 @@
 
 namespace Tests\Feature\Api;
 
-use App\Entity\Comment;
-use App\Entity\Tweet;
-use App\Entity\User;
+use App\Models\Comment;
+use App\Models\Tweet;
+use App\Models\User;
 use App\Exceptions\ErrorCode;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Foundation\Testing\TestResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Testing\TestResponse;
 use InvalidArgumentException;
 use Tests\CreatesApplication;
 
@@ -79,9 +79,9 @@ abstract class ApiTestCase extends BaseTestCase
 
     protected function seedFakeData(int $itemsAmount = 5): void
     {
-        factory(User::class, $itemsAmount)->create();
-        factory(Tweet::class, $itemsAmount)->create();
-        factory(Comment::class, $itemsAmount)->create();
+        User::factory($itemsAmount)->create();
+        Tweet::factory($itemsAmount)->create();
+        Comment::factory($itemsAmount)->create();
     }
 
     /**
@@ -116,7 +116,7 @@ abstract class ApiTestCase extends BaseTestCase
 
     protected function actingWithToken(Authenticatable $user = null): self
     {
-        $user = $user ?? factory(User::class)->create();
+        $user = $user ?? User::factory()->create();
 
         $this->authenticate($user);
 

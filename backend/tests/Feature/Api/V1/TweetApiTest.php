@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Api\V1;
 
-use App\Entity\Tweet;
-use App\Entity\User;
+use App\Models\Tweet;
+use App\Models\User;
 use Tests\Feature\Api\ApiTestCase;
 
 final class TweetApiTest extends ApiTestCase

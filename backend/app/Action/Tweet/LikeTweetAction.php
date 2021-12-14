@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Action\Tweet;
 
-use App\Entity\Like;
+use App\Models\Like;
 use App\Repository\LikeRepository;
 use App\Repository\TweetRepository;
 use Illuminate\Support\Facades\Auth;

@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Entity;
+namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use InvalidArgumentException;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -13,7 +14,7 @@ use Illuminate\Notifications\Notifiable;
 
 /**
  * Class User
- * @package App\Entity
+ * @package App\Models
  * @property int $id
  * @property string $name
  * @property string $nickname
@@ -25,7 +26,7 @@ use Illuminate\Notifications\Notifiable;
  */
 final class User extends Authenticatable implements JWTSubject
 {
-    use Notifiable;
+    use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.

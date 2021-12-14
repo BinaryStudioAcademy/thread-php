@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Action\User;
 
-use App\Entity\User;
+use App\Models\User;
 
 final class GetUserByIdResponse
 {

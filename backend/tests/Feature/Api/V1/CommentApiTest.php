@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Api\V1;
 
-use App\Entity\Comment;
-use App\Entity\Tweet;
+use App\Models\Comment;
+use App\Models\Tweet;
 use Tests\Feature\Api\ApiTestCase;
 
 final class CommentApiTest extends ApiTestCase

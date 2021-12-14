@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Entity\Like;
-use App\Entity\Tweet;
+use App\Models\Like;
+use App\Models\Tweet;
 
 final class LikeRepository
 {

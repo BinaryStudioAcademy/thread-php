@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Repository;
 
-use App\Entity\User;
+use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 

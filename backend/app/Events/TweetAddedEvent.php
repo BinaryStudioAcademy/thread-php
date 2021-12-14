@@ -7,7 +7,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use App\Entity\Tweet;
+use App\Models\Tweet;
 use App\Http\Presenter\TweetArrayPresenter;
 use Illuminate\Support\Facades\App;
 
