@@ -15,23 +15,12 @@ use App\Http\Response\ApiResponse;
 
 final class UserController extends ApiController
 {
-    private $getUserCollectionAction;
-    private $presenter;
-    private $getUserByIdAction;
-
-    public function __construct(
-        GetUserCollectionAction $getUserCollectionAction,
+    public function getUserCollection(
+        CollectionHttpRequest $request,
+        GetUserCollectionAction $action,
         UserArrayPresenter $presenter,
-        GetUserByIdAction $getUserByIdAction
-    ) {
-        $this->getUserCollectionAction = $getUserCollectionAction;
-        $this->presenter = $presenter;
-        $this->getUserByIdAction = $getUserByIdAction;
-    }
-
-    public function getUserCollection(CollectionHttpRequest $request): ApiResponse
-    {
-        $response = $this->getUserCollectionAction->execute(
+    ): ApiResponse {
+        $response = $action->execute(
             new GetCollectionRequest(
                 (int)$request->query('page'),
                 $request->query('sort'),
@@ -39,13 +28,16 @@ final class UserController extends ApiController
             )
         );
 
-        return $this->createPaginatedResponse($response->getPaginator(), $this->presenter);
+        return $this->createPaginatedResponse($response->getPaginator(), $presenter);
     }
 
-    public function getUserById(string $id): ApiResponse
-    {
-        $user = $this->getUserByIdAction->execute(new GetByIdRequest((int)$id))->getUser();
+    public function getUserById(
+        GetUserByIdAction $action,
+        UserArrayPresenter $presenter,
+        string $id,
+    ): ApiResponse {
+        $user = $action->execute(new GetByIdRequest((int)$id))->getUser();
 
-        return $this->createSuccessResponse($this->presenter->present($user));
+        return $this->createSuccessResponse($presenter->present($user));
     }
 }

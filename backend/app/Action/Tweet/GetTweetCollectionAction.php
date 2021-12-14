@@ -10,17 +10,14 @@ use App\Action\PaginatedResponse;
 
 final class GetTweetCollectionAction
 {
-    private $repository;
-
-    public function __construct(TweetRepository $repository)
+    public function __construct(private TweetRepository $tweetRepository)
     {
-        $this->repository = $repository;
     }
 
     public function execute(GetCollectionRequest $request): PaginatedResponse
     {
         return new PaginatedResponse(
-            $this->repository->paginate(
+            $this->tweetRepository->paginate(
                 $request->getPage() ?: TweetRepository::DEFAULT_PAGE,
                 TweetRepository::DEFAULT_PER_PAGE,
                 $request->getSort() ?: TweetRepository::DEFAULT_SORT,

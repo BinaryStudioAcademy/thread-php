@@ -9,16 +9,13 @@ use App\Repository\CommentRepository;
 
 final class GetCommentByIdAction
 {
-    private $repository;
-
-    public function __construct(CommentRepository $repository)
+    public function __construct(private CommentRepository $commentRepository)
     {
-        $this->repository = $repository;
     }
 
     public function execute(GetByIdRequest $request): GetCommentByIdResponse
     {
-        $comment = $this->repository->getById($request->getId());
+        $comment = $this->commentRepository->getById($request->getId());
 
         return new GetCommentByIdResponse($comment);
     }

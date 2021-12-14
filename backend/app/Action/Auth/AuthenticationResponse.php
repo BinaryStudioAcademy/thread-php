@@ -6,18 +6,11 @@ namespace App\Action\Auth;
 
 final class AuthenticationResponse
 {
-    private $accessToken;
-    private $tokenType;
-    private $expiresIn;
-
     public function __construct(
-        string $accessToken,
-        string $tokenType,
-        int $expiresIn
+        private string $accessToken,
+        private string $tokenType,
+        private int $expiresIn
     ) {
-        $this->accessToken = $accessToken;
-        $this->tokenType = $tokenType;
-        $this->expiresIn = $expiresIn;
     }
 
     public function getAccessToken(): string

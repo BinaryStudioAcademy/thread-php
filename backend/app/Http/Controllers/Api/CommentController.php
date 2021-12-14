@@ -20,29 +20,12 @@ use App\Action\Comment\GetCommentCollectionByTweetIdRequest;
 
 final class CommentController extends ApiController
 {
-    private $getCommentCollectionAction;
-    private $presenter;
-    private $getCommentByIdAction;
-    private $addCommentAction;
-    private $getCommentCollectionByTweetIdAction;
-
-    public function __construct(
-        GetCommentCollectionAction $getCommentCollectionAction,
+    public function getCommentCollection(
+        CollectionHttpRequest $request,
+        GetCommentCollectionAction $action,
         CommentAsArrayPresenter $presenter,
-        GetCommentByIdAction $commentByIdAction,
-        AddCommentAction $addCommentAction,
-        GetCommentCollectionByTweetIdAction $getCommentCollectionByTweetIdAction
-    ) {
-        $this->getCommentCollectionAction = $getCommentCollectionAction;
-        $this->presenter = $presenter;
-        $this->getCommentByIdAction = $commentByIdAction;
-        $this->addCommentAction = $addCommentAction;
-        $this->getCommentCollectionByTweetIdAction = $getCommentCollectionByTweetIdAction;
-    }
-
-    public function getCommentCollection(CollectionHttpRequest $request): ApiResponse
-    {
-        $response = $this->getCommentCollectionAction->execute(
+    ): ApiResponse {
+        $response = $action->execute(
             new GetCollectionRequest(
                 (int)$request->query('page'),
                 $request->query('sort'),
@@ -50,19 +33,25 @@ final class CommentController extends ApiController
             )
         );
 
-        return $this->createPaginatedResponse($response->getPaginator(), $this->presenter);
+        return $this->createPaginatedResponse($response->getPaginator(), $presenter);
     }
 
-    public function getCommentById(string $id): ApiResponse
-    {
-        $comment = $this->getCommentByIdAction->execute(new GetByIdRequest((int)$id))->getComment();
+    public function getCommentById(
+        GetCommentByIdAction $action,
+        CommentAsArrayPresenter $presenter,
+        string $id,
+    ): ApiResponse {
+        $comment = $action->execute(new GetByIdRequest((int) $id))->getComment();
 
-        return $this->createSuccessResponse($this->presenter->present($comment));
+        return $this->createSuccessResponse($presenter->present($comment));
     }
 
-    public function newComment(AddCommentHttpRequest $request): ApiResponse
-    {
-        $response = $this->addCommentAction->execute(
+    public function newComment(
+        AddCommentHttpRequest $request,
+        AddCommentAction $action,
+        CommentAsArrayPresenter $presenter,
+    ): ApiResponse {
+        $response = $action->execute(
             new AddCommentRequest(
                 $request->get('body'),
                 (int)$request->get('tweet_id')
@@ -70,23 +59,27 @@ final class CommentController extends ApiController
         );
 
         return $this->created(
-            $this->presenter->present(
+            $presenter->present(
                 $response->getComment()
             )
         );
     }
 
-    public function getCommentCollectionByTweetId(string $tweetId, CollectionHttpRequest $request): ApiResponse
-    {
-        $response = $this->getCommentCollectionByTweetIdAction->execute(
+    public function getCommentCollectionByTweetId(
+        CollectionHttpRequest $request,
+        GetCommentCollectionByTweetIdAction $action,
+        CommentAsArrayPresenter $presenter,
+        string $tweetId,
+    ): ApiResponse {
+        $response = $action->execute(
             new GetCommentCollectionByTweetIdRequest(
-                (int)$tweetId,
-                (int)$request->query('page'),
+                (int) $tweetId,
+                (int) $request->query('page'),
                 $request->query('sort'),
                 $request->query('direction')
             )
         );
 
-        return $this->createPaginatedResponse($response->getPaginator(), $this->presenter);
+        return $this->createPaginatedResponse($response->getPaginator(), $presenter);
     }
 }

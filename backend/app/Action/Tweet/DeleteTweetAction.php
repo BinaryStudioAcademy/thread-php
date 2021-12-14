@@ -12,18 +12,15 @@ use Illuminate\Auth\Access\AuthorizationException;
 
 final class DeleteTweetAction
 {
-    private $tweetRepository;
-
-    public function __construct(TweetRepository $tweetRepository)
+    public function __construct(private TweetRepository $tweetRepository)
     {
-        $this->tweetRepository = $tweetRepository;
     }
 
     public function execute(DeleteTweetRequest $request): void
     {
         try {
             $tweet = $this->tweetRepository->getById($request->getId());
-        } catch (ModelNotFoundException $ex) {
+        } catch (ModelNotFoundException) {
             throw new TweetNotFoundException();
         }
 

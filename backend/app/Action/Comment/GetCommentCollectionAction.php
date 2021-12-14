@@ -10,17 +10,14 @@ use App\Repository\CommentRepository;
 
 final class GetCommentCollectionAction
 {
-    private $repository;
-
-    public function __construct(CommentRepository $repository)
+    public function __construct(private CommentRepository $commentRepository)
     {
-        $this->repository = $repository;
     }
 
     public function execute(GetCollectionRequest $request): PaginatedResponse
     {
         return new PaginatedResponse(
-            $this->repository->paginate(
+            $this->commentRepository->paginate(
                 $request->getPage() ?: CommentRepository::DEFAULT_PAGE,
                 CommentRepository::DEFAULT_PER_PAGE,
                 $request->getSort() ?: CommentRepository::DEFAULT_SORT,

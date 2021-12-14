@@ -9,11 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 final class UpdateProfileAction
 {
-    private $userRepository;
-
-    public function __construct(UserRepository $userRepository)
+    public function __construct(private UserRepository $userRepository)
     {
-        $this->userRepository = $userRepository;
     }
 
     public function execute(UpdateProfileRequest $request): UpdateProfileResponse

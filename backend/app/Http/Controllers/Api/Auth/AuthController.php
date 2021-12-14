@@ -34,7 +34,7 @@ final class AuthController extends ApiController
         RegisterHttpRequest $httpRequest,
         RegisterAction $action,
         AuthenticationResponseArrayPresenter $authenticationResponseArrayPresenter
-    ) {
+    ): ApiResponse {
         $request = new RegisterRequest(
             $httpRequest->get('email'),
             $httpRequest->get('password'),

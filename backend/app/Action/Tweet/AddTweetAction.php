@@ -11,11 +11,8 @@ use App\Events\TweetAddedEvent;
 
 final class AddTweetAction
 {
-    private $tweetRepository;
-
-    public function __construct(TweetRepository $tweetRepository)
+    public function __construct(private TweetRepository $tweetRepository)
     {
-        $this->tweetRepository = $tweetRepository;
     }
 
     public function execute(AddTweetRequest $request): AddTweetResponse

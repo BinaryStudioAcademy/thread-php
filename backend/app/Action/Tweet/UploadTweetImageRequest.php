@@ -8,13 +8,8 @@ use Illuminate\Http\UploadedFile;
 
 final class UploadTweetImageRequest
 {
-    private $id;
-    private $image;
-
-    public function __construct(int $id, UploadedFile $image)
+    public function __construct(private int $id, private UploadedFile $image)
     {
-        $this->id = $id;
-        $this->image = $image;
     }
 
     public function getId(): int

@@ -6,15 +6,10 @@ namespace App\Action\Auth;
 
 final class LoginRequest
 {
-    private $email;
-    private $password;
-
     public function __construct(
-        string $email,
-        string $password
+        private string $email,
+        private string $password
     ) {
-        $this->email = $email;
-        $this->password = $password;
     }
 
     public function getEmail(): string

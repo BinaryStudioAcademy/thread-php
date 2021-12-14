@@ -9,11 +9,8 @@ use App\Repository\CommentRepository;
 
 final class GetCommentCollectionByTweetIdAction
 {
-    private $commentRepository;
-
-    public function __construct(CommentRepository $commentRepository)
+    public function __construct(private CommentRepository $commentRepository)
     {
-        $this->commentRepository = $commentRepository;
     }
 
     public function execute(GetCommentCollectionByTweetIdRequest $request): PaginatedResponse

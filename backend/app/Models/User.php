@@ -16,7 +16,8 @@ use Illuminate\Notifications\Notifiable;
  * Class User
  * @package App\Models
  * @property int $id
- * @property string $name
+ * @property string $first_name
+ * @property string $last_name
  * @property string $nickname
  * @property string $email
  * @property string $password

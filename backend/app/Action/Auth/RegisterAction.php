@@ -10,13 +10,8 @@ use App\Mail\WelcomeEmail;
 
 final class RegisterAction
 {
-    private $userRepository;
-    private $mailer;
-
-    public function __construct(UserRepository $userRepository, Mailer $mailer)
+    public function __construct(private UserRepository $userRepository, private Mailer $mailer)
     {
-        $this->userRepository = $userRepository;
-        $this->mailer = $mailer;
     }
 
     public function execute(RegisterRequest $request): AuthenticationResponse

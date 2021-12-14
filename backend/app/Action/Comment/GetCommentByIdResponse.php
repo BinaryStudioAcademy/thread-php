@@ -8,11 +8,8 @@ use App\Models\Comment;
 
 final class GetCommentByIdResponse
 {
-    private $comment;
-
-    public function __construct(Comment $comment)
+    public function __construct(private Comment $comment)
     {
-        $this->comment = $comment;
     }
 
     public function getComment(): Comment

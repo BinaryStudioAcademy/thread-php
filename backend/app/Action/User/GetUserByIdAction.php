@@ -9,16 +9,13 @@ use App\Repository\UserRepository;
 
 final class GetUserByIdAction
 {
-    private $repository;
-
-    public function __construct(UserRepository $repository)
+    public function __construct(private UserRepository $userRepository)
     {
-        $this->repository = $repository;
     }
 
     public function execute(GetByIdRequest $request): GetUserByIdResponse
     {
-        $user = $this->repository->getById($request->getId());
+        $user = $this->userRepository->getById($request->getId());
 
         return new GetUserByIdResponse($user);
     }

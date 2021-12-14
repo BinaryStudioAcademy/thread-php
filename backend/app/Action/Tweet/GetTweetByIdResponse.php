@@ -8,11 +8,8 @@ use App\Models\Tweet;
 
 final class GetTweetByIdResponse
 {
-    private $tweet;
-
-    public function __construct(Tweet $tweet)
+    public function __construct(private Tweet $tweet)
     {
-        $this->tweet = $tweet;
     }
 
     public function getTweet(): Tweet
