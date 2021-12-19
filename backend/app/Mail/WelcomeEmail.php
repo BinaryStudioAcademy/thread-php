@@ -9,7 +9,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 class WelcomeEmail extends Mailable implements ShouldQueue
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     /**
      * Build the message.

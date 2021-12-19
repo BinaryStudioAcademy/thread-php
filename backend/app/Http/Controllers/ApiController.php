@@ -35,7 +35,7 @@ abstract class ApiController extends Controller
     final protected function createPaginatedResponse(
         LengthAwarePaginator $paginator,
         CollectionAsArrayPresenter $presenter
-    ) : ApiResponse {
+    ): ApiResponse {
         return ApiResponse::paginate(
             new Paginator(
                 $presenter->presentCollection(Collection::make($paginator->items())),

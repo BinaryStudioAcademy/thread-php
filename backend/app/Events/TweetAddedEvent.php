@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\App;
 
 class TweetAddedEvent implements ShouldBroadcast
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
 
     public $tweet;
 
