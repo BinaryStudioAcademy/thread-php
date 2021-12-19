@@ -130,13 +130,8 @@ export default {
     }),
 
     async created() {
-        try {
-            await this.fetchTweetById(this.$route.params.id);
-
-            this.fetchComments(this.tweet.id);
-        } catch (error) {
-            console.error(error.message);
-        }
+        await this.fetchTweetById(this.$route.params.id);
+        await this.fetchComments(this.tweet.id);
     },
 
     computed: {
@@ -201,14 +196,10 @@ export default {
         },
 
         async onLikeOrDislikeTweet() {
-            try {
-                await this.likeOrDislikeTweet({
-                    id: this.tweet.id,
-                    userId: this.user.id
-                });
-            } catch (error) {
-                console.error(error.message);
-            }
+            await this.likeOrDislikeTweet({
+                id: this.tweet.id,
+                userId: this.user.id
+            });
         }
     },
 };

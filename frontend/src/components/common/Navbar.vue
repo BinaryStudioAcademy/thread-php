@@ -119,11 +119,7 @@ export default {
     },
 
     async created() {
-        try {
-            await this.fetchAuthenticatedUser();
-        } catch (error) {
-            console.log(`Error occurred: ${error.message}`);
-        }
+        await this.fetchAuthenticatedUser();
     },
 
     methods: {
