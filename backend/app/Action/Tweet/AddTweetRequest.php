@@ -6,11 +6,8 @@ namespace App\Action\Tweet;
 
 final class AddTweetRequest
 {
-    private $text;
-
-    public function __construct(string $text)
+    public function __construct(private string $text)
     {
-        $this->text = $text;
     }
 
     public function getText(): string

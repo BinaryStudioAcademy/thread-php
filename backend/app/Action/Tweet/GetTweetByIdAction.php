@@ -9,16 +9,13 @@ use App\Repository\TweetRepository;
 
 final class GetTweetByIdAction
 {
-    private $repository;
-
-    public function __construct(TweetRepository $repository)
+    public function __construct(private TweetRepository $tweetRepository)
     {
-        $this->repository = $repository;
     }
 
     public function execute(GetByIdRequest $request): GetTweetByIdResponse
     {
-        $tweet = $this->repository->getById($request->getId());
+        $tweet = $this->tweetRepository->getById($request->getId());
 
         return new GetTweetByIdResponse($tweet);
     }

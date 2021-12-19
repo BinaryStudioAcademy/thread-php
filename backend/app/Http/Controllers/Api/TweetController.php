@@ -28,38 +28,12 @@ use App\Http\Response\ApiResponse;
 
 final class TweetController extends ApiController
 {
-    private $getTweetCollectionAction;
-    private $presenter;
-    private $getTweetByIdAction;
-    private $getTweetCollectionByUserIdAction;
-    private $addTweetAction;
-    private $updateTweetAction;
-    private $uploadTweetImageAction;
-    private $deleteTweetAction;
-
-    public function __construct(
-        GetTweetCollectionAction $getTweetCollectionAction,
+    public function getTweetCollection(
+        CollectionHttpRequest $request,
+        GetTweetCollectionAction $action,
         TweetArrayPresenter $presenter,
-        GetTweetByIdAction $getTweetByIdAction,
-        GetTweetCollectionByUserIdAction $getTweetCollectionByUserIdAction,
-        AddTweetAction $addTweetAction,
-        UpdateTweetAction $updateTweetAction,
-        UploadTweetImageAction $uploadTweetImageAction,
-        DeleteTweetAction $deleteTweetAction
-    ) {
-        $this->getTweetCollectionAction = $getTweetCollectionAction;
-        $this->presenter = $presenter;
-        $this->getTweetByIdAction = $getTweetByIdAction;
-        $this->getTweetCollectionByUserIdAction = $getTweetCollectionByUserIdAction;
-        $this->addTweetAction = $addTweetAction;
-        $this->updateTweetAction = $updateTweetAction;
-        $this->uploadTweetImageAction = $uploadTweetImageAction;
-        $this->deleteTweetAction = $deleteTweetAction;
-    }
-
-    public function getTweetCollection(CollectionHttpRequest $request): ApiResponse
-    {
-        $response = $this->getTweetCollectionAction->execute(
+    ): ApiResponse {
+        $response = $action->execute(
             new GetCollectionRequest(
                 (int)$request->query('page'),
                 $request->query('sort'),
@@ -67,19 +41,26 @@ final class TweetController extends ApiController
             )
         );
 
-        return $this->createPaginatedResponse($response->getPaginator(), $this->presenter);
+        return $this->createPaginatedResponse($response->getPaginator(), $presenter);
     }
 
-    public function getTweetById(string $id): ApiResponse
-    {
-        $tweet = $this->getTweetByIdAction->execute(new GetByIdRequest((int)$id))->getTweet();
+    public function getTweetById(
+        GetTweetByIdAction $action,
+        TweetArrayPresenter $presenter,
+        string $id
+    ): ApiResponse {
+        $tweet = $action->execute(new GetByIdRequest((int)$id))->getTweet();
 
-        return $this->createSuccessResponse($this->presenter->present($tweet));
+        return $this->createSuccessResponse($presenter->present($tweet));
     }
 
-    public function getTweetCollectionByUserId(string $userId, CollectionHttpRequest $request): ApiResponse
-    {
-        $response = $this->getTweetCollectionByUserIdAction->execute(
+    public function getTweetCollectionByUserId(
+        CollectionHttpRequest $request,
+        GetTweetCollectionByUserIdAction $action,
+        TweetArrayPresenter $presenter,
+        string $userId,
+    ): ApiResponse {
+        $response = $action->execute(
             new GetTweetCollectionByUserIdRequest(
                 (int)$userId,
                 (int)$request->query('page'),
@@ -88,23 +69,30 @@ final class TweetController extends ApiController
             )
         );
 
-        return $this->createPaginatedResponse($response->getPaginator(), $this->presenter);
+        return $this->createPaginatedResponse($response->getPaginator(), $presenter);
     }
 
-    public function addTweet(AddTweetHttpRequest $request): ApiResponse
-    {
-        $response = $this->addTweetAction->execute(
+    public function addTweet(
+        AddTweetHttpRequest $request,
+        AddTweetAction $action,
+        TweetArrayPresenter $presenter,
+    ): ApiResponse {
+        $response = $action->execute(
             new AddTweetRequest(
                 $request->get('text')
             )
         );
 
-        return $this->created($this->presenter->present($response->getTweet()));
+        return $this->created($presenter->present($response->getTweet()));
     }
 
-    public function updateTweetById(string $id, UpdateTweetHttpRequest $request): ApiResponse
-    {
-        $response = $this->updateTweetAction->execute(
+    public function updateTweetById(
+        UpdateTweetHttpRequest $request,
+        UpdateTweetAction $action,
+        TweetArrayPresenter $presenter,
+        string $id,
+    ): ApiResponse {
+        $response = $action->execute(
             new UpdateTweetRequest(
                 (int)$id,
                 $request->get('text')
@@ -112,15 +100,19 @@ final class TweetController extends ApiController
         );
 
         return $this->createSuccessResponse(
-            $this->presenter->present(
+            $presenter->present(
                 $response->getTweet()
             )
         );
     }
 
-    public function uploadTweetImage(string $id, UploadTweetImageHttpRequest $request): ApiResponse
-    {
-        $response = $this->uploadTweetImageAction->execute(
+    public function uploadTweetImage(
+        UploadTweetImageHttpRequest $request,
+        UploadTweetImageAction $action,
+        TweetArrayPresenter $presenter,
+        string $id,
+    ): ApiResponse {
+        $response = $action->execute(
             new UploadTweetImageRequest(
                 (int)$id,
                 $request->file('image')
@@ -128,15 +120,17 @@ final class TweetController extends ApiController
         );
 
         return $this->createSuccessResponse(
-            $this->presenter->present(
+            $presenter->present(
                 $response->getTweet()
             )
         );
     }
 
-    public function deleteTweetById(string $id): ApiResponse
-    {
-        $this->deleteTweetAction->execute(
+    public function deleteTweetById(
+        DeleteTweetAction $action,
+        string $id
+    ): ApiResponse {
+        $action->execute(
             new DeleteTweetRequest(
                 (int)$id
             )

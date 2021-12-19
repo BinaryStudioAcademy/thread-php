@@ -14,7 +14,7 @@ class TweetTable extends Migration
     public function up()
     {
         Schema::create('tweets', function (Blueprint $blueprint) {
-            $blueprint->bigIncrements('id');
+            $blueprint->id();
             $blueprint->longText('text');
             $blueprint->unsignedBigInteger('author_id');
             $blueprint->string('image_url')->nullable();

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Api\V1;
 
-use App\Entity\Tweet;
-use App\Entity\User;
+use App\Models\Tweet;
+use App\Models\User;
 use Tests\Feature\Api\ApiTestCase;
 
 final class TweetApiTest extends ApiTestCase
@@ -63,9 +63,11 @@ final class TweetApiTest extends ApiTestCase
 
         $this->actingWithToken($user)
             ->assertUpdatedResponse(
-                $this->createResourceItemUri(self::API_URL, $tweet->id), [
-                'text' => 'Text'
-            ]);
+                $this->createResourceItemUri(self::API_URL, $tweet->id),
+                [
+                    'text' => 'Text'
+                ]
+            );
     }
 
     public function test_delete_tweet_by_id()

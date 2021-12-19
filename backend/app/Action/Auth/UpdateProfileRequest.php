@@ -6,21 +6,12 @@ namespace App\Action\Auth;
 
 final class UpdateProfileRequest
 {
-    private $email;
-    private $firstName;
-    private $lastName;
-    private $nickname;
-
     public function __construct(
-        ?string $email,
-        ?string $firstName,
-        ?string $lastName,
-        ?string $nickname
+        private ?string $email,
+        private ?string $firstName,
+        private ?string $lastName,
+        private ?string $nickname
     ) {
-        $this->email = $email;
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
-        $this->nickname = $nickname;
     }
 
     public function getEmail(): ?string

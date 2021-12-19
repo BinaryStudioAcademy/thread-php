@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\CommentController;
+use App\Http\Controllers\Api\LikeController;
+use App\Http\Controllers\Api\TweetController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,46 +19,37 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('v1')->group(function () {
-    Route::group(['prefix' => 'auth', 'namespace' => 'Api\\Auth'], function () {
-        Route::post('/register', 'AuthController@register');
-        Route::post('/login', 'AuthController@login');
-        Route::get('/me', 'AuthController@me');
-        Route::put('/me', 'AuthController@update');
-        Route::post('/me/image', 'AuthController@uploadProfileImage');
-        Route::post('/logout', 'AuthController@logout');
+    Route::group(['prefix' => 'auth'], function () {
+        Route::post('/register', [AuthController::class, 'register']);
+        Route::post('/login', [AuthController::class, 'login']);
+        Route::get('/me', [AuthController::class, 'me']);
+        Route::put('/me', [AuthController::class, 'update']);
+        Route::post('/me/image', [AuthController::class, 'uploadProfileImage']);
+        Route::post('/logout', [AuthController::class, 'logout']);
     });
 
-    Route::group([
-        'middleware' => 'auth:api',
-        'namespace' => 'Api\\'
-    ], function () {
-        Route::group([
-            'prefix' => '/users',
-        ], function () {
-            Route::get('/', 'UserController@getUserCollection');
-            Route::get('/{id}', 'UserController@getUserById');
-            Route::get('/{id}/tweets', 'TweetController@getTweetCollectionByUserId');
+    Route::group(['middleware' => 'auth:api'], function () {
+        Route::group(['prefix' => '/users'], function () {
+            Route::get('/', [UserController::class, 'getUserCollection']);
+            Route::get('/{id}', [UserController::class, 'getUserById']);
+            Route::get('/{id}/tweets', [TweetController::class, 'getTweetCollectionByUserId']);
         });
 
-        Route::group([
-            'prefix' => '/tweets',
-        ], function () {
-            Route::get('/', 'TweetController@getTweetCollection');
-            Route::post('/', 'TweetController@addTweet');
-            Route::get('/{id}', 'TweetController@getTweetById');
-            Route::get('/{id}/comments', 'CommentController@getCommentCollectionByTweetId');
-            Route::post('/{id}/image', 'TweetController@uploadTweetImage');
-            Route::put('/{id}', 'TweetController@updateTweetById');
-            Route::delete('/{id}', 'TweetController@deleteTweetById');
-            Route::put('/{id}/like', 'LikeController@likeOrDislikeTweet');
+        Route::group(['prefix' => '/tweets'], function () {
+            Route::get('/', [TweetController::class, 'getTweetCollection']);
+            Route::post('/', [TweetController::class, 'addTweet']);
+            Route::get('/{id}', [TweetController::class, 'getTweetById']);
+            Route::get('/{id}/comments', [CommentController::class, 'getCommentCollectionByTweetId']);
+            Route::post('/{id}/image', [TweetController::class, 'uploadTweetImage']);
+            Route::put('/{id}', [TweetController::class, 'updateTweetById']);
+            Route::delete('/{id}', [TweetController::class, 'deleteTweetById']);
+            Route::put('/{id}/like', [LikeController::class, 'likeOrDislikeTweet']);
         });
 
-        Route::group([
-            'prefix' => '/comments',
-        ], function () {
-            Route::get('/', 'CommentController@getCommentCollection');
-            Route::get('/{id}', 'CommentController@getCommentById');
-            Route::post('/', 'CommentController@newComment');
+        Route::group(['prefix' => '/comments'], function () {
+            Route::get('/', [CommentController::class, 'getCommentCollection']);
+            Route::get('/{id}', [CommentController::class, 'getCommentById']);
+            Route::post('/', [CommentController::class, 'newComment']);
         });
     });
 });

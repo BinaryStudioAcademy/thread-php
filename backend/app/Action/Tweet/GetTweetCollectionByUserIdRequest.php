@@ -8,13 +8,13 @@ use App\Action\GetCollectionRequest;
 
 final class GetTweetCollectionByUserIdRequest extends GetCollectionRequest
 {
-    private $userId;
-
-    public function __construct(int $userId, ?int $page, ?string $sort, ?string $direction)
-    {
+    public function __construct(
+        private int $userId,
+        ?int $page,
+        ?string $sort,
+        ?string $direction
+    ) {
         parent::__construct($page, $sort, $direction);
-
-        $this->userId = $userId;
     }
 
     public function getUserId(): int

@@ -14,18 +14,15 @@ use Illuminate\Support\Facades\Storage;
 
 final class UploadTweetImageAction
 {
-    private $tweetRepository;
-
-    public function __construct(TweetRepository $tweetRepository)
+    public function __construct(private TweetRepository $tweetRepository)
     {
-        $this->tweetRepository = $tweetRepository;
     }
 
     public function execute(UploadTweetImageRequest $request): UploadTweetImageResponse
     {
         try {
             $tweet = $this->tweetRepository->getById($request->getId());
-        } catch (ModelNotFoundException $ex) {
+        } catch (ModelNotFoundException) {
             throw new TweetNotFoundException();
         }
 

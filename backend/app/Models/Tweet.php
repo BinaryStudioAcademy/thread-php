@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Entity;
+namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -13,7 +14,7 @@ use InvalidArgumentException;
 
 /**
  * Class Tweet
- * @package App\Entity
+ * @package App\Models
  * @property int $id
  * @property string $text
  * @property string $image_url
@@ -26,6 +27,8 @@ use InvalidArgumentException;
  */
 final class Tweet extends Model
 {
+    use HasFactory;
+
     protected $table = 'tweets';
 
     // Relations to eager load on every query.

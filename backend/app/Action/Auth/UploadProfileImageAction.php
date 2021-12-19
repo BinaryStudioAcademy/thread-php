@@ -11,11 +11,8 @@ use Illuminate\Support\Facades\Config;
 
 final class UploadProfileImageAction
 {
-    private $userRepository;
-
-    public function __construct(UserRepository $userRepository)
+    public function __construct(private UserRepository $userRepository)
     {
-        $this->userRepository = $userRepository;
     }
 
     public function execute(UploadProfileImageRequest $request): UploadProfileImageResponse

@@ -4,15 +4,12 @@ declare(strict_types = 1);
 
 namespace App\Action\Auth;
 
-use App\Entity\User;
+use App\Models\User;
 
 final class UploadProfileImageResponse
 {
-    private $user;
-
-    public function __construct(User $user)
+    public function __construct(private User $user)
     {
-        $this->user = $user;
     }
 
     public function getUser(): User

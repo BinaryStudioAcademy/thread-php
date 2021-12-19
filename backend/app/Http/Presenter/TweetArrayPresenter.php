@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Http\Presenter;
 
-use App\Entity\Tweet;
+use App\Models\Tweet;
 use Illuminate\Support\Collection;
 
 final class TweetArrayPresenter implements CollectionAsArrayPresenter

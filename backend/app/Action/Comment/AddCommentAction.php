@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Action\Comment;
 
-use App\Entity\Comment;
+use App\Models\Comment;
 use App\Exceptions\TweetNotFoundException;
 use App\Repository\CommentRepository;
 use App\Repository\TweetRepository;
@@ -13,22 +13,17 @@ use Illuminate\Support\Facades\Auth;
 
 final class AddCommentAction
 {
-    private $tweetRepository;
-    private $commentRepository;
-
     public function __construct(
-        TweetRepository $tweetRepository,
-        CommentRepository $commentRepository
+        private TweetRepository $tweetRepository,
+        private CommentRepository $commentRepository
     ) {
-        $this->tweetRepository = $tweetRepository;
-        $this->commentRepository = $commentRepository;
     }
 
     public function execute(AddCommentRequest $request): AddCommentResponse
     {
         try {
             $this->tweetRepository->getById($request->getTweetId());
-        } catch (ModelNotFoundException $ex) {
+        } catch (ModelNotFoundException) {
             throw new TweetNotFoundException();
         }
 

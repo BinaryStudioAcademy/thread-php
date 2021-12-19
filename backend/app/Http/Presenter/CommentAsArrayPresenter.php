@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Presenter;
 
-use App\Entity\Comment;
+use App\Models\Comment;
 use Illuminate\Support\Collection;
 
 final class CommentAsArrayPresenter implements CollectionAsArrayPresenter
