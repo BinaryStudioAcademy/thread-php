@@ -10,17 +10,14 @@ use App\Repository\UserRepository;
 
 final class GetUserCollectionAction
 {
-    private $repository;
-
-    public function __construct(UserRepository $repository)
+    public function __construct(private UserRepository $userRepository)
     {
-        $this->repository = $repository;
     }
 
     public function execute(GetCollectionRequest $request): PaginatedResponse
     {
         return new PaginatedResponse(
-            $this->repository->paginate(
+            $this->userRepository->paginate(
                 $request->getPage() ?: UserRepository::DEFAULT_PAGE,
                 UserRepository::DEFAULT_PER_PAGE,
                 $request->getSort() ?: UserRepository::DEFAULT_SORT,

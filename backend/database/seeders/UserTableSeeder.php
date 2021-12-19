@@ -1,6 +1,8 @@
 <?php
 
-use App\Entity\User;
+namespace Database\Seeders;
+
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class UserTableSeeder extends Seeder
@@ -12,6 +14,6 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class, 30)->create();
+        User::factory(30)->create();
     }
 }

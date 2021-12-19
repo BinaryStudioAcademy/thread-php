@@ -1,29 +1,18 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Action\Auth;
 
 final class RegisterRequest
 {
-    private $email;
-    private $password;
-    private $firstName;
-    private $lastName;
-    private $nickname;
-
     public function __construct(
-        string $email,
-        string $password,
-        string $firstName,
-        string $lastName,
-        string $nickname
+        private string $email,
+        private string $password,
+        private string $firstName,
+        private string $lastName,
+        private string $nickname
     ) {
-        $this->email = $email;
-        $this->password = $password;
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
-        $this->nickname = $nickname;
     }
 
     public function getEmail(): string

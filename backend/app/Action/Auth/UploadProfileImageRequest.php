@@ -8,11 +8,8 @@ use Illuminate\Http\UploadedFile;
 
 final class UploadProfileImageRequest
 {
-    private $image;
-
-    public function __construct(UploadedFile $image)
+    public function __construct(private UploadedFile $image)
     {
-        $this->image = $image;
     }
 
     public function getImage(): UploadedFile

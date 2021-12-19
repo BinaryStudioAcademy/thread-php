@@ -4,23 +4,20 @@ declare(strict_types=1);
 
 namespace App\Action\Tweet;
 
-use App\Entity\Like;
+use App\Models\Like;
 use App\Repository\LikeRepository;
 use App\Repository\TweetRepository;
 use Illuminate\Support\Facades\Auth;
 
 final class LikeTweetAction
 {
-    private $tweetRepository;
-    private $likeRepository;
-
     private const ADD_LIKE_STATUS = 'added';
     private const REMOVE_LIKE_STATUS = 'removed';
 
-    public function __construct(TweetRepository $tweetRepository, LikeRepository $likeRepository)
-    {
-        $this->tweetRepository = $tweetRepository;
-        $this->likeRepository = $likeRepository;
+    public function __construct(
+        private TweetRepository $tweetRepository,
+        private LikeRepository $likeRepository,
+    ) {
     }
 
     public function execute(LikeTweetRequest $request): LikeTweetResponse

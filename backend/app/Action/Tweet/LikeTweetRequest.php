@@ -6,11 +6,8 @@ namespace App\Action\Tweet;
 
 final class LikeTweetRequest
 {
-    private $tweetId;
-
-    public function __construct(int $tweetId)
+    public function __construct(private int $tweetId)
     {
-        $this->tweetId = $tweetId;
     }
 
     public function getTweetId(): int

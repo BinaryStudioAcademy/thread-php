@@ -6,15 +6,11 @@ namespace App\Action;
 
 class GetCollectionRequest
 {
-    private $page;
-    private $sort;
-    private $direction;
-
-    public function __construct(?int $page, ?string $sort, ?string $direction)
-    {
-        $this->page = $page;
-        $this->sort = $sort;
-        $this->direction = $direction;
+    public function __construct(
+        private ?int $page,
+        private ?string $sort,
+        private ?string $direction,
+    ) {
     }
 
     public function getPage(): ?int

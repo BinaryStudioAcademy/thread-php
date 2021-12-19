@@ -6,13 +6,8 @@ namespace App\Action\Tweet;
 
 final class UpdateTweetRequest
 {
-    private $id;
-    private $text;
-
-    public function __construct(int $id, ?string $text)
+    public function __construct(private int $id, private ?string $text)
     {
-        $this->id = $id;
-        $this->text = $text;
     }
 
     public function getId(): int

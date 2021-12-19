@@ -8,11 +8,8 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 final class PaginatedResponse
 {
-    private $paginator;
-
-    public function __construct(LengthAwarePaginator $paginator)
+    public function __construct(private LengthAwarePaginator $paginator)
     {
-        $this->paginator = $paginator;
     }
 
     public function getPaginator(): LengthAwarePaginator

@@ -9,11 +9,8 @@ use App\Repository\TweetRepository;
 
 final class GetTweetCollectionByUserIdAction
 {
-    private $tweetRepository;
-
-    public function __construct(TweetRepository $tweetRepository)
+    public function __construct(private TweetRepository $tweetRepository)
     {
-        $this->tweetRepository = $tweetRepository;
     }
 
     public function execute(GetTweetCollectionByUserIdRequest $request): PaginatedResponse

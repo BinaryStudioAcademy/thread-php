@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Presenter;
 
-use App\Entity\Like;
+use App\Models\Like;
 use Illuminate\Support\Collection;
 
 final class LikeArrayPresenter implements CollectionAsArrayPresenter

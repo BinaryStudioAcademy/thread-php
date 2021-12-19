@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Http\Controllers\Api\Auth;
 
@@ -34,7 +34,7 @@ final class AuthController extends ApiController
         RegisterHttpRequest $httpRequest,
         RegisterAction $action,
         AuthenticationResponseArrayPresenter $authenticationResponseArrayPresenter
-    ) {
+    ): ApiResponse {
         $request = new RegisterRequest(
             $httpRequest->get('email'),
             $httpRequest->get('password'),

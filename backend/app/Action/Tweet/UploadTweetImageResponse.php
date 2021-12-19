@@ -4,15 +4,12 @@ declare(strict_types=1);
 
 namespace App\Action\Tweet;
 
-use App\Entity\Tweet;
+use App\Models\Tweet;
 
 final class UploadTweetImageResponse
 {
-    private $tweet;
-
-    public function __construct(Tweet $tweet)
+    public function __construct(private Tweet $tweet)
     {
-        $this->tweet = $tweet;
     }
 
     public function getTweet(): Tweet
