@@ -63,9 +63,11 @@ final class TweetApiTest extends ApiTestCase
 
         $this->actingWithToken($user)
             ->assertUpdatedResponse(
-                $this->createResourceItemUri(self::API_URL, $tweet->id), [
-                'text' => 'Text'
-            ]);
+                $this->createResourceItemUri(self::API_URL, $tweet->id),
+                [
+                    'text' => 'Text'
+                ]
+            );
     }
 
     public function test_delete_tweet_by_id()
